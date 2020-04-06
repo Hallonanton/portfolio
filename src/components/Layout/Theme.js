@@ -28,10 +28,10 @@ let colors = {
   grey:     '#787878'
 }
 
-colors.text = colors.grey
-colors.textHover = colors.black
-colors.bg = colors.white
-colors.bgPerifery = '#f8f8f8'
+colors.text = colors.white
+colors.textInactive = colors.grey
+colors.textActive = colors.white
+colors.bg = colors.black
 
 
 
@@ -278,7 +278,7 @@ const globalStyles = css`
     //This reset makes it easier to use rem
     // With this reset 1rem ~ 10px, 1.2rem ~12px and so on
     font-size: 62.5%;
-    background: radial-gradient(${colors.bg}, ${colors.bgPerifery});
+    background: ${colors.bg};
   }
   body {
     color: ${colors.text};
@@ -294,41 +294,91 @@ const globalStyles = css`
   img {
     max-width: 100%;
   }
-  .mega-size {
+
+  //Fonts
+  .mega {
     font-family: ${fonts.header};
     font-weight: 700;
     ${mega}
   }
   h1,
-  .hero-size {
+  .hero {
     font-family: ${fonts.header};
     font-weight: 700;
     ${hero}
   }
   h2,
-  .heading-size {
+  .heading {
     font-family: ${fonts.header};
     font-weight: 700;
     ${heading}
   }
   h3,
-  .sub-heading-size {
+  .sub-heading {
     font-family: ${fonts.header};
     font-weight: 700;
     ${subHeading}
   }
   h4, h5, h6,
-  .small-heading-size {
+  .small-heading {
     font-family: ${fonts.header};
     font-weight: 700;
     ${regular}
   }
   *, 
-  .regular-size {
+  .regular {
     ${regular}
   }
-  .description-size {
+  .description {
     ${description}
+  }
+
+  //FullPage
+  #fp-nav {
+    right: 25px !important;
+    margin-top: 0px !important;
+    transform: translate( 50%, -50% ) translateZ(0px) !important;
+
+    ul {
+
+      li {
+        width: 1px !important;
+        height: 50px !important;
+        margin: 0px 0px 12px 0px!important;
+
+        &:last-of-type {
+          margin-bottom: 0px !important;
+        }
+        
+        ${breakpointHelpers.above.xl} {
+          height: 60px !important;
+        }
+
+        ${breakpointHelpers.above.xxl} {
+          height: 80px !important;
+        }
+
+        a {
+          span {
+            top: 0px !important;
+            left: 0px !important;
+            width: 100% !important;
+            height: 100% !important;
+            margin: 0px !important;
+            border-radius: 0px !important;
+            background-color: ${colors.textInactive} !important;
+            transition: ${easings.secondary};
+          }
+
+          &:hover,
+          &.active {
+            span {
+              background-color: ${colors.textActive} !important;
+            }
+          }
+        }
+      }
+    }
   }
 `;
 

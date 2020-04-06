@@ -1,14 +1,55 @@
 import React, { Component } from 'react'
-import WebGLHandler from './WebglHandler'
+import styled from '@emotion/styled'
 import Stats from 'three/examples/jsm/libs/stats.module.js'
-import VideoSrc from '../../img/test-face-150.mp4'
+import WebGLHandler from './WebglHandler'
+import VideoSrc from '../../../assets/video/test-face-150.mp4'
+import Hexagon from '../../../assets/images/hexagon.svg'
+import { theme } from '../../Layout/Theme'
+
+
+/*==============================================================================
+  # Styles
+==============================================================================*/
+
+const IntroWrapper = styled('div')`
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+
+  .canvas-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+  }
+
+  .hexagon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 80%;
+    z-index: 1;
+
+    &.first {
+      transform: translate(-50%, -50%);
+    }
+
+    &.second {
+      transform: translate(-50%, -50%) rotate( 15deg );
+    }
+
+    path {
+      fill: ${theme.colors.white};
+    }
+  }
+`
 
 
 /*==============================================================================
   # Component
 ==============================================================================*/
 
-class SectionKnowledge extends Component {
+class SectionIntro extends Component {
 
   componentDidMount() {
     this.useStats = false;
@@ -73,20 +114,17 @@ class SectionKnowledge extends Component {
 
   render () {
 
-    const mountStyle = {
-      width: '100vw',
-      height: '100vh',
-      background: '#000'
-    }
-
     return (
-      <div 
-        ref={(mount) => {this.mount = mount}} 
-        className="canvas-wrapper"
-        style={mountStyle}
-      />
+      <IntroWrapper>
+        <div 
+          ref={(mount) => {this.mount = mount}} 
+          className="canvas-wrapper"
+        />
+        <Hexagon className="hexagon first" />
+        <Hexagon className="hexagon second" />
+      </IntroWrapper>
     )
   }  
 }
 
-export default SectionKnowledge
+export default SectionIntro
