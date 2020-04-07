@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import styled from '@emotion/styled'
+import { css, keyframes } from '@emotion/core'
 import ReactFullpage from '@fullpage/react-fullpage'
 import SectionIntro from './Intro/SectionIntro'
 import { theme } from '../Layout/Theme'
@@ -7,6 +8,28 @@ import { theme } from '../Layout/Theme'
 /*==============================================================================
   # Styles
 ==============================================================================*/
+
+const nMainDelay = 1500
+const nDelay = 250
+const nDuration = 500
+
+const navWait = keyframes`
+  0%, 100% {
+    opacity: 0;
+    transform: translateX(15px)
+  }
+`
+
+const navReveal = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateX(15px)
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px)
+  }
+`
 
 const CustomNav = styled('div')`
   position: absolute !important;
@@ -43,6 +66,14 @@ const CustomNav = styled('div')`
           background-color: ${theme.colors.textActive} !important;
         }
       }
+
+      //Loop out delay for reveal animation
+      ${[...Array(4)].map((item, i) => css`
+        &:nth-of-type(${i+1}){
+          animation: ${navWait} ${i * nDelay + nMainDelay}ms linear 0ms,
+                     ${navReveal} ${nDuration}ms ${theme.easings.primary} ${i * nDelay + nMainDelay}ms;
+        }
+      `)}
     }
   }
 `

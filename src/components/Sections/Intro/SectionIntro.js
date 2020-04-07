@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
+import { keyframes } from '@emotion/core'
 import Stats from 'three/examples/jsm/libs/stats.module.js'
 import WebGLHandler from './WebglHandler'
 import VideoSrc from '../../../assets/video/test-face-150.mp4'
@@ -10,6 +11,21 @@ import { theme } from '../../Layout/Theme'
 /*==============================================================================
   # Styles
 ==============================================================================*/
+
+const rotate = keyframes`
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+`
+
+const dash = keyframes`
+  to {
+    stroke-dashoffset: 0;
+  }
+`
 
 const IntroWrapper = styled('div')`
   position: relative;
@@ -31,15 +47,18 @@ const IntroWrapper = styled('div')`
     z-index: 1;
 
     &.first {
-      transform: translate(-50%, -50%) rotate( ${({rotation}) => rotation}deg );
+      animation: ${rotate} 90s linear infinite;
     }
 
     &.second {
-      transform: translate(-50%, -50%) rotate( ${({rotation}) => rotation*1.5}deg );
+      animation: ${rotate} 120s linear infinite -5s;
     }
 
     path {
-      stroke: ${theme.colors.white};
+      stroke: ${theme.colors.textInactive};
+      stroke-dasharray: 3000;
+      stroke-dashoffset: 3000;
+      animation: ${dash} 10000ms linear forwards;
     }
   }
 `
@@ -63,10 +82,6 @@ class SectionIntro extends Component {
     this.removeListeners();
   }
 
-  state = {
-    rotation: 0
-  }
-
   initWebGL() {
     this.webgl = new WebGLHandler(this, VideoSrc);
     this.mount.appendChild(this.webgl.renderer.domElement);
@@ -78,16 +93,12 @@ class SectionIntro extends Component {
 
   addListeners() {
     this.handlerAnimate = this.animate.bind(this);
-
     window.addEventListener('resize', this.resize.bind(this));
-    this.mount.addEventListener('mousemove', this.mousemove.bind(this));
   }
 
   removeListeners() {
     cancelAnimationFrame(this.animationFrame)
     window.removeEventListener('resize', this.resize.bind(this));
-    clearTimeout(this.rotationTimeout)
-    this.mount.removeEventListener('mousemove', this.mousemove.bind(this));
   }
 
   animate() {
@@ -113,28 +124,10 @@ class SectionIntro extends Component {
     if (this.webgl) this.webgl.resize();
   }
 
-  mousemove(e) {
-    const { rotation } = this.state
-    const centerX = window.innerWidth / 2
-    const centerY = window.innerHeight / 2
-    const mouseX = e.clientX
-    const mouseY = e.clientY
-    const distanceCenter = Math.floor(this.getDistance(centerX, centerY, mouseX, mouseY))
-  }
-
-  getDistance(x1, y1, x2, y2) {
-    var xDistance = x2 - x1;
-    var yDistance = y2 - y1;
-    
-    return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
-  }
-
   render () {
 
-    const { rotation } = this.state
-
     return (
-      <IntroWrapper rotation={rotation}>
+      <IntroWrapper>
         <div 
           ref={(mount) => {this.mount = mount}} 
           className="canvas-wrapper"

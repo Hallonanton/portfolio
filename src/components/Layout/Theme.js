@@ -87,11 +87,8 @@ let easings = {
   easeInOutBack:  'cubic-bezier(.8,-0.25,.2,1.25)'
 }
 
-easings.primary = `all 450ms ${easings.easeInOutQuint} 0ms`
-easings.secondary = `all 250ms ${easings.easeInOutSine} 0ms`
-
-easings.reveal = `1200ms ${easings.easeOutCubic}`
-easings.revealDelay = `120ms`
+easings.primary = easings.easeInOutQuint
+easings.secondary = easings.easeInOutSine
 
 
 /*==============================================================================
