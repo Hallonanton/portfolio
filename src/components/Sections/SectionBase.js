@@ -11,23 +11,26 @@ import { theme } from '../Layout/Theme'
 
 const nMainDelay = 1500
 const nDelay = 250
-const nDuration = 500
+const nDuration = 300
 
 const navWait = keyframes`
   0%, 100% {
     opacity: 0;
-    transform: translateX(15px)
+    transform-origin: top center;
+    transform: scaleY(0)
   }
 `
 
 const navReveal = keyframes`
   0% {
     opacity: 0;
-    transform: translateX(15px)
+    transform-origin: top center;
+    transform: scaleY(0)
   }
   100% {
     opacity: 1;
-    transform: translateX(0px)
+    transform-origin: top center;
+    transform: scaleY(1)
   }
 `
 
