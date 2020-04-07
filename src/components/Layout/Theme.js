@@ -333,52 +333,9 @@ const globalStyles = css`
     ${description}
   }
 
-  //FullPage
-  #fp-nav {
-    right: 25px !important;
-    margin-top: 0px !important;
-    transform: translate( 50%, -50% ) translateZ(0px) !important;
-
-    ul {
-
-      li {
-        width: 1px !important;
-        height: 50px !important;
-        margin: 0px 0px 12px 0px!important;
-
-        &:last-of-type {
-          margin-bottom: 0px !important;
-        }
-        
-        ${breakpointHelpers.above.xl} {
-          height: 60px !important;
-        }
-
-        ${breakpointHelpers.above.xxl} {
-          height: 80px !important;
-        }
-
-        a {
-          span {
-            top: 0px !important;
-            left: 0px !important;
-            width: 100% !important;
-            height: 100% !important;
-            margin: 0px !important;
-            border-radius: 0px !important;
-            background-color: ${colors.textInactive} !important;
-            transition: ${easings.secondary};
-          }
-
-          &:hover,
-          &.active {
-            span {
-              background-color: ${colors.textActive} !important;
-            }
-          }
-        }
-      }
-    }
+  //Tilit
+  .tl-wrapper {
+    overflow: hidden;
   }
 `;
 

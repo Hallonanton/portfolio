@@ -1,4 +1,5 @@
 import React from 'react'
+import Tilt from 'react-tilt'
 import styled from '@emotion/styled'
 import SiteMetadata from './SiteMetadata'
 import Theme, { theme } from './Theme'
@@ -12,6 +13,7 @@ const Main = styled('main')`
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  position: relative;
 
   .mainTitle {
     position: absolute;
@@ -80,14 +82,20 @@ const TemplateWrapper = ({children}) => {
   return (
     <Theme>
       <SiteMetadata />
-      <Main>
-        {children}
-        <h1 className="mainTitle small-heading">{title}</h1>
-        <FrameMarker className="top left" />
-        <FrameMarker className="top right" />
-        <FrameMarker className="bottom left" />
-        <FrameMarker className="bottom right" />
-      </Main>
+      <Tilt className="Tilt" options={{ 
+        max : 3,
+        perspective: 1000,
+        scale: 1.0
+      }}>
+        <Main>
+          {children}
+          <h1 className="mainTitle small-heading">{title}</h1>
+          <FrameMarker className="top left" />
+          <FrameMarker className="top right" />
+          <FrameMarker className="bottom left" />
+          <FrameMarker className="bottom right" />
+        </Main>
+      </Tilt>
     </Theme>
   )
 }

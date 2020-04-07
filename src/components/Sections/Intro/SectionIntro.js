@@ -31,15 +31,15 @@ const IntroWrapper = styled('div')`
     z-index: 1;
 
     &.first {
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%) rotate( ${({rotation}) => rotation}deg );
     }
 
     &.second {
-      transform: translate(-50%, -50%) rotate( 15deg );
+      transform: translate(-50%, -50%) rotate( ${({rotation}) => rotation*1.5}deg );
     }
 
     path {
-      fill: ${theme.colors.white};
+      stroke: ${theme.colors.white};
     }
   }
 `
@@ -61,7 +61,11 @@ class SectionIntro extends Component {
 
   componentWillUnmount() {
     this.removeListeners();
-  }  
+  }
+
+  state = {
+    rotation: 0
+  }
 
   initWebGL() {
     this.webgl = new WebGLHandler(this, VideoSrc);
@@ -76,13 +80,14 @@ class SectionIntro extends Component {
     this.handlerAnimate = this.animate.bind(this);
 
     window.addEventListener('resize', this.resize.bind(this));
-    window.addEventListener('mousemove', this.mousemove.bind(this));
+    this.mount.addEventListener('mousemove', this.mousemove.bind(this));
   }
 
   removeListeners() {
     cancelAnimationFrame(this.animationFrame)
     window.removeEventListener('resize', this.resize.bind(this));
-    window.removeEventListener('mousemove', this.mousemove.bind(this));
+    clearTimeout(this.rotationTimeout)
+    this.mount.removeEventListener('mousemove', this.mousemove.bind(this));
   }
 
   animate() {
@@ -109,13 +114,27 @@ class SectionIntro extends Component {
   }
 
   mousemove(e) {
+    const { rotation } = this.state
+    const centerX = window.innerWidth / 2
+    const centerY = window.innerHeight / 2
+    const mouseX = e.clientX
+    const mouseY = e.clientY
+    const distanceCenter = Math.floor(this.getDistance(centerX, centerY, mouseX, mouseY))
+  }
+
+  getDistance(x1, y1, x2, y2) {
+    var xDistance = x2 - x1;
+    var yDistance = y2 - y1;
     
+    return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
   }
 
   render () {
 
+    const { rotation } = this.state
+
     return (
-      <IntroWrapper>
+      <IntroWrapper rotation={rotation}>
         <div 
           ref={(mount) => {this.mount = mount}} 
           className="canvas-wrapper"
