@@ -10,41 +10,34 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
     'gatsby-transformer-json',
-    {
-      // keep as first gatsby-source-filesystem plugin for gatsby image support
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        path: `${__dirname}/static/img`,
-        name: 'uploads',
-      },
-    },
+    'gatsby-plugin-glslify',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/src/pages`,
+        path: `${__dirname}/src/pages/`,
         name: 'pages',
       },
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/src/img`,
-        name: 'images',
+        path: `${__dirname}/src/data/`,
+        name: 'data',
       },
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/src/data`,
-        name: 'data',
+        path: `${__dirname}/src/assets/`,
+        name: 'images',
       },
     },
     {
       resolve: 'gatsby-plugin-react-svg',
       options: {
-          rule: {
-            include: `${__dirname}/src/img`
-          }
+        rule: {
+          include: `${__dirname}/src/assets/`
+        }
       }
     },
     'gatsby-plugin-sharp',
@@ -74,16 +67,6 @@ module.exports = {
               destinationDir: 'static',
             },
           },
-          {
-            resolve: 'gatsby-remark-audio',
-            options: {
-              preload: 'auto',
-              loop: false,
-              controls: true,
-              muted: false,
-              autoplay: false
-            }
-          },
         ],
       },
     },
@@ -111,7 +94,6 @@ module.exports = {
         display: 'swap'
       }
     },
-    'gatsby-plugin-transition-link',
-    'gatsby-plugin-netlify', // make sure to keep it last in the array
+    'gatsby-plugin-transition-link'
   ],
 }

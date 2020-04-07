@@ -1,14 +1,13 @@
 import React from 'react'
 //import { graphql } from 'gatsby'
 import Layout from '../components/Layout/Layout'
-import SectionHome from '../components/Home/SectionHome'
 import PageMetadata from '../components/Layout/PageMetadata'
+import SectionBase from '../components/Sections/SectionBase'
 
 
 const HomePage = ({ data }) => {
 
   const title = "Anton Pedersen"
-  const subTitle = "Webbutvecklare"
 
   const metaData = {
     title: title
@@ -17,10 +16,7 @@ const HomePage = ({ data }) => {
   return (
     <Layout>
       <PageMetadata {...metaData} />
-      <SectionHome 
-        title={title}
-        subTitle={subTitle}
-      />
+      <SectionBase />
     </Layout>
   )
 }

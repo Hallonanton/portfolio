@@ -28,10 +28,10 @@ let colors = {
   grey:     '#787878'
 }
 
-colors.text = colors.grey
-colors.textHover = colors.black
-colors.bg = colors.white
-colors.bgPerifery = '#f8f8f8'
+colors.text = colors.white
+colors.textInactive = colors.grey
+colors.textActive = colors.white
+colors.bg = colors.black
 
 
 
@@ -87,11 +87,8 @@ let easings = {
   easeInOutBack:  'cubic-bezier(.8,-0.25,.2,1.25)'
 }
 
-easings.primary = `all 450ms ${easings.easeInOutQuint} 0ms`
-easings.secondary = `all 250ms ${easings.easeInOutSine} 0ms`
-
-easings.reveal = `1200ms ${easings.easeOutCubic}`
-easings.revealDelay = `120ms`
+easings.primary = easings.easeInOutQuint
+easings.secondary = easings.easeInOutSine
 
 
 /*==============================================================================
@@ -278,7 +275,7 @@ const globalStyles = css`
     //This reset makes it easier to use rem
     // With this reset 1rem ~ 10px, 1.2rem ~12px and so on
     font-size: 62.5%;
-    background: radial-gradient(${colors.bg}, ${colors.bgPerifery});
+    background: ${colors.bg};
   }
   body {
     color: ${colors.text};
@@ -294,41 +291,48 @@ const globalStyles = css`
   img {
     max-width: 100%;
   }
-  .mega-size {
+
+  //Fonts
+  .mega {
     font-family: ${fonts.header};
     font-weight: 700;
     ${mega}
   }
   h1,
-  .hero-size {
+  .hero {
     font-family: ${fonts.header};
     font-weight: 700;
     ${hero}
   }
   h2,
-  .heading-size {
+  .heading {
     font-family: ${fonts.header};
     font-weight: 700;
     ${heading}
   }
   h3,
-  .sub-heading-size {
+  .sub-heading {
     font-family: ${fonts.header};
     font-weight: 700;
     ${subHeading}
   }
   h4, h5, h6,
-  .small-heading-size {
+  .small-heading {
     font-family: ${fonts.header};
     font-weight: 700;
     ${regular}
   }
   *, 
-  .regular-size {
+  .regular {
     ${regular}
   }
-  .description-size {
+  .description {
     ${description}
+  }
+
+  //Tilit
+  .tl-wrapper {
+    overflow: hidden;
   }
 `;
 
