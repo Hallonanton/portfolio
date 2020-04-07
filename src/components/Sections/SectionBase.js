@@ -70,8 +70,11 @@ const CustomNav = styled('div')`
         background: ${theme.colors.textInactive} !important;
         transition: ${theme.easings.secondary};
 
-        &:hover,
         &.active {
+          background-color: ${theme.colors.text} !important;
+        }
+
+        &:hover {
           background-color: ${theme.colors.textActive} !important;
         }
       }
@@ -109,7 +112,7 @@ const StyledIconNav = styled(IconNav)`
     max-width: 18px;
     max-height: 18px;
     transition: all 1000ms ${theme.easings.easeOutQuint},
-                color 250ms ${theme.easings.secondary};
+                background-color 250ms ${theme.easings.secondary};
   }
 
   &.focus {

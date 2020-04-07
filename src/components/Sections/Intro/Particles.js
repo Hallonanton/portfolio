@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { TweenLite } from 'gsap';
 import TouchTexture from './Interactive/TouchTexture';
+import { theme } from '../../Layout/Theme';
 
 const glslify = require("glslify");
 
@@ -47,7 +48,7 @@ export default class Particles {
     // Uniforms for shaders
     /* variables that the shaders use to calculate position/color */
     const uniforms = {
-      uColor: { value: new THREE.Color(0x8e44ad) },
+      uColor: { value: new THREE.Color(0x2ecc71) },
       uDepth: { value: 1.0 }, // Set from this.show()
       uSize: { value: 1.0 },  // Set from this.show()
       uTextureSize: { value: new THREE.Vector2(this.width, this.height) },
