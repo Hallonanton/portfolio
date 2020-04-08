@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import { css, keyframes } from '@emotion/core'
 import ReactFullpage from '@fullpage/react-fullpage'
 import SectionIntro from './Intro/SectionIntro'
+import SectionCases from './Cases/SectionCases'
 import SectionContact from './Contact/SectionContact'
 import { theme } from '../Layout/Theme'
 import IconNav from '../UI/IconNav'
@@ -183,7 +184,7 @@ class SectionBase extends Component {
         },
         {
           anchor: 'cases',
-          section: null
+          section: <SectionCases />
         },
         {
           anchor: 'contact',

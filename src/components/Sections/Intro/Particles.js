@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 import { TweenLite } from 'gsap';
 import TouchTexture from './Interactive/TouchTexture';
-import { theme } from '../../Layout/Theme';
 
 const glslify = require("glslify");
 
