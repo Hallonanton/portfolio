@@ -16,13 +16,18 @@ export default class Particles {
 
     // Create a video element to read data from 
     this.video = document.createElement('video');
-    this.video.autoplay = true
+    this.video.crossOrigin = 'anonymous'
+    this.video.preload = 'auto'
+    this.video.muted = true
+    this.video.playsInline = true
     this.video.loop = true
     this.video.src = videoSrc
 
     // Extract data after load
     this.video.addEventListener('loadeddata', e => {
       
+      this.video.play();
+
       var texture = new THREE.VideoTexture( this.video );
 
       this.width = this.video.videoWidth
@@ -47,7 +52,7 @@ export default class Particles {
     // Uniforms for shaders
     /* variables that the shaders use to calculate position/color */
     const uniforms = {
-      uColor: { value: new THREE.Color(0x8e44ad) },
+      uColor: { value: new THREE.Color(0x2ecc71) },
       uDepth: { value: 1.0 }, // Set from this.show()
       uSize: { value: 1.0 },  // Set from this.show()
       uTextureSize: { value: new THREE.Vector2(this.width, this.height) },
