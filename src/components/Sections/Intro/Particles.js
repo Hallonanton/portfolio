@@ -17,13 +17,18 @@ export default class Particles {
 
     // Create a video element to read data from 
     this.video = document.createElement('video');
-    this.video.autoplay = true
+    this.video.crossOrigin = 'anonymous'
+    this.video.preload = 'auto'
+    this.video.muted = true
+    this.video.playsInline = true
     this.video.loop = true
     this.video.src = videoSrc
 
     // Extract data after load
     this.video.addEventListener('loadeddata', e => {
       
+      this.video.play();
+
       var texture = new THREE.VideoTexture( this.video );
 
       this.width = this.video.videoWidth
