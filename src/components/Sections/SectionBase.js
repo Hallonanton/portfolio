@@ -173,37 +173,50 @@ class SectionBase extends Component {
     super(props);
     this.state = {
       activeSection: 'intro',
+      destination: null,
+      origin: null,
       fullpages: [
         {
           anchor: 'intro',
-          section: <SectionIntro />
+          section: SectionIntro
         },
         {
           anchor: 'knowledge',
-          section: null
+          section: SectionContact
         },
         {
           anchor: 'cases',
-          section: <SectionCases />
+          section: SectionCases
         },
         {
           anchor: 'contact',
-          section: <SectionContact />
+          section: SectionContact
         }
       ],
     };
   }
 
-  onLeave(origin, destination, direction) {
-    this.setState({
-      activeSection: destination.anchor
+  componentDidMount() {
+    window.sectionScroll = new CustomEvent('sectionScroll', { 
+      detail:   "Triggers when fullpage.js changes section",
+      bubbles:   true
     })
   }
 
-  moveSectionDown() {
-    if ( typeof window !== 'undefined' && window.fullpage_api) {
-      window.fullpage_api.moveSectionDown();
+  onLeave(origin, destination, direction) {
+
+    if ( window.sectionScroll ) {   
+      window.sectionScroll.origin = origin
+      window.sectionScroll.destination = destination
+      window.sectionScroll.direction = direction
+      window.dispatchEvent( window.sectionScroll )
     }
+
+    this.setState({
+      activeSection: destination.anchor,
+      destination: destination,
+      origin: origin
+    })
   }
 
   render() {
@@ -257,11 +270,16 @@ class SectionBase extends Component {
 
           render={comp => (
             <ReactFullpage.Wrapper>
-              {fullpages.map((item) => (
-                <div key={item.anchor} className={SEL}>
-                  {item.section}
-                </div>
-              ))}
+              {fullpages.map((item) => {
+
+                const Section = item.section
+
+                return (
+                  <div key={item.anchor} className={SEL}>
+                    <Section anchor={item.anchor} />
+                  </div>
+                )
+              })}
             </ReactFullpage.Wrapper>
           )}
         />

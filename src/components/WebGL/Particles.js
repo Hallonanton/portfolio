@@ -12,9 +12,10 @@ export default class Particles {
     this.container = new THREE.Object3D();
   }
 
-  init( videoSrc ) {
+  load( videoSrc ) {
 
-    // Create a video element to read data from 
+    // Create a video element to read data from
+    this.videoLoaded = false
     this.video = document.createElement('video');
     this.video.crossOrigin = 'anonymous'
     this.video.preload = 'auto'
@@ -26,8 +27,6 @@ export default class Particles {
     // Extract data after load
     this.video.addEventListener('loadeddata', e => {
       
-      this.video.play();
-
       var texture = new THREE.VideoTexture( this.video );
 
       this.width = this.video.videoWidth
@@ -39,22 +38,24 @@ export default class Particles {
       this.texture.format = THREE.RGBFormat;
 
       // Initiate animation
-      this.initPoints();
-      this.initHitArea();
-      this.initTouch();
+      this.createPoints();
+      this.createHitArea();
+      this.createTouch();
       this.resize();
-      this.show();
+
+      // Loaded
+      this.videoLoaded = true
     })
   }
 
-  initPoints() {
+  createPoints() {
 
     // Uniforms for shaders
     /* variables that the shaders use to calculate position/color */
     const uniforms = {
       uColor: { value: new THREE.Color(0x2ecc71) },
       uDepth: { value: 1.0 }, // Set from this.show()
-      uSize: { value: 1.0 },  // Set from this.show()
+      uSize: { value: 0 },  // Set from this.show()
       uTextureSize: { value: new THREE.Vector2(this.width, this.height) },
       uTexture: { value: this.texture },
       uTouch: { value: null },
@@ -125,13 +126,13 @@ export default class Particles {
     this.container.add(this.object3D);
   }
 
-  initTouch() {
+  createTouch() {
     // Create only once
     if (!this.touch) this.touch = new TouchTexture(this);
     this.object3D.material.uniforms.uTouch.value = this.touch.texture;
   }
 
-  initHitArea() {
+  createHitArea() {
     const geometry = new THREE.PlaneGeometry(this.width, this.height, 1, 1);
     const material = new THREE.MeshBasicMaterial({ color: 0xFFFFFF, wireframe: true, depthTest: false });
     material.visible = false;
@@ -154,12 +155,51 @@ export default class Particles {
     this.webgl.interactive.objects.splice(index, 1);
     this.webgl.interactive.disable();
 
+    clearTimeout(this.loadAwait);
     if ( this.video ) this.video.pause();
   }
 
   // ---------------------------------------------------------------------------------------------
   // PUBLIC
   // ---------------------------------------------------------------------------------------------
+
+  start() {
+    if ( this.videoLoaded ) {
+      this.video.play();
+      this.show();
+    } else {
+      this.loadAwait = setTimeout(() => this.start(), 10)
+    }
+  }
+
+  pause() {
+    return new Promise((resolve, reject) => {
+      this.hide().then(() => {
+        resolve();
+      }).catch(() => {
+        reject();
+      })
+    })
+  }
+
+  destroy() {
+    this.removeListeners();
+
+    if (!this.object3D) {
+      return;
+    }
+    this.object3D.parent.remove(this.object3D);
+    this.object3D.geometry.dispose();
+    this.object3D.material.dispose();
+    this.object3D = null;
+    if (!this.hitArea) {
+      return;
+    }
+    this.hitArea.parent.remove(this.hitArea);
+    this.hitArea.geometry.dispose();
+    this.hitArea.material.dispose();
+    this.hitArea = null;
+  }
 
   update() {
     if (!this.object3D) return;
@@ -178,9 +218,11 @@ export default class Particles {
   hide(time = 1.6) {
     if (!this.object3D) return;
     return new Promise((resolve, reject) => {
-      TweenLite.to(this.object3D.material.uniforms.uSize, time, { value: 0.0 });
-
       this.removeListeners();
+      TweenLite.to(this.object3D.material.uniforms.uSize, time, {
+        value: 0.0,
+        onComplete: () => {resolve();},
+      });
     });
   }
 
