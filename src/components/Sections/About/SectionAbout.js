@@ -16,12 +16,29 @@ const AboutWrapper = styled('div')`
 `
 
 const Mount = styled('div')`
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 75%;
   width: 50%;
-  margin-left: 50%;
   height: 100%;
-  z-index: 2;
-  background: #333333;
+  transform: translateX(-50%);
+`
+
+const Content = styled('div')`
+  position: absolute;
+  top: 50%;
+  left: 33.33%;
+  width: 50%;
+  max-width: 300px;
+  transform: translate(-50%,-50%);
+
+  .title {
+    margin-bottom: 20px;
+  }
+
+  .text {
+
+  }
 `
 
 
@@ -74,6 +91,14 @@ class SectionAbout extends Component {
     return (
       <AboutWrapper>
         <Mount ref={(mount) => this.refHandler(mount)} />
+        <Content>
+          <h2 className="title mega">Hej.</h2>
+          <div className="text description">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam non auctor diam. Donec imperdiet, enim sit amet tincidunt vehicula.</p>
+            <br />
+            <p>Massa purus elementum ex, a lobortis ex turpis sit amet turpis. Suspendisse non porttitor arcu. Nullam maximus ut ex id finibus. Quisque id accumsan ligula, eget fringilla dui. Curabitur semper ante quis efficitur pharetra. Pellentesque eros tortor, finibus vitae consequat nec, faucibus et sapien.</p>
+          </div>
+        </Content>
       </AboutWrapper>
     )
   }  

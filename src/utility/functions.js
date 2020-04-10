@@ -116,3 +116,16 @@ export function lightenDarkenColor(col,amt) {
 
     return (usePound?"#":"") + (g | (b << 8) | (r << 16)).toString(16);
 }
+
+
+/*
+ * Get node index
+ */
+
+export function getNodeIndex(node) {
+    var index = 0;
+    while ( (node = node.previousElementSibling) ) {
+        index++;
+    }
+    return index;
+}

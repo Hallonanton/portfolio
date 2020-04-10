@@ -5,13 +5,9 @@ import ReactFullpage from '@fullpage/react-fullpage'
 import SectionIntro from './Intro/SectionIntro'
 import SectionAbout from './About/SectionAbout'
 import SectionCases from './Cases/SectionCases'
-import SectionContact from './Contact/SectionContact'
 import { theme } from '../Layout/Theme'
-import IconNav from '../UI/IconNav'
-import Mail from '../../assets/icons/social/envelope.svg'
-import LinkedIn from '../../assets/icons/social/linkedin.svg'
-import Codepen from '../../assets/icons/social/codepen.svg'
-import Github from '../../assets/icons/social/github.svg'
+import ContactNav from '../UI/ContactNav'
+
 
 /*==============================================================================
   # Styles
@@ -92,47 +88,6 @@ const CustomNav = styled('div')`
   }
 `
 
-const StyledIconNav = styled(IconNav)`
-  position: absolute;
-  bottom: 7px;
-  right: 50px;
-  transition: all 1000ms ${theme.easings.easeOutQuint};
-
-  a {
-    color: ${theme.colors.textInactive};
-    transition: all 250ms ${theme.easings.secondary},
-                margin 1000ms ${theme.easings.easeOutQuint};
-
-    &:hover {
-      color: ${theme.colors.textActive};
-    }
-  }
-
-  svg {
-    width: 70px!important;
-    height: 70px!important;
-    max-width: 18px;
-    max-height: 18px;
-    transition: all 1000ms ${theme.easings.easeOutQuint},
-                background-color 250ms ${theme.easings.secondary};
-  }
-
-  &.focus {
-    bottom: 50%;
-    right: 50%;
-    transform: translate(50%, 50%);
-
-    a {
-      margin: 20px;
-    }
-
-    svg {  
-      max-width: 70px;
-      max-height: 70px;
-    }
-  }
-`
-
 
 /*==============================================================================
   # Component
@@ -191,7 +146,7 @@ class SectionBase extends Component {
         },
         {
           anchor: 'contact',
-          section: SectionContact
+          section: null
         }
       ],
     };
@@ -230,32 +185,6 @@ class SectionBase extends Component {
     const SEL = 'fullpage-section';
     const SECTION_SEL = `.${SEL}`;
 
-    const socialmediaLinks = [
-      {
-        title: 'Mejl',
-        to: 'mailto:antonpedersen9@gmail.com',
-        icon: <Mail />
-      },
-      {
-        title: 'LinkedIn',
-        to: 'https://www.linkedin.com/in/antonpedersen/',
-        icon: <LinkedIn />,
-        target: true
-      },
-      {
-        title: 'Codepen',
-        to: 'https://codepen.io/hallonanton/',
-        icon: <Codepen />,
-        target: true
-      },
-      {
-        title: 'Github',
-        to: 'https://github.com/hallonanton/',
-        icon: <Github />,
-        target: true
-      }
-    ]
-
     return (
       <Fragment>
         <CustomReactFullpageNav 
@@ -266,6 +195,7 @@ class SectionBase extends Component {
           licenseKey={'D154C10D-26774ED9-98FB51F3-DDE248C0'}
           anchors={fullpages.map(item => item.anchor)}
           sectionSelector={SECTION_SEL}
+          scrollingSpeed = {1000}
           onLeave={this.onLeave.bind(this)}
 
           render={comp => (
@@ -276,14 +206,14 @@ class SectionBase extends Component {
 
                 return (
                   <div key={item.anchor} className={SEL}>
-                    <Section anchor={item.anchor} />
+                    {Section && <Section anchor={item.anchor} activeSection={activeSection} />}
                   </div>
                 )
               })}
             </ReactFullpage.Wrapper>
           )}
         />
-        <StyledIconNav className={activeSection === 'contact' ? 'focus' : ''} links={socialmediaLinks} />
+        <ContactNav className={activeSection === 'contact' ? 'focus' : ''} />
       </Fragment>
     );
   }

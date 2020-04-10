@@ -28,8 +28,6 @@ export default class Particles {
     // Extract data after load
     this.video.addEventListener('loadeddata', e => {
       
-      console.log('loadeddata', this.anchor)
-
       var texture = new THREE.VideoTexture( this.video );
 
       this.width = this.video.videoWidth
@@ -139,7 +137,7 @@ export default class Particles {
   createHitArea() {
     const geometry = new THREE.PlaneGeometry(this.width, this.height, 1, 1);
     const material = new THREE.MeshBasicMaterial({ color: 0xFFFFFF, wireframe: true, depthTest: false });
-    material.visible = true;
+    material.visible = false;
     this.hitArea = new THREE.Mesh(geometry, material);
     this.container.add(this.hitArea);
   }
@@ -210,7 +208,7 @@ export default class Particles {
     if (this.touch) this.touch.update();
   }
 
-  show(time = 2.0) {
+  show(time = 1.0) {
     if (!this.object3D) return;
     // reset
     TweenLite.fromTo(this.object3D.material.uniforms.uSize, time, { value: 0 }, { value: 1.0 });
@@ -240,9 +238,6 @@ export default class Particles {
   }
 
   onInteractiveMove(e) {
-
-    console.log('onInteractiveMove', this.anchor)
-
     const uv = e.intersectionData.uv;
     if (this.touch) this.touch.addTouch(uv);
   }

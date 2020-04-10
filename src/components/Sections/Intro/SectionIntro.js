@@ -16,11 +16,29 @@ const IntroWrapper = styled('div')`
 `
 
 const Mount = styled('div')`
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 25%;
   width: 50%;
   height: 100%;
-  z-index: 2;
-  background: #333333;
+  transform: translateX(-50%);
+`
+
+const Content = styled('div')`
+  position: absolute;
+  top: 50%;
+  left: 66.66%;
+  width: 50%;
+  max-width: 300px;
+  transform: translate(-50%,-50%);
+
+  .title {
+    margin-bottom: 20px;
+  }
+
+  .text {
+
+  }
 `
 
 
@@ -73,6 +91,12 @@ class SectionIntro extends Component {
     return (
       <IntroWrapper>
         <Mount ref={(mount) => this.refHandler(mount)} />
+        <Content>
+          <h2 className="title mega">Hej.</h2>
+          <div className="text description">
+            <p>Mitt namn är Anton Pedersen och skapar hemsidor.</p>
+          </div>
+        </Content>
       </IntroWrapper>
     )
   }  

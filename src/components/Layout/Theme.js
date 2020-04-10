@@ -35,19 +35,6 @@ colors.textActive = colors.green
 colors.bg = colors.black
 
 
-
-
-colors.bgContrastLower = '#f0f0f0'
-colors.bgContrastLow = '#f0f0f0'
-colors.bgContrast = '#f0f0f0'
-colors.bgContrastHigh = '#f0f0f0'
-colors.bgContrastHigher = '#f0f0f0'
-colors.primary = '#f0f0f0'
-colors.accent = '#f0f0f0'
-colors.success = '#f0f0f0'
-colors.error = '#f0f0f0'
-
-
 /*==============================================================================
   # Easings
 ==============================================================================*/
@@ -100,7 +87,7 @@ const linkEase = `
   position: relative;
   color: ${colors.text};
   text-decoration: none;
-  transition: all 450ms ease;
+  transition: all 450ms ${easings.secondary};
 
   &::before {
     content: '';
@@ -111,11 +98,11 @@ const linkEase = `
     width: 100%;
     height: 1px;
     pointer-events: none;
-    background: ${colors.text};
+    background: currentColor;
     transform: scale3d(0,1,1);
     transform-origin: 100% 50%;
-    transition: background 450ms ease,
-                ${easings.primary};
+    transition: background 450ms ${easings.secondary},
+                all 450ms ${easings.primary};
     will-change: transform;
   }
 
@@ -124,7 +111,6 @@ const linkEase = `
     color: ${colors.primary};
 
     &::before {
-      background: ${colors.primary};
       transform: scale3d(1,1,1);
       transform-origin: 0% 50%;
     }

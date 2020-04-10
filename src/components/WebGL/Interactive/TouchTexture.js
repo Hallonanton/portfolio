@@ -25,15 +25,6 @@ export default class TouchTexture {
 		//this.canvas.id = 'touchTexture';
 		this.canvas.style.width = this.canvas.style.height = `${this.canvas.width}px`;
 		this.canvas.id = this.anchor
-
-
-		//Test
-		this.canvas.style.position = "fixed"
-		this.canvas.style.top = '15px' 
-		this.canvas.style.right = this.anchor !== 'intro' ? '15px' : '90px' 
-		this.canvas.style.zIndex = "4"
-		this.canvas.style.border = this.anchor !== 'intro' ? "1px solid blue" : "1px solid red"
-		document.body.append( this.canvas )
 	}
 
 	update(delta) {

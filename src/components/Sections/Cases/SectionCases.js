@@ -1,126 +1,58 @@
-import React from 'react'
+import React, { Component } from 'react'
 import styled from '@emotion/styled'
-import { theme } from '../../Layout/Theme'
+import Case from './Case'
+import { getNodeIndex } from '../../../utility/functions'
+
 
 /*==============================================================================
   # Styles
 ==============================================================================*/
 
 const CasesWrapper = styled('div')`
+  width: 100vw;
+  height: 100vh;
+  padding: 90px;
+`
+
+const CasesList = styled('ul')`
+  position: relative;
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  padding: 60px;
 `
 
-const Case = styled('div')`
-  width: 50%;
-  height: 50%;
-  padding: 30px;
+const StyledCase = styled(Case)`
+  position: absolute;
+  z-index: 1;
 
-  .inner {
-  	position: relative;
-  	width: 100%;
-  	height: 100%; 
-  	cursor: pointer;
-  	background-image: url('https://placekitten.com/600/500');
-  	background-position: center center;
-  	background-repeat: no-repeat;
-  	background-size: cover;
-
-  	&::after {
-  		display: block;
-  		position: absolute;
-  		content: "";
-  		top: 0px;
-  		left: 0px;
-  		width: 100%;
-  		height: 100%;
-  		background: ${theme.colors.black};
-  		opacity: 0.7;
-  		transition: all 250ms ${theme.easings.primary};
-  		z-index: 1;
-  	}
-
-  	.frame-marker {
-  		position: absolute;
-  		width: 20px;
-  		height: 20px;
-  		opacity: 0;
-  		transition: all 250ms ${theme.easings.primary};
-
-  		&.top {
-  			top: 0px;
-  			border-top: 1px solid ${theme.colors.textInactive};
-  		}
-
-  		&.bottom {
-  			bottom: 0px;
-  			border-bottom: 1px solid ${theme.colors.textInactive};
-  		}
-
-  		&.left {
-  			left: 0px;
-  			border-left: 1px solid ${theme.colors.textInactive};
-  		}
-
-  		&.right {
-  			right: 0px;
-  			border-right: 1px solid ${theme.colors.textInactive};
-  		}
-  	}
-
-  	&:hover {
-  		&::after {
-  			opacity: 0.4;
-  		}
-
-  		.frame-marker {
-  			opacity: 1;
-  			border-color: ${theme.colors.text};
-
-  			&.top {
-	  			top: -10px;
-	  		}
-
-	  		&.bottom {
-	  			bottom: -10px;
-	  		}
-
-	  		&.left {
-	  			left: -10px;
-	  		}
-
-	  		&.right {
-	  			right: -10px;
-	  		}
-  		}
-  	}
+  &:nth-of-type(1) {
+    top: 0;
+    left: 0;
   }
 
-  header {
-  	position: absolute;
-  	left: 15px;
-  	bottom: 15px;
-  	z-index: 2;
+  &:nth-of-type(2) {
+    top: 0;
+    left: calc(50% + 30px);
+  }
 
-  	ul {
-  		display: flex;
+  &:nth-of-type(3) {
+    top: calc(50% + 30px);
+    left: 0;
+  }
 
-  		li {
-  			${theme.fontSizes.description}
-  		}
+  &:nth-of-type(4) {
+    top: calc(50% + 30px);
+    left: calc(50% + 30px);
+  }
 
-  		li:not(:last-of-type) {
-  			&::after {
-  				margin-right: 5px;
-  				content: ",";
-  			}
-  		}	
-  	}
+  &.active {
+    z-index: 2;
+    top: 0;
+    left: 0;
+    max-width: 100%;
+    max-height: 100%;
   }
 `
+
 
 /*==============================================================================
   # Component
@@ -129,46 +61,144 @@ const Case = styled('div')`
 const cases = [
 	{
 		'title': 'Oas',
-		'tags': ['React', 'Wordpress', 'Gatsby.js' ,'Three.js']
+		'tags': ['React', 'Wordpress', 'GatsbyJS' ,'Three.js'],
+    'url': 'https://www.oas.nu/'
 	},
 	{
 		'title': 'Svenska Hem',
-		'tags': ['React', 'E-handel']
+		'tags': ['React', 'E-handel'],
+    'url': 'https://www.svenskahem.se/'
 	},
 	{
 		'title': 'Nybergsbil',
-		'tags': ['Wordpress', 'PHP']
+		'tags': ['Wordpress', 'PHP'],
+    'url': 'https://nybergsbil.se/'
 	},
 	{
 		'title': 'Västerhuset',
-		'tags': ['Vue', 'Wordpress']
+		'tags': ['Vue', 'NuxtJS', 'Wordpress'],
+    'url': 'http://vasterhuset.se/'
 	}
 ]
 
+class SectionCases extends Component {
 
-const SectionCases = ({  }) => {
+  componentDidMount() {
+    window.addEventListener('sectionScroll', this.handleSectionScroll);
+  }
 
-  return (
-    <CasesWrapper>
-    	{cases.map((item, i) => {
+  componentWillUnmount() {
+    this.ref.removeEventListener('click', this.handleClick);
+    window.removeEventListener('sectionScroll', this.handleSectionScroll);
+    clearTimeout(this.revealDelay);
+  }
 
-    		return (
-		      <Case key={i}>
-		      	<article className="inner">
-		      		<header>
-			      		<h3>{item.title}</h3>
-			      		<ul>{item.tags.map(item => <li key={item}>{item}</li>)}</ul>
-		      		</header>
-		      		<div className="frame-marker top left" />
-		          <div className="frame-marker top right" />
-		          <div className="frame-marker bottom left" />
-		          <div className="frame-marker bottom right" />
-		      	</article>
-		      </Case>
-    		)
-    	})}
-    </CasesWrapper>
-  )
+  state = {
+    activeCase: null,
+    visbile: false,
+    revealDelay: 400,
+    revealed: []
+  }
+
+  refHandler = ref => {
+    if ( !this.ref ) {
+      this.ref = ref
+      this.ref.addEventListener('click', this.handleClick);
+      
+      const { anchor } = this.props
+      const hash = window.location.hash?.replace('#','')
+
+      // Check if first section, start animation if it is
+      if ( !this.state.visbile && hash === anchor ) {
+        this.setState({
+          visbile: true
+        }, () => this.reveal(0))
+      }
+    }
+  }
+
+  handleSectionScroll = e => {
+
+    const { anchor } = this.props
+    const destination = e.destination.anchor
+
+    // Trigger reveal animation on first focus
+    if ( destination === anchor ) {
+      
+      if ( !this.state.visbile ) {
+        this.setState({
+          visbile: true
+        }, () => this.reveal(0))
+      }
+
+    // Close active cases 
+    } else {
+      this.clearActive();
+    }
+  }
+
+  handleClick = e => {
+    const li = e.target.closest('li');
+    if ( li ) {
+      if ( !e.target.classList.contains('close') ) {
+        const index = getNodeIndex(li);
+
+        this.setState({
+          activeCase: index
+        })
+      }
+    } else {
+      this.clearActive()
+    }
+  }
+
+  clearActive = () => {
+    this.setState({
+      activeCase: null
+    })
+  }
+
+  reveal = i => {
+    let { revealed, revealDelay } = this.state
+    if ( !revealed.includes(i) && i < cases.length ) {
+      revealed.push(i);
+      console.log( i )
+      this.setState({
+        revealed: revealed
+      }, () => {
+        this.revealDelay = setTimeout(() => {
+          i += 1
+          this.reveal(i)
+        }, revealDelay)
+      })
+    }
+  }
+
+  render() {
+    return (
+      <CasesWrapper ref={(ref) => this.refHandler(ref)}>
+        <CasesList>
+          {cases.map((item, i) => {
+             
+            const { activeCase, revealed } = this.state
+            let classes = activeCase === i ? 'active' : ''
+            classes += revealed.includes(i) ? ' reveal' : ''
+
+            return (
+              <StyledCase 
+                key={i}
+                className={classes}
+                onClick={e => this.handleClick(e)}
+                clearActive={() => this.clearActive()}
+                index={i}
+                {...item}
+              />
+            )
+          })}
+        </CasesList>
+      </CasesWrapper>
+    )
+  }
 }
 
 export default SectionCases
