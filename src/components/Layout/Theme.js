@@ -184,9 +184,9 @@ const mega = `
   letter-spacing: 0.5px;
 
   ${breakpointHelpers.above.md} {
-    font-size: 6rem;
-    line-height: 1;
-    letter-spacing: 0.9px;
+    font-size: 13rem;
+    line-height: 1.1;
+    letter-spacing: 1px;
   }
 `
 
@@ -218,13 +218,13 @@ const subHeading = `
 const regular = `
   font-size: 1.5rem;
   line-height: 1.4;
-  letter-spacing: 0.26px;
+  letter-spacing: 0.5px;
 `
 
 const description = `
   font-size: 1.2rem;
   line-height: 1.3;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.5px;
 `
 
 const fontSizes = {

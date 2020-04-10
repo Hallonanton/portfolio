@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
+import TextReveal from '../../UI/TextReveal'
 import WebGLHandler from '../../WebGL/WebglHandler'
 import VideoSrc from '../../../assets/video/test-face-150.mp4'
-
 
 
 /*==============================================================================
@@ -28,17 +28,7 @@ const Content = styled('div')`
   position: absolute;
   top: 50%;
   left: 66.66%;
-  width: 50%;
-  max-width: 300px;
   transform: translate(-50%,-50%);
-
-  .title {
-    margin-bottom: 20px;
-  }
-
-  .text {
-
-  }
 `
 
 
@@ -54,6 +44,12 @@ class SectionIntro extends Component {
 
   componentWillUnmount() {
     this.WebGLHandler.destroyObject();
+    clearTimeout(this.revealDelay);
+  }
+
+  state = {
+    visbile: false,
+    revealDelay: 1000
   }
 
   refHandler =  mount => {
@@ -67,7 +63,7 @@ class SectionIntro extends Component {
 
       // Check if first section, start animation if it is
       if ( !hash || hash === anchor ) {
-        this.WebGLHandler.startAnimation();
+        this.reveal();
       }
     }
   }
@@ -79,11 +75,22 @@ class SectionIntro extends Component {
 
     // Start animation if target section is this section
     if ( destination === anchor ) {
-      this.WebGLHandler.startAnimation();
+      this.reveal();
 
     // Pause animation if target section is another section
     } else {
       this.WebGLHandler.pauseAnimation(anchor);
+    }
+  }
+
+  reveal = () => {
+    this.WebGLHandler.startAnimation();
+    if ( !this.state.visbile ) {
+      this.revealDelay = setTimeout(() => {
+        this.setState({
+          visbile: true
+        })
+      }, this.state.revealDelay)
     }
   }
 
@@ -92,10 +99,16 @@ class SectionIntro extends Component {
       <IntroWrapper>
         <Mount ref={(mount) => this.refHandler(mount)} />
         <Content>
-          <h2 className="title mega">Hej.</h2>
-          <div className="text description">
-            <p>Mitt namn är Anton Pedersen och skapar hemsidor.</p>
-          </div>
+          <TextReveal 
+            reveal={this.state.visbile}
+            title="Hej."
+            paragraphs={[
+              "Mitt namn är Anton Pedersen.",
+              "Jag är en Front-end utvecklare",
+              "som kodar och designar hemsidor.",
+              "Baserad i Göteborg.",
+            ]}
+          />
         </Content>
       </IntroWrapper>
     )

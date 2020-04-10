@@ -114,7 +114,7 @@ const CustomReactFullpageNav = ({ sections, activeSection }) => {
                   }
                 }}
               >
-                <span className="fp-sr-only">{section.anchor}</span>
+                <span className="fp-sr-only" />
               </a>
             </li>
           )

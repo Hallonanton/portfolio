@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
+import TextReveal from '../../UI/TextReveal'
 import WebGLHandler from '../../WebGL/WebglHandler'
 import VideoSrc from '../../../assets/video/test-face-150.mp4'
-
 
 
 /*==============================================================================
@@ -31,14 +31,6 @@ const Content = styled('div')`
   width: 50%;
   max-width: 300px;
   transform: translate(-50%,-50%);
-
-  .title {
-    margin-bottom: 20px;
-  }
-
-  .text {
-
-  }
 `
 
 
@@ -54,6 +46,12 @@ class SectionAbout extends Component {
 
   componentWillUnmount() {
     this.WebGLHandler.destroyObject();
+    clearTimeout(this.revealDelay);
+  }
+
+  state = {
+    visbile: false,
+    revealDelay: 1000
   }
 
   refHandler =  mount => {
@@ -66,8 +64,8 @@ class SectionAbout extends Component {
       const hash = window.location.hash?.replace('#','')
 
       // Check if first section, start animation if it is
-      if ( !hash || hash === anchor ) {
-        this.WebGLHandler.startAnimation();
+      if ( hash === anchor ) {
+        this.reveal();
       }
     }
   }
@@ -79,11 +77,22 @@ class SectionAbout extends Component {
 
     // Start animation if target section is this section
     if ( destination === anchor ) {
-      this.WebGLHandler.startAnimation();
+      this.reveal();
 
     // Pause animation if target section is another section
     } else {
       this.WebGLHandler.pauseAnimation(anchor);
+    }
+  }
+
+  reveal = () => {
+    this.WebGLHandler.startAnimation();
+    if ( !this.state.visbile ) {
+      this.revealDelay = setTimeout(() => {
+        this.setState({
+          visbile: true
+        })
+      }, this.state.revealDelay)
     }
   }
 
@@ -92,12 +101,17 @@ class SectionAbout extends Component {
       <AboutWrapper>
         <Mount ref={(mount) => this.refHandler(mount)} />
         <Content>
-          <h2 className="title mega">Hej.</h2>
-          <div className="text description">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam non auctor diam. Donec imperdiet, enim sit amet tincidunt vehicula.</p>
-            <br />
-            <p>Massa purus elementum ex, a lobortis ex turpis sit amet turpis. Suspendisse non porttitor arcu. Nullam maximus ut ex id finibus. Quisque id accumsan ligula, eget fringilla dui. Curabitur semper ante quis efficitur pharetra. Pellentesque eros tortor, finibus vitae consequat nec, faucibus et sapien.</p>
-          </div>
+          <TextReveal 
+            reveal={this.state.visbile}
+            title="Kunskap"
+            size="hero"
+            paragraphs={[
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam non auctor diam. Donec imperdiet, enim sit amet tincidunt vehicula.",
+              "Massa purus elementum ex, a lobortis ex turpis sit amet turpis. Suspendisse non porttitor arcu.",
+              "Nullam maximus ut ex id finibus. Quisque id accumsan ligula, eget fringilla dui. Curabitur semper ante quis efficitur pharetra.",
+              "Pellentesque eros tortor, finibus vitae consequat nec, faucibus et sapien."
+            ]}
+          />
         </Content>
       </AboutWrapper>
     )
