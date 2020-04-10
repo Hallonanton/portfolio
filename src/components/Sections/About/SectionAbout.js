@@ -9,7 +9,7 @@ import VideoSrc from '../../../assets/video/test-face-150.mp4'
   # Styles
 ==============================================================================*/
 
-const IntroWrapper = styled('div')`
+const AboutWrapper = styled('div')`
   position: relative;
   width: 100vw;
   height: 100vh;
@@ -18,6 +18,7 @@ const IntroWrapper = styled('div')`
 const Mount = styled('div')`
   position: relative;
   width: 50%;
+  margin-left: 50%;
   height: 100%;
   z-index: 2;
   background: #333333;
@@ -28,7 +29,7 @@ const Mount = styled('div')`
   # Component
 ==============================================================================*/
 
-class SectionIntro extends Component {
+class SectionAbout extends Component {
 
   componentDidMount() {
     window.addEventListener('sectionScroll', this.handleSectionScroll);
@@ -71,11 +72,11 @@ class SectionIntro extends Component {
 
   render () {
     return (
-      <IntroWrapper>
+      <AboutWrapper>
         <Mount ref={(mount) => this.refHandler(mount)} />
-      </IntroWrapper>
+      </AboutWrapper>
     )
   }  
 }
 
-export default SectionIntro
+export default SectionAbout

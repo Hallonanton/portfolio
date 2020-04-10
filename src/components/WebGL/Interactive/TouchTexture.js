@@ -2,12 +2,13 @@ import * as THREE from 'three';
 import { easeOutSine } from './utils';
 
 export default class TouchTexture {
-	constructor(parent) {
+	constructor(parent, anchor) {
 		this.parent = parent;
 		this.size = 64;
 		this.maxAge = 120;
 		this.radius = 0.15;
 		this.trail = [];
+		this.anchor = anchor
 
 		this.initTexture();
 	}
@@ -21,8 +22,18 @@ export default class TouchTexture {
 
 		this.texture = new THREE.Texture(this.canvas);
 
-		this.canvas.id = 'touchTexture';
+		//this.canvas.id = 'touchTexture';
 		this.canvas.style.width = this.canvas.style.height = `${this.canvas.width}px`;
+		this.canvas.id = this.anchor
+
+
+		//Test
+		this.canvas.style.position = "fixed"
+		this.canvas.style.top = '15px' 
+		this.canvas.style.right = this.anchor !== 'intro' ? '15px' : '90px' 
+		this.canvas.style.zIndex = "4"
+		this.canvas.style.border = this.anchor !== 'intro' ? "1px solid blue" : "1px solid red"
+		document.body.append( this.canvas )
 	}
 
 	update(delta) {

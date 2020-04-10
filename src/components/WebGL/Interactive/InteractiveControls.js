@@ -7,11 +7,12 @@ export default class InteractiveControls extends EventEmitter {
 
 	get enabled() { return this._enabled; }
 
-	constructor(camera, el) {
+	constructor(camera, el, anchor) {
 		super();
 
 		this.camera = camera;
 		this.el = el || window;
+		this.anchor = anchor;
 
 		this.plane = new THREE.Plane();
 		this.raycaster = new THREE.Raycaster();
@@ -92,9 +93,8 @@ export default class InteractiveControls extends EventEmitter {
 		const t = (e.touches) ? e.touches[0] : e;
 		const touch = { x: t.clientX, y: t.clientY };
 
-		this.mouse.x = ((touch.x + this.rect.x) / this.rect.width) * 2 - 1;
-		this.mouse.y = -((touch.y + this.rect.y) / this.rect.height) * 2 + 1;
-
+		this.mouse.x = ((touch.x - this.rect.x) / this.rect.width) * 2 - 1;
+		this.mouse.y = -((touch.y - this.rect.y) / this.rect.height) * 2 + 1;
 		this.raycaster.setFromCamera(this.mouse, this.camera);
 
 		const intersects = this.raycaster.intersectObjects(this.objects);

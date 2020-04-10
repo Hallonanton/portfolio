@@ -7,8 +7,9 @@ const glslify = require("glslify");
 
 export default class Particles {
   
-  constructor(webgl) {
+  constructor(webgl, anchor) {
     this.webgl = webgl;
+    this.anchor = anchor;
     this.container = new THREE.Object3D();
   }
 
@@ -27,6 +28,8 @@ export default class Particles {
     // Extract data after load
     this.video.addEventListener('loadeddata', e => {
       
+      console.log('loadeddata', this.anchor)
+
       var texture = new THREE.VideoTexture( this.video );
 
       this.width = this.video.videoWidth
@@ -41,6 +44,7 @@ export default class Particles {
       this.createPoints();
       this.createHitArea();
       this.createTouch();
+      this.addListeners();
       this.resize();
 
       // Loaded
@@ -128,14 +132,14 @@ export default class Particles {
 
   createTouch() {
     // Create only once
-    if (!this.touch) this.touch = new TouchTexture(this);
+    if (!this.touch) this.touch = new TouchTexture(this, this.anchor);
     this.object3D.material.uniforms.uTouch.value = this.touch.texture;
   }
 
   createHitArea() {
     const geometry = new THREE.PlaneGeometry(this.width, this.height, 1, 1);
     const material = new THREE.MeshBasicMaterial({ color: 0xFFFFFF, wireframe: true, depthTest: false });
-    material.visible = false;
+    material.visible = true;
     this.hitArea = new THREE.Mesh(geometry, material);
     this.container.add(this.hitArea);
   }
@@ -211,14 +215,11 @@ export default class Particles {
     // reset
     TweenLite.fromTo(this.object3D.material.uniforms.uSize, time, { value: 0 }, { value: 1.0 });
     TweenLite.fromTo(this.object3D.material.uniforms.uDepth, time * 1.5, { value: 20.0 }, { value: 1.0 });
-
-    this.addListeners();
   }
 
   hide(time = 1.6) {
     if (!this.object3D) return;
     return new Promise((resolve, reject) => {
-      this.removeListeners();
       TweenLite.to(this.object3D.material.uniforms.uSize, time, {
         value: 0.0,
         onComplete: () => {resolve();},
@@ -239,6 +240,9 @@ export default class Particles {
   }
 
   onInteractiveMove(e) {
+
+    console.log('onInteractiveMove', this.anchor)
+
     const uv = e.intersectionData.uv;
     if (this.touch) this.touch.addTouch(uv);
   }

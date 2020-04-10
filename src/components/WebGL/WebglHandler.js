@@ -9,7 +9,7 @@ export default class WebGLView {
 	 * Init
 	 */
 
-	constructor(mount, videoSrc) {
+	constructor(mount, videoSrc, anchor) {
 
 		// Variable check
 		if ( !mount || !videoSrc ) {
@@ -20,6 +20,7 @@ export default class WebGLView {
 		// Basic variables
 		this.useStats = false;
 		this.mount = mount
+    this.anchor = anchor
 
 		// Setup
 		this.addListeners();
@@ -29,7 +30,7 @@ export default class WebGLView {
     this.resize();
 	}
 
-	init( videoSrc) {
+	init( videoSrc ) {
 
 		// Get width of mount
 		this.width = this.mount.offsetWidth;
@@ -67,13 +68,14 @@ export default class WebGLView {
    */
 
 	initParticles(videoSrc) {
-		this.particles = new Particles(this);
+		this.particles = new Particles(this, this.anchor);
 		this.scene.add(this.particles.container);
 		this.particles.load(videoSrc);
 	}
 
   initControls() {
-		this.interactive = new InteractiveControls(this.camera, this.renderer.domElement);
+		this.interactive = new InteractiveControls(this.camera, this.renderer.domElement, this.anchor);
+    if (this.interactive) this.interactive.resize();
 	}
 
 
@@ -104,10 +106,12 @@ export default class WebGLView {
    */
 
   startAnimation() {
-  	if (this.particles) {
-  		this.particles.start();
-  	}
+  	if (this.particles) this.particles.start();
   	this.animate();
+
+    setTimeout(() => {
+      this.resize();
+    }, 1000)
   }
 
   pauseAnimation(anchor) {

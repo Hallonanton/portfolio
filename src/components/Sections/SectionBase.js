@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import { css, keyframes } from '@emotion/core'
 import ReactFullpage from '@fullpage/react-fullpage'
 import SectionIntro from './Intro/SectionIntro'
+import SectionAbout from './About/SectionAbout'
 import SectionCases from './Cases/SectionCases'
 import SectionContact from './Contact/SectionContact'
 import { theme } from '../Layout/Theme'
@@ -181,8 +182,8 @@ class SectionBase extends Component {
           section: SectionIntro
         },
         {
-          anchor: 'knowledge',
-          section: SectionContact
+          anchor: 'about',
+          section: SectionAbout
         },
         {
           anchor: 'cases',
@@ -262,7 +263,6 @@ class SectionBase extends Component {
           activeSection={activeSection}
         />
         <ReactFullpage
-          debug
           licenseKey={'D154C10D-26774ED9-98FB51F3-DDE248C0'}
           anchors={fullpages.map(item => item.anchor)}
           sectionSelector={SECTION_SEL}
