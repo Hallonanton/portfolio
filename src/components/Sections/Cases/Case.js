@@ -48,6 +48,10 @@ const Card = styled('li')`
     background-color: ${theme.colors.textActive};
   }
 
+  a {
+    color: ${theme.colors.white};
+  }
+
   .inner {
   	position: relative;
   	width: 100%;
@@ -103,7 +107,7 @@ const Card = styled('li')`
   	}
   }
 
-  &.active .inner,
+  //&.active .inner,
   .inner:hover {
     &::after {
       opacity: 0.4;
@@ -129,6 +133,11 @@ const Card = styled('li')`
         right: -10px;
       }
     }
+
+    .external {
+      opacity: 1;
+      visiblity: hidden;
+    }
   }
 
   header {
@@ -153,7 +162,7 @@ const Card = styled('li')`
   	}
   }
 
-  &.active {
+  /*&.active {
     .inner {
       cursor: default;
     }
@@ -163,7 +172,7 @@ const Card = styled('li')`
       opacity: 1;
       visiblity: hidden;
     }
-  }
+  }*/
 
   &.reveal {
     .inner {
@@ -210,9 +219,9 @@ const Close = styled('div')`
   }
 `
 
-const Link = styled('a')`
+const Link = styled('span')`
   position: absolute;
-  bottom: 15px;
+  top: 15px;
   right: 15px;
   display: block;
   display: flex;
@@ -280,22 +289,24 @@ class Case extends Component {
 
     return (
       <Card {...rest}>
-        <article className="inner" onClick={e => onClick(e)}>
+        <a href={url} target="_blank" rel="noreffer noopener">
+          <article className="inner" onClick={e => onClick(e)}>
 
-          <Close className="close" onClick={() => clearActive()} />
+            <Close className="close" onClick={() => clearActive()} />
 
-          <header>
-            <h3>{title}</h3>
-            <ul>{tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
-          </header>
+            <header>
+              <h3>{title}</h3>
+              <ul>{tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
+            </header>
 
-          {url && <Link href={url} className="external" target="_blank" rel="noreffer noopener"><span>Visa sida</span><External /></Link>}
+            {url && <Link href={url} className="external" target="_blank" rel="noreffer noopener"><span>Visa sida</span><External /></Link>}
 
-          <div className="frame-marker top left" />
-          <div className="frame-marker top right" />
-          <div className="frame-marker bottom left" />
-          <div className="frame-marker bottom right" />
-        </article>
+            <div className="frame-marker top left" />
+            <div className="frame-marker top right" />
+            <div className="frame-marker bottom left" />
+            <div className="frame-marker bottom right" />
+          </article>
+        </a>
       </Card>
     )
   }

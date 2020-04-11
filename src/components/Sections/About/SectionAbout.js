@@ -27,9 +27,9 @@ const Mount = styled('div')`
 const Content = styled('div')`
   position: absolute;
   top: 50%;
-  left: 33.33%;
+  left: 30%;
   width: 50%;
-  max-width: 300px;
+  max-width: 400px;
   transform: translate(-50%,-50%);
 `
 
@@ -103,13 +103,42 @@ class SectionAbout extends Component {
         <Content>
           <TextReveal 
             reveal={this.state.visbile}
-            title="Kunskap"
+            title="<span>Nogrann och</span><span>tillmötesgående</span>"
             size="hero"
             paragraphs={[
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam non auctor diam. Donec imperdiet, enim sit amet tincidunt vehicula.",
-              "Massa purus elementum ex, a lobortis ex turpis sit amet turpis. Suspendisse non porttitor arcu.",
-              "Nullam maximus ut ex id finibus. Quisque id accumsan ligula, eget fringilla dui. Curabitur semper ante quis efficitur pharetra.",
-              "Pellentesque eros tortor, finibus vitae consequat nec, faucibus et sapien."
+              "En bra hemsida för mig är en sida som är logisk och tydligt uppbyggd men samtidigt vacker och levande att utforska.",
+              "Att försöka skapa sådana sidor är vad jag älskar med att utveckla."
+            ]}
+            tagTitle="Erfarenheter"
+            tags={[
+              'React',
+              'Gatsby.js',
+              'Wordpress',
+              'PHP'
+            ]}
+            secondaryTags={[
+              'Docker',
+              'Git',
+              'Netlify',
+              'Webpack',
+              'Node.js',
+              'npm/yarn/bower',
+              'jQuery',
+              'Bootstrap',
+              'Vue.js',
+              'Styled-components',
+              'Emotion',
+              'SASS/LESS',
+              'GraphQL',
+              'MySQL',
+              'Three.js',
+              'ACF',
+              'Woocommerce',
+              'E-handel',
+              'SEO',
+              'UX/UI',
+              'Illustrator',
+              'Photoshop'
             ]}
           />
         </Content>

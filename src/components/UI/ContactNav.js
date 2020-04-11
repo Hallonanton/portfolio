@@ -32,6 +32,27 @@ const navReveal = keyframes`
     transform: translateX(0px)
   }
 `
+const rDelay = 800
+const rDuration = 1000
+
+const reveal = keyframes`
+  0% {
+    transform: translate(-50%, -5px) scale3d(0,1,1);
+    transform-origin: 0% 50%;
+  }
+  40% {
+    transform: translate(-50%, -5px) scale3d(1,1,1);
+    transform-origin: 0% 50%;
+  }
+  60% {
+    transform: translate(-50%, -5px) scale3d(1,1,1);
+    transform-origin: 100% 50%;
+  }
+  100% {
+    transform: translate(-50%, -5px) scale3d(0,1,1);
+    transform-origin: 100% 50%;
+  }
+`
 
 const NavigationList = styled('ul')`
   position: absolute;
@@ -45,19 +66,37 @@ const NavigationList = styled('ul')`
   align-items: center;
   transition: all 1000ms ${theme.easings.easeOutQuint};
 
-  &::before {
+  &::before,
+  &::after {
     display: block;
-    content: "Nyfiken på mer?";
+    content: "";
     position: absolute;
     left: 50%;
     bottom: 100%;
-    color: ${theme.colors.textInactive};
-    opacity: 0;
-    font-style: italic;
+    width: 223px;
+    height: 40px;
+  }
+
+  &::before {
+    display: block;
+    content: "Nyfiken på mer?";
+    color: ${theme.colors.text};
+    ${theme.fontSizes.hero}
+    font-family: ${theme.fonts.heading};
+    font-weight: 900;
     white-space: nowrap;
+    opacity: 0;
     transform-origin: top center;
     transition: all 750ms ${theme.easings.easeOutQuint};
     transform: translate(-50%, -5px) scale(0.5);
+    z-index: 1;
+  }
+
+  &::after {
+    background-color: ${theme.colors.textActive};
+    transform: translate(-50%, -5px) scale3d(0,1,1);
+    transform-origin: 0% 50%;
+    z-index: 2;
   }
 
   &.focus {
@@ -68,20 +107,29 @@ const NavigationList = styled('ul')`
 
     &::before {
       opacity: 1;
-      transition: all 700ms ${theme.easings.easeOutSine} 250ms;
+      transition: all 0ms linear ${rDelay + (rDuration/2)}ms;
       transform: translate(-50%, -5px) scale(1);
+    }
+
+    &::after {
+      animation: ${reveal} ${rDuration}ms ${theme.easings.primary} ${rDelay}ms;
     }
 
     a {
       margin: 20px;
+      color: ${theme.colors.text};
       transition: margin 1000ms ${theme.easings.easeOutSine};
+
+      &:hover {
+        color: ${theme.colors.textActive};
+      }
     }
 
     svg {  
       max-width: 70px;
       max-height: 70px;
       transition: all 1000ms ${theme.easings.easeOutQuint},
-                color 250ms ${theme.easings.secondary};
+                color 250ms ${theme.easings.primary};
     }
   }
 
@@ -121,7 +169,7 @@ const Icon = styled('span')`
     max-height: 18px;
     object-fit: contain;
     transition: all 1000ms ${theme.easings.easeOutQuint},
-                color 250ms ${theme.easings.secondary};
+                color 250ms ${theme.easings.primary};
 
     path,
     circle,

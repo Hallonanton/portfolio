@@ -44,13 +44,13 @@ const StyledCase = styled(Case)`
     left: calc(50% + 30px);
   }
 
-  &.active {
+  /*&.active {
     z-index: 2;
     top: 0;
     left: 0;
     max-width: 100%;
     max-height: 100%;
-  }
+  }*/
 `
 
 

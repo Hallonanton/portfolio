@@ -166,8 +166,8 @@ const TemplateWrapper = ({children}) => {
         scale: 1.0
       }}>
         <Main>
-          {children}
           <h1 className="mainTitle regular">{title.split('').map((character, i) => <span key={i}>{character}</span>)}</h1>
+          {children}
           <FrameMarker className="top left" />
           <FrameMarker className="top right" />
           <FrameMarker className="bottom left" />

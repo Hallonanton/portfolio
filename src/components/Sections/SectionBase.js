@@ -55,14 +55,6 @@ const CustomNav = styled('div')`
       &:last-of-type {
         margin-bottom: 0px !important;
       }
-      
-      ${theme.above.xl} {
-        height: 60px !important;
-      }
-
-      ${theme.above.xxl} {
-        height: 80px !important;
-      }
 
       a {
         background: ${theme.colors.textInactive} !important;

@@ -34,26 +34,28 @@ const reveal = keyframes`
 
 const TextRevealWrapper = styled('div')`
 	.title {
-		position: relative;
     display: inline-block;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 
     span {
-	    opacity: 0;
-	    visibility: hidden;
+		  position: relative;
+      display: inline-block;
+      color: transparent;
+      margin-right: 10px;
+      margin-bottom: 5px;
+
+      &::before {
+      	display: block;
+  	    content: "";
+  	    position: absolute;
+  	    top: 0;
+  	    left: 0;
+  	    height: 100%;
+  	    z-index: 3;
+  	    background-color: ${theme.colors.textActive};
+      }
     }
 
-    &::before {
-    	display: block;
-	    content: "";
-	    position: absolute;
-	    top: 0;
-	    left: 0;
-	    height: 100%;
-	    z-index: 3;
-	    background-color: ${theme.colors.textActive};
-    }
-    
     &.mega {
     	padding-bottom: 15px;
     	margin-bottom: 15px;
@@ -65,6 +67,8 @@ const TextRevealWrapper = styled('div')`
   }
 
   .text {
+    margin-bottom: 20px;
+
     p {
       display: block;
       margin-bottom: 3px;
@@ -74,18 +78,53 @@ const TextRevealWrapper = styled('div')`
     }
   }
 
+  .tag-wrapper {
+    margin-top: 15px;
+
+    .tag-title {
+      ${theme.fontSizes.regular}
+      text-transform: none;
+      margin-bottom: 5px;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+
+      li {
+        padding: 5px 10px;
+        margin: 2px;
+        border-radius: 2px;
+        background: ${theme.colors.text};
+        color: ${theme.colors.black};
+      }
+    }
+
+    &.secondary {
+      li {
+        padding: 2px 5px;
+        opacity: 0.8;
+      }
+    }
+  }
+
   &.reveal {
   	.title {
 
   		span {
-	  		opacity: 1;
+	  		color: ${theme.colors.white};
 	      visibility: visible;
-	      transition: opacity 0ms linear 500ms;
+	      
+        //Loop out delay for reveal animation
+        ${Array(3).fill().map((item, i) => css`
+          &:nth-of-type(${i+1}){
+            transition: color 0ms linear ${500+i*100}ms;
+      
+            &::before {
+              animation: ${reveal} 1000ms ${theme.easings.primary} ${i*100}ms;
+            }
+          }
+        `)}
   		}
-
-  		&::before {
-	      animation: ${reveal} 1000ms ${theme.easings.primary};
-	    }
   	}
 
   	.text {
@@ -96,7 +135,7 @@ const TextRevealWrapper = styled('div')`
   			transition: all 500ms ${theme.easings.secondary};
 
   			//Loop out delay for reveal animation
-	      ${[...Array(10)].map((item, i) => css`
+	      ${Array(5).fill().map((item, i) => css`
 	        &:nth-of-type(${i+1}){
 	          transition-delay: ${i*pDelay+pBaseDelay}ms;
 	        }
@@ -111,13 +150,24 @@ const TextRevealWrapper = styled('div')`
   # Component
 ==============================================================================*/
 
-const TextReveal = ({ title, size = 'mega', paragraphs, reveal, className, ...rest }) => {
+const TextReveal = ({ title, size = 'mega', paragraphs, tagTitle, tags, secondaryTags, reveal, className, ...rest }) => {
 	className += reveal ? ' reveal' : ''
 	return (
 		<TextRevealWrapper className={className} {...rest}>
-			{title && <h2 className={`title ${size}`}><span>{title}</span></h2>}
+			{title && <h2 className={`title ${size}`} dangerouslySetInnerHTML={{__html: title }}/>}
       {paragraphs && <div className="text regular">
       	{paragraphs.map((p, i) => <p key={i}>{p}</p>)}
+      </div>}
+      {tags && <div className="tag-wrapper">
+        {tagTitle && <h3 className="tag-title">{tagTitle}</h3>}
+        <ul className="tags">
+          {tags.map((tag, i) => <li key={i}>{tag}</li>)}
+        </ul>
+      </div>}
+      {secondaryTags && <div className="tag-wrapper secondary">
+        <ul className="tags">
+          {secondaryTags.map((tag, i) => <li key={i}>{tag}</li>)}
+        </ul>
       </div>}
 		</TextRevealWrapper>
 	)

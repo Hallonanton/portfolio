@@ -101,10 +101,10 @@ class SectionIntro extends Component {
         <Content>
           <TextReveal 
             reveal={this.state.visbile}
-            title="Hej."
+            title="<span>Hej.</span>"
             paragraphs={[
               "Mitt namn är Anton Pedersen.",
-              "Jag är en Front-end utvecklare",
+              "Jag är en social Front-end utvecklare",
               "som kodar och designar hemsidor.",
               "Baserad i Göteborg.",
             ]}

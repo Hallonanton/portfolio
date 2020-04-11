@@ -4,7 +4,7 @@ import 'reset-css'
 import PropTypes from 'prop-types'
 import ReactBreakpoints from 'react-breakpoints'
 import { ThemeProvider } from 'emotion-theming'
-import { Global, css } from '@emotion/core'
+import { Global, css, keyframes } from '@emotion/core'
 import { createBreakpointHelpers } from '../../utility/breakpoints'
 
 
@@ -185,7 +185,7 @@ const mega = `
 
   ${breakpointHelpers.above.md} {
     font-size: 13rem;
-    line-height: 1.1;
+    line-height: 1.2;
     letter-spacing: 1px;
   }
 `
@@ -212,7 +212,6 @@ const subHeading = `
   font-size: 1.8rem;
   line-height: 1.39;
   letter-spacing: 1px;
-  text-transform: uppercase;
 `
 
 const regular = `
@@ -282,31 +281,31 @@ const globalStyles = css`
   //Fonts
   .mega {
     font-family: ${fonts.header};
-    font-weight: 700;
+    font-weight: 900;
     ${mega}
   }
   h1,
   .hero {
     font-family: ${fonts.header};
-    font-weight: 700;
+    font-weight: 900;
     ${hero}
   }
   h2,
   .heading {
     font-family: ${fonts.header};
-    font-weight: 700;
+    font-weight: 900;
     ${heading}
   }
   h3,
   .sub-heading {
     font-family: ${fonts.header};
-    font-weight: 700;
+    font-weight: 900;
     ${subHeading}
   }
   h4, h5, h6,
   .small-heading {
     font-family: ${fonts.header};
-    font-weight: 700;
+    font-weight: 900;
     ${regular}
   }
   *, 
