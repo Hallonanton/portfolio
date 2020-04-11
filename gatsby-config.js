@@ -11,6 +11,7 @@ module.exports = {
     'gatsby-plugin-sitemap',
     'gatsby-transformer-json',
     'gatsby-plugin-glslify',
+    'gatsby-plugin-emotion',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -71,29 +72,23 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-emotion',
-      options: {
-        // Accepts all options defined by `babel-plugin-emotion` plugin.
-      },
-    },
-    {
       resolve: 'gatsby-plugin-nprogress',
       options: {
-        // Setting a color is optional.
-        color: '#2a6cf0',
-        // Disable the loading spinner.
+        color: '#2ecc71',
         showSpinner: false,
       },
     },
     {
-      resolve: 'gatsby-plugin-google-fonts',
+      resolve: 'gatsby-plugin-web-font-loader',
       options: {
-        fonts: [
-          'open sans\:400,700'
-        ],
-        display: 'swap'
+        google: {
+          families: ['Source Sans Pro\:200,400']
+        },
+        custom: {
+          families: ['Helvetica Neue'],
+          urls: ['src/assets/fonts/HelveticaNeue/stylesheet.css']
+        }
       }
-    },
-    'gatsby-plugin-transition-link'
+    }
   ],
 }

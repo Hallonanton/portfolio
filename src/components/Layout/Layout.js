@@ -46,7 +46,8 @@ const Main = styled('main')`
     bottom: 45px;
     left: 25px;
     color: ${theme.colors.textInactive};
-    font-weight: 100;
+    font-weight: 200;
+    font-family: ${theme.fonts.primary};
     text-transform: uppercase;
     transform-origin: center left;
     transform: rotate(-90deg);
@@ -166,7 +167,7 @@ const TemplateWrapper = ({children}) => {
       }}>
         <Main>
           {children}
-          <h1 className="mainTitle description">{title.split('').map((character, i) => <span key={i}>{character}</span>)}</h1>
+          <h1 className="mainTitle regular">{title.split('').map((character, i) => <span key={i}>{character}</span>)}</h1>
           <FrameMarker className="top left" />
           <FrameMarker className="top right" />
           <FrameMarker className="bottom left" />

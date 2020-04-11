@@ -2,10 +2,10 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { css, keyframes } from '@emotion/core'
 import { theme } from '../Layout/Theme'
-import Mail from '../../assets/icons/social/envelope.svg'
-import LinkedIn from '../../assets/icons/social/linkedin.svg'
-import Codepen from '../../assets/icons/social/codepen.svg'
-import Github from '../../assets/icons/social/github.svg'
+import Mail from '../../assets/icons/envelope.svg'
+import LinkedIn from '../../assets/icons/linkedin.svg'
+import Codepen from '../../assets/icons/codepen.svg'
+import Github from '../../assets/icons/github.svg'
 
 /*==============================================================================
   # Styles

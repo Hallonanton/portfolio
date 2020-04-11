@@ -1,117 +1,70 @@
-module.exports = {
-  siteMetadata: {
-    title: 'Portfolio',
-    titleSuffix: '|',
-    sitename: 'Anton Pedersen',
-    siteUrl: 'https://hallonanton-portfolio.netlify.com/',
-    description: '',
-  },
-  plugins: [
-    'gatsby-plugin-react-helmet',
-    'gatsby-plugin-sitemap',
-    'gatsby-transformer-json',
-    {
-      // keep as first gatsby-source-filesystem plugin for gatsby image support
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        path: `${__dirname}/static/img`,
-        name: 'uploads',
-      },
-    },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        path: `${__dirname}/src/pages`,
-        name: 'pages',
-      },
-    },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        path: `${__dirname}/src/img`,
-        name: 'images',
-      },
-    },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        path: `${__dirname}/src/data`,
-        name: 'data',
-      },
-    },
-    {
-      resolve: 'gatsby-plugin-react-svg',
-      options: {
-          rule: {
-            include: `${__dirname}/src/img`
-          }
-      }
-    },
-    'gatsby-plugin-sharp',
-    'gatsby-transformer-sharp',
-    {
-      resolve: 'gatsby-transformer-remark',
-      options: {
-        plugins: [
-          {
-            resolve: 'gatsby-remark-relative-images',
-            options: {
-              name: 'uploads',
-            },
-          },
-          {
-            resolve: 'gatsby-remark-images',
-            options: {
-              // It's important to specify the maxWidth (in pixels) of
-              // the content container as this plugin uses this as the
-              // base for generating different widths of each image.
-              maxWidth: 2048,
-            },
-          },
-          {
-            resolve: 'gatsby-remark-copy-linked-files',
-            options: {
-              destinationDir: 'static',
-            },
-          },
-          {
-            resolve: 'gatsby-remark-audio',
-            options: {
-              preload: 'auto',
-              loop: false,
-              controls: true,
-              muted: false,
-              autoplay: false
-            }
-          },
-        ],
-      },
-    },
-    {
-      resolve: 'gatsby-plugin-emotion',
-      options: {
-        // Accepts all options defined by `babel-plugin-emotion` plugin.
-      },
-    },
-    {
-      resolve: 'gatsby-plugin-nprogress',
-      options: {
-        // Setting a color is optional.
-        color: '#2a6cf0',
-        // Disable the loading spinner.
-        showSpinner: false,
-      },
-    },
-    {
-      resolve: 'gatsby-plugin-google-fonts',
-      options: {
-        fonts: [
-          'open sans\:400,700'
-        ],
-        display: 'swap'
-      }
-    },
-    'gatsby-plugin-transition-link',
-    'gatsby-plugin-netlify', // make sure to keep it last in the array
-  ],
+
+const { createFilePath } = require('gatsby-source-filesystem')
+const { fmImagesToRelative } = require('gatsby-remark-relative-images')
+
+
+/*==============================================================================
+  # Customize GraphQL schema
+==============================================================================*/
+
+//https://www.gatsbyjs.org/docs/schema-customization/
+
+//This link might be useful for flexible content: https://medium.com/@Zepro/contentful-reference-fields-with-gatsby-js-graphql-9f14ed90bdf9
+
+//For now I haven't figured out how to implement this on fields with more complex types like images with File etc
+//https://github.com/gatsbyjs/gatsby/issues/3344
+
+//This will allow different fields to be left empty without causing a GraphQL error
+//The result will be that missing fields default to null instead on beaing declared as undefined
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions
+  const typeDefs = `
+    type DataJson implements Node {
+      socialmedia: DataJsonSocialmedia
+    }
+    type DataJsonSocialmedia {
+      Facebook: String
+      Instagram: String
+      LinkedIn: String
+      Twitter: String
+      Youtube: String
+      Github: String
+      Codepen: String
+    }
+  `
+  createTypes(typeDefs)
+}
+
+
+/*==============================================================================
+  # Create image nodes
+==============================================================================*/
+
+exports.onCreateNode = ({ node, actions, getNode }) => {
+  const { createNodeField } = actions
+  fmImagesToRelative(node) // convert image paths for gatsby images
+
+  if (node.internal.type === 'MarkdownRemark') {
+    const value = createFilePath({ node, getNode })
+    createNodeField({
+      name: 'slug',
+      node,
+      value,
+    })
+  }
+}
+
+
+/*==============================================================================
+  # Fix react warning
+==============================================================================*/
+
+exports.onCreateWebpackConfig = ({ getConfig, stage, actions }) => {
+  const config = getConfig()
+  if (stage.startsWith('develop') && config.resolve) {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'react-dom': '@hot-loader/react-dom'
+    }
+  }
 }

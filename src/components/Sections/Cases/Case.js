@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from '@emotion/styled'
 import { keyframes } from '@emotion/core'
 import { theme } from '../../Layout/Theme'
-import External from '../../../assets/icons/social/external-link.svg'
+import External from '../../../assets/icons/external-link.svg'
 
 /*==============================================================================
   # Styles
