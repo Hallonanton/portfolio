@@ -232,7 +232,7 @@ export default class Particles {
   resize() {
     if (!this.object3D) return;
 
-    const scale = (this.webgl.fovHeight / this.height) * 0.75;
+    const scale = (this.webgl.fovHeight / this.height) * 0.9;
     this.object3D.scale.set(scale, scale, 1);
     this.hitArea.scale.set(scale, scale, 1);
   }

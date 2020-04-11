@@ -3,7 +3,6 @@ import styled from '@emotion/styled'
 import Layout from '../components/Layout/Layout'
 import PageMetadata from '../components/Layout/PageMetadata'
 import Container from '../components/UI/Grid'
-import VideoSrc from '../assets/video/404.mp4'
 
 /*==============================================================================
   # Styles
@@ -19,12 +18,6 @@ const StyledContainer = styled(Container)`
 const Content = styled('div')`
 	width: 100%;
 	max-width: 540px;
-`
-
-const Video = styled('video')`
-	width: 100%;
-	margin-top: 30px;
-	margin-bottom: 30px;
 `
 
 /*==============================================================================

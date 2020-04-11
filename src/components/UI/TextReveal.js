@@ -8,8 +8,10 @@ import { theme } from '../Layout/Theme'
   # Styles
 ==============================================================================*/
 
-const pBaseDelay = 1500
+const pBaseDelay = 1000
 const pDelay = 350
+const tDuration = 350
+const tDelay = 180
 
 const reveal = keyframes`
   0% {
@@ -33,6 +35,8 @@ const reveal = keyframes`
 `
 
 const TextRevealWrapper = styled('div')`
+  max-width: 400px;
+
 	.title {
     display: inline-block;
     margin-bottom: 5px;
@@ -85,24 +89,32 @@ const TextRevealWrapper = styled('div')`
       ${theme.fontSizes.regular}
       text-transform: none;
       margin-bottom: 5px;
+      transform: translateY(5px);
+      opacity: 0;
+      visibility: hidden;
     }
     .tags {
       display: flex;
       flex-wrap: wrap;
 
-      li {
+      .divider {
+        margin-top: 15px;
+        width: 100%;
+      }
+
+      .tag {
         padding: 5px 10px;
         margin: 2px;
         border-radius: 2px;
         background: ${theme.colors.text};
         color: ${theme.colors.black};
-      }
-    }
-
-    &.secondary {
-      li {
-        padding: 2px 5px;
-        opacity: 0.8;
+        transform: translateY(5px);
+        opacity: 0;
+        visibility: hidden;
+        
+        &.secondary {
+          padding: 2px 5px;
+        }
       }
     }
   }
@@ -114,16 +126,21 @@ const TextRevealWrapper = styled('div')`
 	  		color: ${theme.colors.white};
 	      visibility: visible;
 	      
-        //Loop out delay for reveal animation
-        ${Array(3).fill().map((item, i) => css`
-          &:nth-of-type(${i+1}){
-            transition: color 0ms linear ${500+i*100}ms;
-      
-            &::before {
-              animation: ${reveal} 1000ms ${theme.easings.primary} ${i*100}ms;
-            }
+        &:nth-of-type(1) {
+          transition: color 0ms linear ${500+(0*100)}ms;
+    
+          &::before {
+            animation: ${reveal} 1000ms ${theme.easings.primary} ${0*100}ms;
           }
-        `)}
+        }
+
+        &:nth-of-type(2) {
+          transition: color 0ms linear ${500+(1*100)}ms;
+    
+          &::before {
+            animation: ${reveal} 1000ms ${theme.easings.primary} ${1*100}ms;
+          }
+        }
   		}
   	}
 
@@ -134,14 +151,49 @@ const TextRevealWrapper = styled('div')`
   			transform: translateY(0px);
   			transition: all 500ms ${theme.easings.secondary};
 
-  			//Loop out delay for reveal animation
-	      ${Array(5).fill().map((item, i) => css`
-	        &:nth-of-type(${i+1}){
-	          transition-delay: ${i*pDelay+pBaseDelay}ms;
-	        }
-	      `)}
+        &:nth-of-type(1){
+          transition-delay: ${0*pDelay+pBaseDelay}ms;
+        }
+
+        &:nth-of-type(2){
+          transition-delay: ${1*pDelay+pBaseDelay}ms;
+        }
+
+        &:nth-of-type(3){
+          transition-delay: ${2*pDelay+pBaseDelay}ms;
+        }
+
+        &:nth-of-type(4){
+          transition-delay: ${3*pDelay+pBaseDelay}ms;
+        }
   		}
   	}
+
+    .tag-wrapper {
+      .tag-title {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0px);
+        transition: all 500ms ${theme.easings.secondary} ${2*pDelay+pBaseDelay}ms;
+      }
+
+      .tag {
+        opacity: 1;
+        transform: translateY(0px);
+        visibility: visible;
+
+        &.secondary {
+          opacity: 0.8;
+        }
+
+        //Loop out delay for reveal animation
+        ${[...Array(40)].map((item, i) => css`
+          &:nth-child(${i+1}){
+            transition: all ${tDuration}ms ${theme.easings.secondary} ${(tDelay*i)+3*pDelay+pBaseDelay}ms;
+          }
+        `)}
+      }
+    }
   }
 `
 
@@ -161,12 +213,9 @@ const TextReveal = ({ title, size = 'mega', paragraphs, tagTitle, tags, secondar
       {tags && <div className="tag-wrapper">
         {tagTitle && <h3 className="tag-title">{tagTitle}</h3>}
         <ul className="tags">
-          {tags.map((tag, i) => <li key={i}>{tag}</li>)}
-        </ul>
-      </div>}
-      {secondaryTags && <div className="tag-wrapper secondary">
-        <ul className="tags">
-          {secondaryTags.map((tag, i) => <li key={i}>{tag}</li>)}
+          {tags.map((tag, i) => <li key={i} className="tag">{tag}</li>)}
+          {secondaryTags && <li className="divider" />}
+          {secondaryTags.map((tag, i) => <li key={i} className="tag secondary">{tag}</li>)}
         </ul>
       </div>}
 		</TextRevealWrapper>

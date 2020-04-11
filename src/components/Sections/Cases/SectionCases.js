@@ -1,18 +1,13 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
 import Case from './Case'
+import { SectionContainer } from '../../UI/Grid'
 import { getNodeIndex } from '../../../utility/functions'
 
 
 /*==============================================================================
   # Styles
 ==============================================================================*/
-
-const CasesWrapper = styled('div')`
-  width: 100vw;
-  height: 100vh;
-  padding: 90px;
-`
 
 const CasesList = styled('ul')`
   position: relative;
@@ -176,7 +171,7 @@ class SectionCases extends Component {
 
   render() {
     return (
-      <CasesWrapper ref={(ref) => this.refHandler(ref)}>
+      <SectionContainer ref={(ref) => this.refHandler(ref)}>
         <CasesList>
           {cases.map((item, i) => {
              
@@ -196,7 +191,7 @@ class SectionCases extends Component {
             )
           })}
         </CasesList>
-      </CasesWrapper>
+      </SectionContainer>
     )
   }
 }

@@ -29,6 +29,11 @@ const BaseContainer = styled('div')`
 `;
 
 
+const BaseSectionContainer = styled(BaseContainer)`
+  height: 100%;
+  padding: 90px;
+`
+
 const BaseRow = styled('div')`
   display: flex;
   flex-wrap: wrap;
@@ -79,6 +84,11 @@ const Container = ({ children, ...rest }) => {
   return <BaseContainer {...rest}>{children}</BaseContainer>;
 }
 export default Container
+
+
+export const SectionContainer = ({ children, ...rest }) => {
+  return <BaseSectionContainer {...rest}>{children}</BaseSectionContainer>;
+}
 
 /*
  * Row

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
+import { SectionContainer, Row, Col } from '../../UI/Grid'
 import TextReveal from '../../UI/TextReveal'
 import WebGLHandler from '../../WebGL/WebglHandler'
 import VideoSrc from '../../../assets/video/test-face-150.mp4'
@@ -9,28 +10,27 @@ import VideoSrc from '../../../assets/video/test-face-150.mp4'
   # Styles
 ==============================================================================*/
 
-const AboutWrapper = styled('div')`
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-`
-
-const Mount = styled('div')`
-  position: absolute;
-  top: 0;
-  left: 75%;
-  width: 50%;
+const AboutRow = styled(Row)`
   height: 100%;
-  transform: translateX(-50%);
+  align-items: center;
 `
 
-const Content = styled('div')`
-  position: absolute;
-  top: 50%;
-  left: 30%;
-  width: 50%;
-  max-width: 400px;
-  transform: translate(-50%,-50%);
+const MountCol = styled(Col)`
+  position: relative;
+  height: 100%;
+  order: 2;
+
+  .mount {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+`
+
+const ContentCol = styled(Col)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 
@@ -98,51 +98,57 @@ class SectionAbout extends Component {
 
   render () {
     return (
-      <AboutWrapper>
-        <Mount ref={(mount) => this.refHandler(mount)} />
-        <Content>
-          <TextReveal 
-            reveal={this.state.visbile}
-            title="<span>Nogrann och</span><span>tillmötesgående</span>"
-            size="hero"
-            paragraphs={[
-              "En bra hemsida för mig är en sida som är logisk och tydligt uppbyggd men samtidigt vacker och levande att utforska.",
-              "Att försöka skapa sådana sidor är vad jag älskar med att utveckla."
-            ]}
-            tagTitle="Erfarenheter"
-            tags={[
-              'React',
-              'Gatsby.js',
-              'Wordpress',
-              'PHP'
-            ]}
-            secondaryTags={[
-              'Docker',
-              'Git',
-              'Netlify',
-              'Webpack',
-              'Node.js',
-              'npm/yarn/bower',
-              'jQuery',
-              'Bootstrap',
-              'Vue.js',
-              'Styled-components',
-              'Emotion',
-              'SASS/LESS',
-              'GraphQL',
-              'MySQL',
-              'Three.js',
-              'ACF',
-              'Woocommerce',
-              'E-handel',
-              'SEO',
-              'UX/UI',
-              'Illustrator',
-              'Photoshop'
-            ]}
-          />
-        </Content>
-      </AboutWrapper>
+      <SectionContainer>
+        <AboutRow>
+
+          <MountCol col={6}>
+            <div className="mount" ref={(mount) => this.refHandler(mount)} />
+          </MountCol>
+
+          <ContentCol col={6}>
+            <TextReveal 
+              reveal={this.state.visbile}
+              title="<span>Nogrann och</span><span>tillmötesgående</span>"
+              size="hero"
+              paragraphs={[
+                "En bra hemsida för mig är en sida som är logisk och tydligt uppbyggd men samtidigt vacker och levande att utforska.",
+                "Att försöka skapa sådana sidor är vad jag älskar med att utveckla."
+              ]}
+              tagTitle="Erfarenheter"
+              tags={[
+                'React',
+                'Gatsby.js',
+                'Wordpress',
+                'PHP'
+              ]}
+              secondaryTags={[
+                'Docker',
+                'Git',
+                'Netlify',
+                'Webpack',
+                'npm/yarn/bower',
+                'jQuery',
+                'Bootstrap',
+                'Vue.js',
+                'Styled-components',
+                'Emotion',
+                'SASS/LESS',
+                'GraphQL',
+                'MySQL',
+                'Three.js',
+                'ACF',
+                'Woocommerce',
+                'E-handel',
+                'SEO',
+                'UX/UI',
+                'Illustrator',
+                'Photoshop'
+              ]}
+            />
+          </ContentCol>
+
+        </AboutRow>
+      </SectionContainer>
     )
   }  
 }
