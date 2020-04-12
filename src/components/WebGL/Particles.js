@@ -21,7 +21,7 @@ export default class Particles {
     this.video.crossOrigin = 'anonymous'
     this.video.preload = 'auto'
     this.video.muted = true
-    this.video.playsinline = true
+    this.video.playsinline = ''
     this.video.loop = true
     this.video.src = videoSrc
 
@@ -54,6 +54,7 @@ export default class Particles {
     this.video.style.left = '15px'
     this.video.style.width = '40px'
     this.video.style.height = '40px'
+    this.video.style.background = 'red'
     document.body.appendChild(this.video)
   }
 
