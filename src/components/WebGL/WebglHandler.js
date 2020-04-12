@@ -127,7 +127,7 @@ export default class WebGLView {
   }
 
   cancel(anchor) {
-  	const destination = window.fullpage_api.getActiveSection().anchor
+  	const destination = window.sectionScroll.anchor
   	if( destination && anchor && destination === anchor ) return
   	cancelAnimationFrame(this.animationFrame)
   }

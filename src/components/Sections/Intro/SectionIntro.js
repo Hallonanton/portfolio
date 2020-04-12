@@ -21,7 +21,6 @@ const MountCol = styled(Col)`
   padding-bottom: 66.66%;
 
   ${theme.above.md} {
-    order: 1;
     height: 100%;
     padding-bottom: 0;
   }
@@ -37,10 +36,6 @@ const ContentCol = styled(Col)`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  ${theme.above.md} {
-    order: 2;
-  }
 `
 
 
@@ -64,8 +59,7 @@ class SectionIntro extends Component {
     revealDelay: 1000
   }
 
-  refHandler =  mount => {
-
+  mountHandler =  mount => {
     if ( !this.mount && mount ) {
       this.mount = mount;
       const { anchor } = this.props;
@@ -80,10 +74,18 @@ class SectionIntro extends Component {
     }
   }
 
+  refHandler = ref => {
+    if ( !this.ref && ref ) {
+      this.ref = ref
+      const { anchor, refCallback } = this.props
+      refCallback(anchor, ref)
+    }
+  }
+
   handleSectionScroll = e => {
 
     const { anchor } = this.props
-    const destination = e.destination.anchor
+    const destination = e.anchor
 
     // Start animation if target section is this section
     if ( destination === anchor ) {
@@ -108,9 +110,13 @@ class SectionIntro extends Component {
 
   render () {
     return (
-      <SectionContainer>
+      <SectionContainer ref={(ref) => this.refHandler(ref)}>
         <IntroRow>
         
+          <MountCol col={12} md={6}>
+            <div className="mount" ref={(mount) => this.mountHandler(mount)} />
+          </MountCol>
+          
           <ContentCol col={12} md={6}>
             <TextReveal 
               reveal={this.state.visbile}
@@ -123,10 +129,6 @@ class SectionIntro extends Component {
               ]}
             />
           </ContentCol>
-
-          <MountCol col={12} md={6}>
-            <div className="mount" ref={(mount) => this.refHandler(mount)} />
-          </MountCol>
 
         </IntroRow>
       </SectionContainer>

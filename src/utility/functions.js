@@ -129,3 +129,38 @@ export function getNodeIndex(node) {
     }
     return index;
 }
+
+
+/*
+ * sectionVisibilty
+ */
+
+export function sectionVisibilty (el) {
+  if ( typeof document !== 'undefined' ) {
+    var rect = el.getBoundingClientRect();
+
+    const winHeight = (window.innerHeight || document.documentElement.clientHeight)
+    const visibleTop = (rect.top-winHeight)*-1
+    const visibleBot = rect.top+rect.height
+    const isVisible = visibleTop >= 0 && visibleBot >= 0
+
+
+    let percentage = 0
+    if ( isVisible ) {
+
+      let percentageTop = (1 - (winHeight-visibleTop) / winHeight)
+      percentageTop = percentageTop > 1 ? 1 : percentageTop
+      let percentageBot = (1 - (winHeight-visibleBot) / winHeight)
+      percentageBot = percentageBot > 1 ? 1 : percentageBot
+
+      percentage = Math.min(percentageTop, percentageBot)
+    }
+
+    return {
+      visible: isVisible,
+      percentage: percentage
+    }
+  } else {
+    return { visible: false, percentage: 0 };
+  }
+}

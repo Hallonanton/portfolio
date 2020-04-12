@@ -3,7 +3,6 @@ import styled from '@emotion/styled'
 import Case from './Case'
 import { SectionContainer } from '../../UI/Grid'
 import { theme } from '../../Layout/Theme'
-import { getNodeIndex } from '../../../utility/functions'
 
 
 /*==============================================================================
@@ -67,10 +66,13 @@ class SectionCases extends Component {
   }
 
   refHandler = ref => {
-    if ( !this.ref ) {
+    if ( ref && !this.ref ) {
       this.ref = ref
 
-      const { anchor } = this.props
+      const { refCallback, anchor } = this.props
+
+      refCallback(anchor, ref)
+
       const hash = window.location.hash?.replace('#','')
 
       // Check if first section, start animation if it is
@@ -85,7 +87,7 @@ class SectionCases extends Component {
   handleSectionScroll = e => {
 
     const { anchor } = this.props
-    const destination = e.destination.anchor
+    const destination = e.anchor
 
     // Trigger reveal animation on first focus
     if ( destination === anchor ) {
@@ -115,11 +117,11 @@ class SectionCases extends Component {
 
   render() {
     return (
-      <SectionContainer id="section-cases" forwardRef={(ref) => this.refHandler(ref)}>
+      <SectionContainer ref={(ref) => this.refHandler(ref)}>
         <CasesList>
           {cases.map((item, i) => {
              
-            const { activeCase, revealed } = this.state
+            const { revealed } = this.state
             const classes = revealed.includes(i) ? ' reveal' : ''
 
             return (
