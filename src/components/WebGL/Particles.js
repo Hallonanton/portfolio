@@ -21,7 +21,7 @@ export default class Particles {
     this.video.crossOrigin = 'anonymous'
     this.video.preload = 'auto'
     this.video.muted = true
-    this.video.playsInline = true
+    this.video.playsinline = true
     this.video.loop = true
     this.video.src = videoSrc
 
@@ -232,7 +232,7 @@ export default class Particles {
   resize() {
     if (!this.object3D) return;
 
-    const scale = (this.webgl.fovHeight / this.height) * 0.9;
+    const scale = (this.webgl.fovHeight / this.height) * 0.95;
     this.object3D.scale.set(scale, scale, 1);
     this.hitArea.scale.set(scale, scale, 1);
   }

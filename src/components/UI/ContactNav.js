@@ -64,6 +64,7 @@ const NavigationList = styled('ul')`
   flex-grow: 1;
   flex-basis: 0;
   align-items: center;
+  z-index: 1;
   transition: all 1000ms ${theme.easings.easeOutQuint};
 
   ${theme.above.md} {
@@ -107,10 +108,14 @@ const NavigationList = styled('ul')`
 
   &.focus {
     max-width: calc( 100% - 60px );
-    bottom: 50%;
+    bottom: 33.33%;
     right: 50%;
     transform: translate(50%, 50%);
     transition: all 1000ms ${theme.easings.easeOutSine};
+
+    ${theme.above.md} {
+      bottom: 50%;
+    }
 
     &::before {
       opacity: 1;

@@ -18,7 +18,7 @@ const AboutRow = styled(Row)`
 
 const MountCol = styled(Col)`
   position: relative;
-  padding-bottom: 66.66%;
+  padding-bottom: 100%;
 
   ${theme.above.md} {
     height: 100%;
@@ -37,6 +37,10 @@ const ContentCol = styled(Col)`
   display: flex;
   justify-content: center;
   align-items: center;
+  
+  ${theme.below.md} {
+    margin-top: 20px;
+  }
 
   ${theme.above.md} {
     order: 1;
@@ -125,7 +129,7 @@ class SectionAbout extends Component {
           <ContentCol col={12} md={6}>
             <TextReveal 
               reveal={this.state.visbile}
-              title="<span>Nogrann och</span><span>tillmötesgående</span>"
+              title="<span>Nogrann och</span><br><span>tillmötesgående</span>"
               size="hero"
               paragraphs={[
                 "En bra hemsida för mig är en sida som är logisk och tydligt uppbyggd men samtidigt vacker och levande att utforska.",

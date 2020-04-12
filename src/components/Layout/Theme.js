@@ -179,11 +179,11 @@ const fonts = {
 ==============================================================================*/
 
 const mega = `
-  font-size: 3.2rem;
-  line-height: 1.25;
-  letter-spacing: 0.5px;
+  font-size: 9rem;
+  line-height: 1.2;
+  letter-spacing: 1px;
 
-  ${breakpointHelpers.above.md} {
+  ${breakpointHelpers.above.md} {  
     font-size: 13rem;
     line-height: 1.2;
     letter-spacing: 1px;
@@ -191,15 +191,9 @@ const mega = `
 `
 
 const hero = `
-  font-size: 2.6rem;
-  line-height: 1.38;
+  font-size: 3.2rem;
+  line-height: 1.25;
   letter-spacing: 0.5px;
-
-  ${breakpointHelpers.above.md} {
-    font-size: 3.2rem;
-    line-height: 1.25;
-    letter-spacing: 0.5px;
-  }
 `
 
 const heading = `

@@ -11,6 +11,12 @@ import VideoSrc from '../../../assets/video/test-face-150.mp4'
   # Styles
 ==============================================================================*/
 
+const IntroContainer = styled(SectionContainer)`
+  ${theme.below.md} {
+    padding-top: 10px;
+  }
+`
+
 const IntroRow = styled(Row)`
   height: 100%;
   align-items: center;
@@ -18,7 +24,7 @@ const IntroRow = styled(Row)`
 
 const MountCol = styled(Col)`
   position: relative;
-  padding-bottom: 66.66%;
+  padding-bottom: 100%;
 
   ${theme.above.md} {
     height: 100%;
@@ -36,6 +42,10 @@ const ContentCol = styled(Col)`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  ${theme.below.md} {
+    margin-top: 20px;
+  }
 `
 
 
@@ -110,17 +120,17 @@ class SectionIntro extends Component {
 
   render () {
     return (
-      <SectionContainer ref={(ref) => this.refHandler(ref)}>
+      <IntroContainer ref={(ref) => this.refHandler(ref)}>
         <IntroRow>
         
           <MountCol col={12} md={6}>
             <div className="mount" ref={(mount) => this.mountHandler(mount)} />
           </MountCol>
-          
+
           <ContentCol col={12} md={6}>
             <TextReveal 
               reveal={this.state.visbile}
-              title="<span>Hej.</span>"
+              title="<span>Hej</span>"
               paragraphs={[
                 "Mitt namn är Anton Pedersen.",
                 "Jag är en social Front-end utvecklare",
@@ -131,7 +141,7 @@ class SectionIntro extends Component {
           </ContentCol>
 
         </IntroRow>
-      </SectionContainer>
+      </IntroContainer>
     )
   }  
 }

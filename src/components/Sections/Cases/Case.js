@@ -34,7 +34,7 @@ const Card = styled('li')`
   width: 100%;
   height: 0%;
   padding-bottom: 50%;
-  margin-bottom: 45px;
+  margin-bottom: 30px;
   transition: all 450ms ${theme.easings.primary};
 
   ${theme.above.md} {

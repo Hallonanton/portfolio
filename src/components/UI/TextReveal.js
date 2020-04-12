@@ -36,6 +36,11 @@ const reveal = keyframes`
 
 const TextRevealWrapper = styled('div')`
   max-width: 400px;
+  text-align: center;
+
+  ${theme.above.md} {
+    text-align: left;
+  }
 
 	.title {
     display: inline-block;
@@ -45,8 +50,11 @@ const TextRevealWrapper = styled('div')`
 		  position: relative;
       display: inline-block;
       color: transparent;
-      margin-right: 10px;
       margin-bottom: 5px;
+
+      ${theme.above.md} {
+        margin-right: 10px;
+      }
 
       &::before {
       	display: block;
@@ -60,8 +68,8 @@ const TextRevealWrapper = styled('div')`
       }
     }
 
-    ${theme.above.md} {
-      &.mega {
+    &.mega {
+      ${theme.above.md} {
       	padding-bottom: 15px;
       	margin-bottom: 15px;
 
@@ -85,7 +93,7 @@ const TextRevealWrapper = styled('div')`
   }
 
   .tag-wrapper {
-    margin-top: 15px;
+    margin-top: 25px;
 
     .tag-title {
       ${theme.fontSizes.regular}
@@ -98,6 +106,11 @@ const TextRevealWrapper = styled('div')`
     .tags {
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
+
+      ${theme.above.md} {
+        justify-content: flex-start;
+      }
 
       .divider {
         margin-top: 15px;
