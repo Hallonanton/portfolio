@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styled from '@emotion/styled'
 import { SectionContainer, Row, Col } from '../../UI/Grid'
 import TextReveal from '../../UI/TextReveal'
+import { theme } from '../../Layout/Theme'
 import WebGLHandler from '../../WebGL/WebglHandler'
 import VideoSrc from '../../../assets/video/test-face-150.mp4'
 
@@ -17,8 +18,12 @@ const AboutRow = styled(Row)`
 
 const MountCol = styled(Col)`
   position: relative;
-  height: 100%;
-  order: 2;
+  padding-bottom: 66.66%;
+
+  ${theme.above.md} {
+    height: 100%;
+    padding-bottom: 0;
+  }
 
   .mount {
     position: absolute;
@@ -101,11 +106,7 @@ class SectionAbout extends Component {
       <SectionContainer>
         <AboutRow>
 
-          <MountCol col={6}>
-            <div className="mount" ref={(mount) => this.refHandler(mount)} />
-          </MountCol>
-
-          <ContentCol col={6}>
+          <ContentCol col={12} md={6}>
             <TextReveal 
               reveal={this.state.visbile}
               title="<span>Nogrann och</span><span>tillmötesgående</span>"
@@ -146,6 +147,10 @@ class SectionAbout extends Component {
               ]}
             />
           </ContentCol>
+
+          <MountCol col={12} md={6}>
+            <div className="mount" ref={(mount) => this.refHandler(mount)} />
+          </MountCol>
 
         </AboutRow>
       </SectionContainer>

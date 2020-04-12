@@ -60,13 +60,15 @@ const TextRevealWrapper = styled('div')`
       }
     }
 
-    &.mega {
-    	padding-bottom: 15px;
-    	margin-bottom: 15px;
+    ${theme.above.md} {
+      &.mega {
+      	padding-bottom: 15px;
+      	margin-bottom: 15px;
 
-	    span {
-	      margin-left: -10px;
-	    }
+  	    span {
+  	      margin-left: -10px;
+  	    }
+      }
     }
   }
 

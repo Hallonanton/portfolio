@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { Media } from 'react-breakpoints'
 import styled from '@emotion/styled'
 import { css, keyframes } from '@emotion/core'
 import ReactFullpage from '@fullpage/react-fullpage'
@@ -39,11 +40,16 @@ const navReveal = keyframes`
 `
 
 const CustomNav = styled('div')`
+  display: none;
   position: absolute !important;
   top: 50% !important;
   right: 25px !important;
   transform: translate( -50%, -50% ) translateZ(0px) !important;
   z-index: 9999 !important;
+
+  ${theme.above.md} {
+    display: block;
+  }
 
   ul {
 
@@ -116,6 +122,46 @@ const CustomReactFullpageNav = ({ sections, activeSection }) => {
   ) : null
 }
 
+const FullpageWrapper = ({ sections, activeSection, sectionClass, onLeave }) => (
+  <Media>
+    {({ breakpoints, currentBreakpoint }) => 
+      breakpoints[currentBreakpoint] < breakpoints.md ? (
+        <Fragment>
+          {sections.map((item) => {
+            const Section = item.section
+            return (
+              <div key={item.anchor} className={sectionClass}>
+                {Section && <Section anchor={item.anchor} activeSection={activeSection} />}
+              </div>
+            )
+          })}
+        </Fragment>
+      ) : (
+        <ReactFullpage
+          licenseKey={'D154C10D-26774ED9-98FB51F3-DDE248C0'}
+          anchors={sections.map(item => item.anchor)}
+          sectionSelector={`.${sectionClass}`}
+          scrollingSpeed = {1000}
+          onLeave={onLeave}
+
+          render={comp => (
+            <ReactFullpage.Wrapper>
+              {sections.map((item) => {
+                const Section = item.section
+                return (
+                  <div key={item.anchor} className={sectionClass}>
+                    {Section && <Section anchor={item.anchor} activeSection={activeSection} />}
+                  </div>
+                )
+              })}
+            </ReactFullpage.Wrapper>
+          )}
+        />
+      )
+    }
+  </Media>
+)
+
 class SectionBase extends Component {
   constructor(props) {
     super(props);
@@ -174,8 +220,7 @@ class SectionBase extends Component {
       return null;
     }
 
-    const SEL = 'fullpage-section';
-    const SECTION_SEL = `.${SEL}`;
+    const sectionClass = 'fullpage-section';
 
     return (
       <Fragment>
@@ -183,27 +228,11 @@ class SectionBase extends Component {
           sections={fullpages}
           activeSection={activeSection}
         />
-        <ReactFullpage
-          licenseKey={'D154C10D-26774ED9-98FB51F3-DDE248C0'}
-          anchors={fullpages.map(item => item.anchor)}
-          sectionSelector={SECTION_SEL}
-          scrollingSpeed = {1000}
+        <FullpageWrapper
+          sections={fullpages}
+          sectionClass={sectionClass}
+          activeSection={activeSection}
           onLeave={this.onLeave.bind(this)}
-
-          render={comp => (
-            <ReactFullpage.Wrapper>
-              {fullpages.map((item) => {
-
-                const Section = item.section
-
-                return (
-                  <div key={item.anchor} className={SEL}>
-                    {Section && <Section anchor={item.anchor} activeSection={activeSection} />}
-                  </div>
-                )
-              })}
-            </ReactFullpage.Wrapper>
-          )}
         />
         <ContactNav className={activeSection === 'contact' ? 'focus' : ''} />
       </Fragment>

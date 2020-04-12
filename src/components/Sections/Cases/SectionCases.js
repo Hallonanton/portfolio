@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styled from '@emotion/styled'
 import Case from './Case'
 import { SectionContainer } from '../../UI/Grid'
+import { theme } from '../../Layout/Theme'
 import { getNodeIndex } from '../../../utility/functions'
 
 
@@ -12,40 +13,12 @@ import { getNodeIndex } from '../../../utility/functions'
 const CasesList = styled('ul')`
   position: relative;
   width: 100%;
-  height: 100%;
-`
+  display: flex;
+  flex-wrap: wrap;
 
-const StyledCase = styled(Case)`
-  position: absolute;
-  z-index: 1;
-
-  &:nth-of-type(1) {
-    top: 0;
-    left: 0;
+  ${theme.above.md} {
+    height: 100%;
   }
-
-  &:nth-of-type(2) {
-    top: 0;
-    left: calc(50% + 30px);
-  }
-
-  &:nth-of-type(3) {
-    top: calc(50% + 30px);
-    left: 0;
-  }
-
-  &:nth-of-type(4) {
-    top: calc(50% + 30px);
-    left: calc(50% + 30px);
-  }
-
-  /*&.active {
-    z-index: 2;
-    top: 0;
-    left: 0;
-    max-width: 100%;
-    max-height: 100%;
-  }*/
 `
 
 
@@ -83,13 +56,11 @@ class SectionCases extends Component {
   }
 
   componentWillUnmount() {
-    this.ref.removeEventListener('click', this.handleClick);
     window.removeEventListener('sectionScroll', this.handleSectionScroll);
     clearTimeout(this.revealDelay);
   }
 
   state = {
-    activeCase: null,
     visbile: false,
     revealDelay: 400,
     revealed: []
@@ -98,8 +69,7 @@ class SectionCases extends Component {
   refHandler = ref => {
     if ( !this.ref ) {
       this.ref = ref
-      this.ref.addEventListener('click', this.handleClick);
-      
+
       const { anchor } = this.props
       const hash = window.location.hash?.replace('#','')
 
@@ -125,39 +95,13 @@ class SectionCases extends Component {
           visbile: true
         }, () => this.reveal(0))
       }
-
-    // Close active cases 
-    } else {
-      this.clearActive();
     }
-  }
-
-  handleClick = e => {
-    const li = e.target.closest('li');
-    if ( li ) {
-      if ( !e.target.classList.contains('close') ) {
-        const index = getNodeIndex(li);
-
-        this.setState({
-          activeCase: index
-        })
-      }
-    } else {
-      this.clearActive()
-    }
-  }
-
-  clearActive = () => {
-    this.setState({
-      activeCase: null
-    })
   }
 
   reveal = i => {
     let { revealed, revealDelay } = this.state
     if ( !revealed.includes(i) && i < cases.length ) {
       revealed.push(i);
-      console.log( i )
       this.setState({
         revealed: revealed
       }, () => {
@@ -171,20 +115,17 @@ class SectionCases extends Component {
 
   render() {
     return (
-      <SectionContainer ref={(ref) => this.refHandler(ref)}>
+      <SectionContainer id="section-cases" forwardRef={(ref) => this.refHandler(ref)}>
         <CasesList>
           {cases.map((item, i) => {
              
             const { activeCase, revealed } = this.state
-            let classes = activeCase === i ? 'active' : ''
-            classes += revealed.includes(i) ? ' reveal' : ''
+            const classes = revealed.includes(i) ? ' reveal' : ''
 
             return (
-              <StyledCase 
+              <Case 
                 key={i}
                 className={classes}
-                onClick={e => this.handleClick(e)}
-                clearActive={() => this.clearActive()}
                 index={i}
                 {...item}
               />

@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
+import { theme } from '../Layout/Theme'
 
 /*==============================================================================
   # Styles
@@ -22,7 +23,7 @@ const BaseContainer = styled('div')`
   /* props.fullWidth can be used to remove max-width */
   max-width: ${({ fullWidth }) => fullWidth ? 'none' : '1200px' };
   /* props.marginTop can be used to set predefined margins from Theme.js */
-  margin-top: ${({ theme, marginTop }) =>
+  margin-top: ${({ marginTop }) =>
     typeof theme.margin[marginTop] !== 'undefined'
       ? theme.margin[marginTop]
       : '0px'};
@@ -31,7 +32,11 @@ const BaseContainer = styled('div')`
 
 const BaseSectionContainer = styled(BaseContainer)`
   height: 100%;
-  padding: 90px;
+  padding: 45px;
+
+  ${theme.above.md} {
+    padding: 90px; 
+  }
 `
 
 const BaseRow = styled('div')`
@@ -58,7 +63,7 @@ const BaseCol = styled('div')`
   `: null};
   /* Responsive column width */
   /* Ex: md="6" for half width above.md */
-  ${({ theme, ...props }) => theme.breakpointMap ? 
+  ${({ ...props }) => theme.breakpointMap ? 
     theme.breakpointMap.map(breakpoint => {
       let { label } = breakpoint
       return props[label] ? css`

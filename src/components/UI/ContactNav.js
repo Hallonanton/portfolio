@@ -55,9 +55,9 @@ const reveal = keyframes`
 `
 
 const NavigationList = styled('ul')`
-  position: absolute;
-  bottom: 7px;
-  right: 50px;
+  position: fixed;
+  bottom: 0px;
+  right: 25px;
   display: flex;
   flex-direction: row;
   flex-wrap: no-wrap;
@@ -65,6 +65,12 @@ const NavigationList = styled('ul')`
   flex-basis: 0;
   align-items: center;
   transition: all 1000ms ${theme.easings.easeOutQuint};
+
+  ${theme.above.md} {
+    position: absolute;
+    bottom: 7px;
+    right: 50px;
+  }
 
   &::before,
   &::after {
@@ -100,6 +106,7 @@ const NavigationList = styled('ul')`
   }
 
   &.focus {
+    max-width: calc( 100% - 60px );
     bottom: 50%;
     right: 50%;
     transform: translate(50%, 50%);
@@ -116,9 +123,13 @@ const NavigationList = styled('ul')`
     }
 
     a {
-      margin: 20px;
+      margin: 8px;
       color: ${theme.colors.text};
       transition: margin 1000ms ${theme.easings.easeOutSine};
+
+      ${theme.above.md} {
+        margin: 20px;
+      }
 
       &:hover {
         color: ${theme.colors.textActive};
@@ -126,10 +137,15 @@ const NavigationList = styled('ul')`
     }
 
     svg {  
-      max-width: 70px;
-      max-height: 70px;
+      max-width: 45px;
+      max-height: 45px;
       transition: all 1000ms ${theme.easings.easeOutQuint},
                 color 250ms ${theme.easings.primary};
+
+      ${theme.above.md} {
+        max-width: 70px;
+        max-height: 70px;
+      }
     }
   }
 
@@ -148,12 +164,17 @@ const NavigationItem = styled('a')`
   position: relative;
   display: flex;
   align-items: center;
-  padding: 5px;
-  margin: 5px;
+  padding: 8px 5px;
+  margin: 0px 5px;
   color: ${theme.colors.textInactive};
   text-decoration: none;
   ${theme.fontSizes.regular}
   transition: margin 1000ms ${theme.easings.easeOutQuint};
+
+  ${theme.above.md} {
+    padding: 5px;
+    margin: 5px;
+  }
 
   &:hover {
     color: ${theme.colors.textActive};
@@ -165,11 +186,16 @@ const Icon = styled('span')`
     display: block;
     width: 70px;
     height: 70px;
-    max-width: 18px;
-    max-height: 18px;
+    max-width: 14px;
+    max-height: 14px;
     object-fit: contain;
     transition: all 1000ms ${theme.easings.easeOutQuint},
                 color 250ms ${theme.easings.primary};
+
+    ${theme.above.md} {
+      max-width: 18px;
+      max-height: 18px;
+    }
 
     path,
     circle,

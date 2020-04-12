@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import Tilt from 'react-tilt'
+import { Media } from 'react-breakpoints'
 import styled from '@emotion/styled'
 import { css, keyframes } from '@emotion/core'
 import SiteMetadata from './SiteMetadata'
@@ -36,21 +37,32 @@ const characterReveal = keyframes`
 `
 
 const Main = styled('main')`
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
   position: relative;
 
+  ${theme.above.md} {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
   .mainTitle {
-    position: absolute;
-    bottom: 45px;
-    left: 25px;
+    position: fixed;
+    bottom: 25px;
+    left: 15px;
     color: ${theme.colors.textInactive};
+    ${theme.fontSizes.description}
     font-weight: 200;
     font-family: ${theme.fonts.primary};
     text-transform: uppercase;
     transform-origin: center left;
     transform: rotate(-90deg);
+
+    ${theme.above.md} {
+      position: absolute;
+      bottom: 45px;
+      left: 25px;
+      ${theme.fontSizes.regular}
+    }
 
     span {
       display: inline-block;
@@ -84,10 +96,16 @@ const maxWidthReveal = keyframes`
 `
 
 const FrameMarker = styled('span')`
-  position: absolute;
+  position: fixed;
   display: block;
-  width: 20px; 
-  height: 20px; 
+  width: 10px; 
+  height: 10px; 
+
+  ${theme.above.md} {
+    position: absolute;
+    width: 20px; 
+    height: 20px; 
+  }
 
   &::before,
   &:after {
@@ -111,7 +129,11 @@ const FrameMarker = styled('span')`
   }
 
   &.top {
-    top: 15px;
+    top: 10px;
+
+    ${theme.above.md} {
+      top: 15px;
+    }
 
     &::after {
       top: 0px;
@@ -121,7 +143,11 @@ const FrameMarker = styled('span')`
   }
 
   &.bottom {
-    bottom: 15px;
+    bottom: 10px;
+
+    ${theme.above.md} {
+      bottom: 15px;
+    }
 
     &::after {
       bottom: 0px;
@@ -131,7 +157,11 @@ const FrameMarker = styled('span')`
   }
 
   &.left {
-    left: 15px;
+    left: 10px;
+
+    ${theme.above.md} {
+      left: 15px;
+    }
 
     &::before {
       left: 0px
@@ -139,7 +169,11 @@ const FrameMarker = styled('span')`
   }
 
   &.right {
-    right: 15px;
+    right: 10px;
+
+    ${theme.above.md} {
+      right: 15px;
+    }
 
      &::before {
       right: 0px
@@ -153,6 +187,27 @@ const FrameMarker = styled('span')`
   # Component
 ==============================================================================*/
 
+
+const TiltWrapper = ({ children }) => (
+  <Media>
+    {({ breakpoints, currentBreakpoint }) => 
+      breakpoints[currentBreakpoint] < breakpoints.md ? (
+        <Fragment>
+          {children}
+        </Fragment>
+      ) : (
+        <Tilt className="Tilt" options={{ 
+          max : 2,
+          perspective: 1000,
+          scale: 1.0
+        }}>
+          {children}
+        </Tilt>
+      )
+    }
+  </Media>
+)
+
 const TemplateWrapper = ({children}) => {
 
   const title = "Anton Pedersen"
@@ -160,20 +215,16 @@ const TemplateWrapper = ({children}) => {
   return (
     <Theme>
       <SiteMetadata />
-      <Tilt className="Tilt" options={{ 
-        max : 2,
-        perspective: 1000,
-        scale: 1.0
-      }}>
+      <TiltWrapper>
         <Main>
-          <h1 className="mainTitle regular">{title.split('').map((character, i) => <span key={i}>{character}</span>)}</h1>
+          <h1 className="mainTitle">{title.split('').map((character, i) => <span key={i}>{character}</span>)}</h1>
           {children}
           <FrameMarker className="top left" />
           <FrameMarker className="top right" />
           <FrameMarker className="bottom left" />
           <FrameMarker className="bottom right" />
         </Main>
-      </Tilt>
+      </TiltWrapper>
     </Theme>
   )
 }

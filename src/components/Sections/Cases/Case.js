@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from '@emotion/styled'
 import { keyframes } from '@emotion/core'
 import { theme } from '../../Layout/Theme'
-import External from '../../../assets/icons/external-link.svg'
+import ExternalIcon from '../../../assets/icons/external-link.svg'
 
 /*==============================================================================
   # Styles
@@ -10,7 +10,7 @@ import External from '../../../assets/icons/external-link.svg'
 
 const reveal = keyframes`
   0% {
-    width: 100%;
+    visibility: visible;
     transform: scale3d(0,1,1);
     transform-origin: 0% 50%;
   }
@@ -23,7 +23,7 @@ const reveal = keyframes`
     transform-origin: 100% 50%;
   }
   100% {
-    width: 100%;
+    visibility: visible;
     transform: scale3d(0,1,1);
     transform-origin: 100% 50%;
   }
@@ -32,20 +32,36 @@ const reveal = keyframes`
 const Card = styled('li')`
   position: relative;
   width: 100%;
-  max-width: calc( 50% - 30px );
-  height: 100%;
-  max-height: calc( 50% - 30px );
+  height: 0%;
+  padding-bottom: 50%;
+  margin-bottom: 45px;
   transition: all 450ms ${theme.easings.primary};
+
+  ${theme.above.md} {
+    width: 50%;
+    height: 50%;
+    padding: 30px;
+    margin-bottom: 0px;
+  }
 
   &::before {
     display: block;
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
     z-index: 3;
+    visibility: hidden;
     background-color: ${theme.colors.textActive};
+
+    ${theme.above.md} {
+      top: 30px;
+      bottom: 30px;
+      left: 30px;
+      right: 30px;
+    }
   }
 
   a {
@@ -53,7 +69,7 @@ const Card = styled('li')`
   }
 
   .inner {
-  	position: relative;
+    position: absolute;
   	width: 100%;
   	height: 100%; 
   	cursor: pointer;
@@ -63,6 +79,10 @@ const Card = styled('li')`
   	background-size: cover;
     opacity: 0;
     visibility: hidden;
+
+    ${theme.above.md} {
+      position: relative;
+    }
 
   	&::after {
   		display: block;
@@ -107,7 +127,6 @@ const Card = styled('li')`
   	}
   }
 
-  //&.active .inner,
   .inner:hover {
     &::after {
       opacity: 0.4;
@@ -162,18 +181,6 @@ const Card = styled('li')`
   	}
   }
 
-  /*&.active {
-    .inner {
-      cursor: default;
-    }
-
-    .external,
-    .close {
-      opacity: 1;
-      visiblity: hidden;
-    }
-  }*/
-
   &.reveal {
     .inner {
       opacity: 1;
@@ -187,39 +194,7 @@ const Card = styled('li')`
   }
 `
 
-const Close = styled('div')`
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  z-index: 2;
-  opacity: 0;
-  visiblity: hidden;
-
-  &::before,
-  &::after {
-    display: block;
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%; 
-    width: 100%;
-    height: 1px;
-    background: ${theme.colors.white};
-  }
-
-  &::before {
-    transform: translate(-50%,-50%) rotate(45deg);
-  }
-
-  &::after {
-    transform: translate(-50%,-50%) rotate(-45deg);
-  }
-`
-
-const Link = styled('span')`
+const ExternalIndicator = styled('span')`
   position: absolute;
   top: 15px;
   right: 15px;
@@ -285,21 +260,21 @@ class Case extends Component {
 
   render() {
 
-    const { title, tags, url, onClick, clearActive, ...rest } = this.props
+    const { title, tags, url, ...rest } = this.props
 
     return (
       <Card {...rest}>
-        <a href={url} target="_blank" rel="noreffer noopener">
-          <article className="inner" onClick={e => onClick(e)}>
-
-            <Close className="close" onClick={() => clearActive()} />
+        <a href={url} target="_blank" rel="noopener noreferrer">
+          <article className="inner">
 
             <header>
               <h3>{title}</h3>
               <ul>{tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
             </header>
 
-            {url && <Link href={url} className="external" target="_blank" rel="noreffer noopener"><span>Visa sida</span><External /></Link>}
+            <ExternalIndicator>
+              <span>Visa sida</span><ExternalIcon />
+            </ExternalIndicator>
 
             <div className="frame-marker top left" />
             <div className="frame-marker top right" />

@@ -4,7 +4,7 @@ import 'reset-css'
 import PropTypes from 'prop-types'
 import ReactBreakpoints from 'react-breakpoints'
 import { ThemeProvider } from 'emotion-theming'
-import { Global, css, keyframes } from '@emotion/core'
+import { Global, css } from '@emotion/core'
 import { createBreakpointHelpers } from '../../utility/breakpoints'
 
 
@@ -26,7 +26,7 @@ let colors = {
   black:    '#000000', 
   white:    '#ffffff',
   grey:     '#787878',
-  green:     '#2ecc71'
+  green:    '#2ecc71'
 }
 
 colors.text = colors.white
@@ -253,8 +253,10 @@ const globalStyles = css`
   body,
   #___gatsby,
   #gatsby-focus-wrapper {
-    height: 100%;
-    overflow: hidden;
+    ${breakpointHelpers.above.md} {
+      height: 100%;
+      overflow: hidden;
+    }
   }
   html {
     box-sizing: border-box;
