@@ -44,8 +44,8 @@ const MountCol = styled(Col)`
 
   video {
     position: absolute;
-    max-width: 100%;
-    max-height: 100%;
+    width: 150px;
+    height: 150px;
   }
 `
 

@@ -80,8 +80,9 @@ const NavigationList = styled('ul')`
     position: absolute;
     left: 50%;
     bottom: 100%;
-    width: 223px;
-    height: 40px;
+    width: 250px;
+    height: 44px;
+    text-align: center;
   }
 
   &::before {

@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
-import Tilt from 'react-tilt'
+//import Tilt from 'react-tilt'
+import Tilt from 'react-parallax-tilt';
 import { Media } from 'react-breakpoints'
 import styled from '@emotion/styled'
 import { css, keyframes } from '@emotion/core'
@@ -189,6 +190,16 @@ const FrameMarker = styled('span')`
 
 
 const TiltWrapper = ({ children }) => (
+  <Tilt
+    tiltMaxAngleX={2}
+    tiltMaxAngleY={2}
+    gyroscope={true}
+  >
+    {children}
+  </Tilt>
+)
+
+/*const TiltWrapper = ({ children }) => (
   <Media>
     {({ breakpoints, currentBreakpoint }) => 
       breakpoints[currentBreakpoint] < breakpoints.md ? (
@@ -206,7 +217,7 @@ const TiltWrapper = ({ children }) => (
       )
     }
   </Media>
-)
+)*/
 
 const TemplateWrapper = ({children}) => {
 
