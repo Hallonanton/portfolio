@@ -22,6 +22,7 @@ export default class Particles {
     this.video.preload = 'auto'
     this.video.muted = true
     this.video.playsinline = ''
+    this.video.autoplay = true
     this.video.loop = true
     this.video.src = videoSrc
 
