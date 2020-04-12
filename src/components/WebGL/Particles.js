@@ -229,7 +229,10 @@ export default class Particles {
     return new Promise((resolve, reject) => {
       TweenLite.to(this.object3D.material.uniforms.uSize, time, {
         value: 0.0,
-        onComplete: () => {resolve();},
+        onComplete: () => {
+          if ( this.video ) this.video.pause();
+          resolve();
+        },
       });
     });
   }
