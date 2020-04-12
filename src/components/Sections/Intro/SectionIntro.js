@@ -35,6 +35,13 @@ const MountCol = styled(Col)`
     position: absolute;
     width: 100%;
     height: 100%;
+    background-color: ${theme.colors.bg};
+  }
+
+  video {
+    position: absolute;
+    max-width: 100%;
+    max-height: 100%;
   }
 `
 
@@ -72,8 +79,21 @@ class SectionIntro extends Component {
   mountHandler =  mount => {
     if ( !this.mount && mount ) {
       this.mount = mount;
+       this.initWebGL();
+    }
+  }
+
+  videoHandler =  video => {
+    if ( !this.video && video ) {
+      this.video = video;
+       this.initWebGL();
+    }
+  }
+
+  initWebGL = () => {
+    if ( this.video && this.mount ) {
       const { anchor } = this.props;
-      this.WebGLHandler = new WebGLHandler(mount, VideoSrc, anchor);
+      this.WebGLHandler = new WebGLHandler(this.mount, this.video, anchor);
 
       const hash = window.location.hash?.replace('#','')
 
@@ -124,6 +144,15 @@ class SectionIntro extends Component {
         <IntroRow>
         
           <MountCol col={12} md={6}>
+            <video
+              loop
+              playsInline
+              muted
+              autoPlay
+              preload="auto"
+              src={VideoSrc}
+              ref={(video) => this.videoHandler(video)}
+            />
             <div className="mount" ref={(mount) => this.mountHandler(mount)} />
           </MountCol>
 

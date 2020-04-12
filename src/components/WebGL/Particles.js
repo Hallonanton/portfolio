@@ -13,18 +13,13 @@ export default class Particles {
     this.container = new THREE.Object3D();
   }
 
-  load( videoSrc ) {
+  load( video ) {
 
     // Create a video element to read data from
     this.videoLoaded = false
-    this.video = document.createElement('video');
-    this.video.crossOrigin = 'anonymous'
-    this.video.preload = 'auto'
-    this.video.muted = true
-    this.video.playsinline = ''
-    this.video.autoplay = true
-    this.video.loop = true
-    this.video.src = videoSrc
+    this.video = video
+
+    console.log( video )
 
     // Extract data after load
     this.video.addEventListener('loadeddata', e => {
@@ -49,14 +44,6 @@ export default class Particles {
       // Loaded
       this.videoLoaded = true
     })
-
-    this.video.style.position = 'fixed'
-    this.video.style.top = '15px'
-    this.video.style.left = '15px'
-    this.video.style.width = '40px'
-    this.video.style.height = '40px'
-    this.video.style.background = 'red'
-    document.body.appendChild(this.video)
   }
 
   createPoints() {

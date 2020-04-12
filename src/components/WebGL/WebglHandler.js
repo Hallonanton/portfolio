@@ -9,10 +9,10 @@ export default class WebGLView {
 	 * Init
 	 */
 
-	constructor(mount, videoSrc, anchor) {
+	constructor(mount, video, anchor) {
 
 		// Variable check
-		if ( !mount || !videoSrc ) {
+		if ( !mount || !video ) {
 			console.log('WebGLView: Missing initial value...')
 			return
 		}
@@ -26,11 +26,11 @@ export default class WebGLView {
 		this.addListeners();
 
 		// Init
-		this.init( videoSrc );
+		this.init( video );
     this.resize();
 	}
 
-	init( videoSrc ) {
+	init( video ) {
 
 		// Get width of mount
 		this.width = this.mount.offsetWidth;
@@ -58,7 +58,7 @@ export default class WebGLView {
     }
 
 		// Content
-		this.initParticles(videoSrc);
+		this.initParticles(video);
 		this.initControls();
 	}
 
@@ -67,10 +67,10 @@ export default class WebGLView {
    * Setup animation
    */
 
-	initParticles(videoSrc) {
+	initParticles(video) {
 		this.particles = new Particles(this, this.anchor);
 		this.scene.add(this.particles.container);
-		this.particles.load(videoSrc);
+		this.particles.load(video);
 	}
 
   initControls() {
