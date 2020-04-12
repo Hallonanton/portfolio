@@ -26,6 +26,10 @@ const MountCol = styled(Col)`
   position: relative;
   padding-bottom: 100%;
 
+  ${theme.above.sm} {
+    padding-bottom: 66.66%;
+  }
+
   ${theme.above.md} {
     height: 100%;
     padding-bottom: 0;

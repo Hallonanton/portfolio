@@ -19,8 +19,6 @@ export default class Particles {
     this.videoLoaded = false
     this.video = video
 
-    console.log( video )
-
     // Extract data after load
     this.video.addEventListener('loadeddata', e => {
       
@@ -154,7 +152,7 @@ export default class Particles {
     this.webgl.interactive.disable();
 
     clearTimeout(this.loadAwait);
-    if ( this.video ) this.video.pause();
+    //if ( this.video ) this.video.pause();
   }
 
   // ---------------------------------------------------------------------------------------------
@@ -217,7 +215,7 @@ export default class Particles {
       TweenLite.to(this.object3D.material.uniforms.uSize, time, {
         value: 0.0,
         onComplete: () => {
-          if ( this.video ) this.video.pause();
+          //if ( this.video ) this.video.pause();
           resolve();
         },
       });
