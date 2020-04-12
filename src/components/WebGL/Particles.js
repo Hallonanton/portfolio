@@ -50,7 +50,7 @@ export default class Particles {
     /* variables that the shaders use to calculate position/color */
     const uniforms = {
       uColor: { value: new THREE.Color(0x2ecc71) },
-      uDepth: { value: 1.0 }, // Set from this.show()
+      uDepth: { value: 20.0 }, // Set from this.show()
       uSize: { value: 0 },  // Set from this.show()
       uTextureSize: { value: new THREE.Vector2(this.width, this.height) },
       uTexture: { value: this.texture },

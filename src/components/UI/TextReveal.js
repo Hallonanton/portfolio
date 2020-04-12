@@ -11,7 +11,7 @@ import { theme } from '../Layout/Theme'
 const pBaseDelay = 1000
 const pDelay = 350
 const tDuration = 350
-const tDelay = 180
+const tDelay = 100
 
 const reveal = keyframes`
   0% {

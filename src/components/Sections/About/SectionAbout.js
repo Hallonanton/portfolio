@@ -101,7 +101,7 @@ class SectionAbout extends Component {
       const hash = window.location.hash?.replace('#','')
 
       // Check if first section, start animation if it is
-      if ( !hash || hash === anchor ) {
+      if ( hash === anchor ) {
         this.reveal();
       }
     }
