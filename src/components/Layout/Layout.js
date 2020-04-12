@@ -1,6 +1,5 @@
-import React, { Component, Fragment } from 'react'
-//import Tilt from 'react-tilt'
-import * as VanillaTilt from 'vanilla-tilt';
+import React, { Fragment } from 'react'
+import Tilt from 'react-tilt'
 import { Media } from 'react-breakpoints'
 import styled from '@emotion/styled'
 import { css, keyframes } from '@emotion/core'
@@ -188,7 +187,8 @@ const FrameMarker = styled('span')`
   # Component
 ==============================================================================*/
 
-/*const TiltWrapper = ({ children }) => (
+
+const TiltWrapper = ({ children }) => (
   <Media>
     {({ breakpoints, currentBreakpoint }) => 
       breakpoints[currentBreakpoint] < breakpoints.md ? (
@@ -206,39 +206,28 @@ const FrameMarker = styled('span')`
       )
     }
   </Media>
-)*/
+)
 
-class TemplateWrapper extends Component {
+const TemplateWrapper = ({children}) => {
 
-  componentDidMount(){
-    VanillaTilt.init(this.rootNode, {
-      max: 2,
-      speed: 400,
-      glare: false,
-      perspective: 2000,
-      reverse: false
-    });
-  }
+  const title = "Anton Pedersen"
 
-  render () {
-    const { children } = this.props
-    const title = "Anton Pedersen"
-    return (
-      <Theme>
-        <SiteMetadata />
-        <div className="tilt-root" ref={node => (this.rootNode = node)}>
-          <Main>
-            <h1 className="mainTitle">{title.split('').map((character, i) => <span key={i}>{character}</span>)}</h1>
-            {children}
-            <FrameMarker className="top left" />
-            <FrameMarker className="top right" />
-            <FrameMarker className="bottom left" />
-            <FrameMarker className="bottom right" />
-          </Main>
-        </div>
-      </Theme>
-    )
-  }
+  return (
+    <Theme>
+      <SiteMetadata />
+      <TiltWrapper>
+        <Main>
+          <h1 className="mainTitle">{title.split('').map((character, i) => <span key={i}>{character}</span>)}</h1>
+          {children}
+          <FrameMarker className="top left" />
+          <FrameMarker className="top right" />
+          <FrameMarker className="bottom left" />
+          <FrameMarker className="bottom right" />
+        </Main>
+      </TiltWrapper>
+    </Theme>
+  )
 }
+
 
 export default TemplateWrapper
