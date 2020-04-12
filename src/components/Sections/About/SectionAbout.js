@@ -154,6 +154,7 @@ class SectionAbout extends Component {
               autoPlay
               preload="auto"
               src={VideoSrc}
+              style={{opacity: 0}}
               ref={(video) => this.videoHandler(video)}
             />
             <div className="mount" ref={(mount) => this.mountHandler(mount)} />
