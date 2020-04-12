@@ -48,6 +48,13 @@ export default class Particles {
       // Loaded
       this.videoLoaded = true
     })
+
+    this.video.style.position = 'fixed'
+    this.video.style.top = '15px'
+    this.video.style.left = '15px'
+    this.video.style.width = '40px'
+    this.video.style.height = '40px'
+    document.body.appendChild(this.video)
   }
 
   createPoints() {
