@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
-import Tilt from '../../modules/react-tilt/src/tilt'
+import Tilt from 'react-tilt'
+//import Tilt from '../../modules/react-tilt/src/tilt'
 import { Media } from 'react-breakpoints'
 import styled from '@emotion/styled'
 import { css, keyframes } from '@emotion/core'
