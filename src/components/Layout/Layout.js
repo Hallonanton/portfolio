@@ -192,7 +192,7 @@ const FrameMarker = styled('span')`
 const TiltWrapper = ({ children }) => (
   <Media>
     {({ breakpoints, currentBreakpoint }) => 
-      breakpoints[currentBreakpoint] > breakpoints.md ? (
+      breakpoints[currentBreakpoint] < breakpoints.md ? (
         <Tilt className="Tilt" options={{ 
           max : 2,
           perspective: 1000,
