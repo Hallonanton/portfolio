@@ -38,6 +38,9 @@ class Tilt extends Component {
   }
   componentDidMount() {
     this.element = findDOMNode(this)
+
+    /*ADDED THIS PART*/
+    // Fullpage tilit not working from start otherwise 
     this.onMouseEnter()
   }
   componentWillUnmount() {

@@ -83,14 +83,14 @@ class SectionIntro extends Component {
   mountHandler =  mount => {
     if ( !this.mount && mount ) {
       this.mount = mount;
-       this.initWebGL();
+      this.initWebGL();
     }
   }
 
   videoHandler =  video => {
     if ( !this.video && video ) {
       this.video = video;
-       this.initWebGL();
+      this.initWebGL();
     }
   }
 
@@ -117,17 +117,18 @@ class SectionIntro extends Component {
   }
 
   handleSectionScroll = e => {
+    if ( this.video && this.mount ) {
+      const { anchor } = this.props
+      const destination = e.anchor
 
-    const { anchor } = this.props
-    const destination = e.anchor
+      // Start animation if target section is this section
+      if ( destination === anchor ) {
+        this.reveal();
 
-    // Start animation if target section is this section
-    if ( destination === anchor ) {
-      this.reveal();
-
-    // Pause animation if target section is another section
-    } else {
-      this.WebGLHandler.pauseAnimation(anchor);
+      // Pause animation if target section is another section
+      } else {
+        this.WebGLHandler.pauseAnimation(anchor);
+      }
     }
   }
 

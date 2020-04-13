@@ -11,6 +11,9 @@ export default class Particles {
     this.webgl = webgl;
     this.anchor = anchor;
     this.container = new THREE.Object3D();
+
+    this.width = 150
+    this.height = 150
   }
 
   load( video ) {
@@ -33,9 +36,7 @@ export default class Particles {
       this.texture.format = THREE.RGBFormat;
 
       // Initiate animation
-      this.createPoints();
       this.createHitArea();
-      this.createTouch();
       this.addListeners();
       this.resize();
 
@@ -46,12 +47,14 @@ export default class Particles {
 
   createPoints() {
 
+    console.log('createPoints', this.width, this.height  )
+
     // Uniforms for shaders
     /* variables that the shaders use to calculate position/color */
     const uniforms = {
       uColor: { value: new THREE.Color(0x2ecc71) },
-      uDepth: { value: 20.0 }, // Set from this.show()
-      uSize: { value: 0 },  // Set from this.show()
+      uDepth: { value: 1.0 }, // Set from this.show()
+      uSize: { value: 1.0 },  // Set from this.show()
       uTextureSize: { value: new THREE.Vector2(this.width, this.height) },
       uTexture: { value: this.texture },
       uTouch: { value: null },
@@ -120,6 +123,8 @@ export default class Particles {
     // Create object that will be visible in the render
     this.object3D = new THREE.Mesh(geometry, material);
     this.container.add(this.object3D);
+
+    this.pointsCreated = true
   }
 
   createTouch() {
@@ -160,7 +165,15 @@ export default class Particles {
   // ---------------------------------------------------------------------------------------------
 
   start() {
+    console.log('start', this.videoLoaded  )
     if ( this.videoLoaded ) {
+
+      if ( !this.pointsCreated ) {
+        this.createPoints();
+        this.createTouch();
+        this.resize();
+      }
+
       this.video.play();
       this.show();
     } else {
@@ -203,6 +216,7 @@ export default class Particles {
   }
 
   show(time = 1.0) {
+    console.log('show', this.object3D.material.uniforms.uSize)
     if (!this.object3D) return;
     // reset
     TweenLite.fromTo(this.object3D.material.uniforms.uSize, time, { value: 0 }, { value: 1.0 });
