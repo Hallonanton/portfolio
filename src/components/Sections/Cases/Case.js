@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Img from 'gatsby-image'
 import styled from '@emotion/styled'
 import { keyframes } from '@emotion/core'
 import { theme } from '../../Layout/Theme'
@@ -37,11 +38,20 @@ const Card = styled('li')`
   margin-bottom: 30px;
   transition: all 450ms ${theme.easings.primary};
 
+  ${theme.above.sm} {
+    width: calc( 50% - 15px );
+    padding-bottom: 25%;
+
+    &:nth-of-type(even) {
+      margin-left: 30px;
+    }
+  }
+
   ${theme.above.md} {
     width: 50%;
     height: 50%;
     padding: 30px;
-    margin-bottom: 0px;
+    margin: 0px !important;
   }
 
   &::before {
@@ -73,10 +83,6 @@ const Card = styled('li')`
   	width: 100%;
   	height: 100%; 
   	cursor: pointer;
-  	background-image: url('https://placekitten.com/600/500');
-  	background-position: center center;
-  	background-repeat: no-repeat;
-  	background-size: cover;
     opacity: 0;
     visibility: hidden;
 
@@ -93,7 +99,7 @@ const Card = styled('li')`
   		width: 100%;
   		height: 100%;
   		background: ${theme.colors.black};
-  		opacity: 0.7;
+  		opacity: 0.6;
   		transition: all 250ms ${theme.easings.primary};
   		z-index: 1;
   	}
@@ -129,7 +135,7 @@ const Card = styled('li')`
 
   .inner:hover {
     &::after {
-      opacity: 0.4;
+      opacity: 0.1;
     }
 
     .frame-marker {
@@ -157,6 +163,15 @@ const Card = styled('li')`
       opacity: 1;
       visiblity: hidden;
     }
+  }
+
+  .img-container {
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
 
   header {
@@ -260,19 +275,25 @@ class Case extends Component {
 
   render() {
 
-    const { title, tags, url, ...rest } = this.props
+    const { title, tags, url, image, ...rest } = this.props
 
     return (
       <Card {...rest}>
         <a href={url} target="_blank" rel="noopener noreferrer">
           <article className="inner">
 
+            {image && 
+              <div className="img-container">
+                <Img fluid={image} />
+              </div>
+            }
+
             <header>
               <h3>{title}</h3>
               <ul>{tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
             </header>
 
-            <ExternalIndicator>
+            <ExternalIndicator className="external">
               <span>Visa sida</span><ExternalIcon />
             </ExternalIndicator>
 

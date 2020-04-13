@@ -48,8 +48,8 @@ const Main = styled('main')`
 
   .mainTitle {
     position: fixed;
-    bottom: 25px;
-    left: 15px;
+    bottom: 30px;
+    left: 17.5px;
     color: ${theme.colors.textInactive};
     ${theme.fontSizes.description}
     font-weight: 200;
@@ -99,8 +99,8 @@ const maxWidthReveal = keyframes`
 const FrameMarker = styled('span')`
   position: fixed;
   display: block;
-  width: 10px; 
-  height: 10px; 
+  width: 15px; 
+  height: 15px; 
 
   ${theme.above.md} {
     position: absolute;
@@ -123,6 +123,7 @@ const FrameMarker = styled('span')`
 
   &::before {
     top: 50%;
+    transform: translateY(-0.5px);
   }
 
   &::after {

@@ -12,6 +12,7 @@ export default class Particles {
     this.anchor = anchor;
     this.container = new THREE.Object3D();
 
+    // Fallback for iOs
     this.width = 150
     this.height = 150
   }
@@ -46,8 +47,6 @@ export default class Particles {
   }
 
   createPoints() {
-
-    console.log('createPoints', this.width, this.height  )
 
     // Uniforms for shaders
     /* variables that the shaders use to calculate position/color */
@@ -157,7 +156,7 @@ export default class Particles {
     this.webgl.interactive.disable();
 
     clearTimeout(this.loadAwait);
-    //if ( this.video ) this.video.pause();
+    //if ( this.video ) this.video.pause(); Removed because of iOs
   }
 
   // ---------------------------------------------------------------------------------------------
@@ -165,10 +164,11 @@ export default class Particles {
   // ---------------------------------------------------------------------------------------------
 
   start() {
-    console.log('start', this.videoLoaded  )
     if ( this.videoLoaded ) {
 
       if ( !this.pointsCreated ) {
+        // Initiate animation
+        // Fallback for iOs
         this.createPoints();
         this.createTouch();
         this.resize();
@@ -216,7 +216,6 @@ export default class Particles {
   }
 
   show(time = 1.0) {
-    console.log('show', this.object3D.material.uniforms.uSize)
     if (!this.object3D) return;
     // reset
     TweenLite.fromTo(this.object3D.material.uniforms.uSize, time, { value: 0 }, { value: 1.0 });
@@ -229,7 +228,7 @@ export default class Particles {
       TweenLite.to(this.object3D.material.uniforms.uSize, time, {
         value: 0.0,
         onComplete: () => {
-          //if ( this.video ) this.video.pause();
+          //if ( this.video ) this.video.pause(); Removed because of iOs
           resolve();
         },
       });

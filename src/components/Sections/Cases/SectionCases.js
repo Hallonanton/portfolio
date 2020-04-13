@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
+import { StaticQuery, graphql } from 'gatsby'
 import Case from './Case'
 import { SectionContainer } from '../../UI/Grid'
 import { theme } from '../../Layout/Theme'
@@ -29,23 +30,32 @@ const cases = [
 	{
 		'title': 'Oas',
 		'tags': ['React', 'Wordpress', 'GatsbyJS' ,'Three.js'],
-    'url': 'https://www.oas.nu/'
+    'url': 'https://www.oas.nu/',
+    'imageName': 'oas-2.png'
 	},
 	{
 		'title': 'Svenska Hem',
 		'tags': ['React', 'E-handel'],
-    'url': 'https://www.svenskahem.se/'
+    'url': 'https://www.svenskahem.se/',
+    'imageName': 'svenska-hem-4.png'
 	},
 	{
 		'title': 'Nybergsbil',
 		'tags': ['Wordpress', 'PHP'],
-    'url': 'https://nybergsbil.se/'
+    'url': 'https://nybergsbil.se/',
+    'imageName': 'nybergs-bil-3.png'
 	},
-	{
+  {
+    'title': 'Herenco',
+    'tags': ['Wordpress', 'PHP'],
+    'url': 'http://www.5050challenge.se/',
+    'imageName': 'herenco-2.png'
+  },
+	/*{
 		'title': 'Västerhuset',
 		'tags': ['Vue', 'NuxtJS', 'Wordpress'],
     'url': 'http://vasterhuset.se/'
-	}
+	}*/
 ]
 
 class SectionCases extends Component {
@@ -117,24 +127,42 @@ class SectionCases extends Component {
 
   render() {
     return (
-      <SectionContainer ref={(ref) => this.refHandler(ref)}>
-        <CasesList>
-          {cases.map((item, i) => {
-             
-            const { revealed } = this.state
-            const classes = revealed.includes(i) ? ' reveal' : ''
+      <StaticQuery 
+        query={graphql`
+          query ImageQuery {
+            ...Images
+          }
+        `}
+        render={data => {
+          if ( !data ) return 
 
-            return (
-              <Case 
-                key={i}
-                className={classes}
-                index={i}
-                {...item}
-              />
-            )
-          })}
-        </CasesList>
-      </SectionContainer>
+          const imagesRaw = data.allImageSharp?.edges
+          let images = {}
+          imagesRaw.forEach(image => {images[image.node.fluid.originalName] = image.node.fluid})
+
+          return (
+            <SectionContainer ref={(ref) => this.refHandler(ref)}>
+              <CasesList>
+                {cases.map((item, i) => {
+                   
+                  const { revealed } = this.state
+                  const classes = revealed.includes(i) ? ' reveal' : ''
+
+                  return (
+                    <Case 
+                      key={i}
+                      className={classes}
+                      index={i}
+                      {...item}
+                      image={images[item.imageName]}
+                    />
+                  )
+                })}
+              </CasesList>
+            </SectionContainer>
+          )
+        }}
+      />
     )
   }
 }

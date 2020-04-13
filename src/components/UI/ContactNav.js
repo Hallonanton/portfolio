@@ -56,8 +56,8 @@ const reveal = keyframes`
 
 const NavigationList = styled('ul')`
   position: fixed;
-  bottom: 0px;
-  right: 25px;
+  bottom: 2.5px;
+  right: 35px;
   display: flex;
   flex-direction: row;
   flex-wrap: no-wrap;

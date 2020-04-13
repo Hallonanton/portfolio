@@ -70,3 +70,18 @@ export const SiteMetaQuery = graphql`
     }
   }
 `
+
+export const Images = graphql`
+  fragment Images on Query {
+    allImageSharp {
+      edges {
+        node {
+          fluid(maxWidth: 500, quality: 100) {
+            originalName
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+    }
+  }
+`
