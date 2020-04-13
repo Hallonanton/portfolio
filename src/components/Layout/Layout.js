@@ -193,6 +193,10 @@ const TiltWrapper = ({ children }) => (
   <Media>
     {({ breakpoints, currentBreakpoint }) => 
       breakpoints[currentBreakpoint] < breakpoints.md ? (
+        <Fragment>
+          {children}
+        </Fragment>
+      ) : (
         <Tilt className="Tilt" options={{ 
           max : 2,
           perspective: 1000,
@@ -200,10 +204,6 @@ const TiltWrapper = ({ children }) => (
         }}>
           {children}
         </Tilt>
-      ) : (
-        <Fragment>
-          {children}
-        </Fragment>
       )
     }
   </Media>
