@@ -284,7 +284,7 @@ class Case extends Component {
 
             {image && 
               <div className="img-container">
-                <Img fluid={image} />
+                <Img fluid={image} alt={title} />
               </div>
             }
 

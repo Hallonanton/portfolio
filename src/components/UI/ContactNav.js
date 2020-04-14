@@ -251,6 +251,7 @@ const ContactNav = ({ ...rest }) => {
           <NavigationItem 
             href={link.to}
             target={link.target ? '_blank' : ''}
+            rel={link.target ? "noopener noreferrer" : null}
             title={link.title}
           >
             <Icon>{link.icon}</Icon>
