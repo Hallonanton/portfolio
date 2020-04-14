@@ -3,8 +3,8 @@ module.exports = {
     title: 'Portfolio',
     titleSuffix: '|',
     sitename: 'Anton Pedersen',
-    siteUrl: 'https://hallonanton-portfolio.netlify.com/',
-    description: '',
+    siteUrl: 'https://hallonanton-portfolio.netlify.app/',
+    description: 'Mitt namn är Anton Pedersen. Jag är en social Front-end utvecklare med erfarenhet av båda stora och små projekt. Baserad i Göteborg.',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -73,15 +73,29 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-web-font-loader',
+      resolve: 'gatsby-plugin-webfonts',
       options: {
-        google: {
-          families: ['Source Sans Pro\:200,400']
+        fonts: {
+          google: [
+            {
+              family: "Source Sans Pro",
+              variants: ["200", "400"],
+              fontDisplay: 'swap',
+            },
+          ],
         },
-        custom: {
-          families: ['Helvetica Neue'],
-          urls: ['static/fonts/HelveticaNeue/stylesheet.css']
-        }
+        //formats: ['woff2', 'woff'],
+        useMinify: true,
+        usePreload: true,
+        usePreconnect: true,
+      },
+    },    
+    {
+      resolve: "gatsby-plugin-preconnect",
+      options: {
+        domains: [
+          "https://fonts.googleapis.com"
+        ]
       }
     }
   ],

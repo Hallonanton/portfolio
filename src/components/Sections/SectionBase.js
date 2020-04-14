@@ -102,6 +102,9 @@ class SectionBase extends Component {
       detail:   "Triggers when fullpage.js changes section",
       bubbles:   true
     })
+
+
+    console.log(window.fullpage_api)
   }
 
   handleScroll = (e) => {
