@@ -96,7 +96,7 @@ module.exports = {
       options: {
         domains: [
           "https://fonts.googleapis.com",
-          "/fonts/HelveticaNeue/stylesheet.css",
+          "https://hallonanton-portfolio.netlify.app//fonts/HelveticaNeue/stylesheet.css",
         ]
       }
     }
