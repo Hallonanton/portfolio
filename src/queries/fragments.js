@@ -76,7 +76,7 @@ export const Images = graphql`
     allImageSharp {
       edges {
         node {
-          fluid(maxWidth: 500, quality: 100) {
+          fluid(maxWidth: 480, quality: 100) {
             originalName
             ...GatsbyImageSharpFluid
           }

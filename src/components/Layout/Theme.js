@@ -235,7 +235,7 @@ const fontSizes = {
 ==============================================================================*/
 
 const globalStyles = css`
-  @import url('/static/fonts/HelveticaNeue/stylesheet.css');
+  @import url('/fonts/HelveticaNeue/stylesheet.css');
 
   ::-moz-selection {
     background: ${colors.text}; 

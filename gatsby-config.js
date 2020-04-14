@@ -81,6 +81,7 @@ module.exports = {
               family: "Source Sans Pro",
               variants: ["200", "400"],
               fontDisplay: 'swap',
+              strategy: 'selfHosted'
             },
           ],
         },
@@ -94,7 +95,8 @@ module.exports = {
       resolve: "gatsby-plugin-preconnect",
       options: {
         domains: [
-          "https://fonts.googleapis.com"
+          "https://fonts.googleapis.com",
+          "/fonts/HelveticaNeue/stylesheet.css",
         ]
       }
     }
