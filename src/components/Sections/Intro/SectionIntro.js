@@ -169,8 +169,8 @@ class SectionIntro extends Component {
               paragraphs={[
                 "Mitt namn är Anton Pedersen.",
                 "Jag är en social Front-end utvecklare",
-                "som kodar och designar hemsidor.",
-                "Baserad i Göteborg.",
+                "med erfarenhet av båda stora och ",
+                "små projekt. Baserad i Göteborg.",
               ]}
             />
           </ContentCol>

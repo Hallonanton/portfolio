@@ -12,6 +12,7 @@ module.exports = {
     'gatsby-transformer-json',
     'gatsby-plugin-glslify',
     'gatsby-plugin-emotion',
+    'gatsby-plugin-compression-v2',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -79,7 +80,7 @@ module.exports = {
         },
         custom: {
           families: ['Helvetica Neue'],
-          urls: ['src/assets/fonts/HelveticaNeue/stylesheet.css']
+          urls: ['static/fonts/HelveticaNeue/stylesheet.css']
         }
       }
     }
