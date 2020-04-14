@@ -138,7 +138,7 @@ class SectionCases extends Component {
 
           const imagesRaw = data.allImageSharp?.edges
           let images = {}
-          imagesRaw.forEach(image => {images[image.node.fluid.originalName] = image.node.fluid})
+          imagesRaw.forEach(image => {images[image.node.mobile.originalName] = image.node})
 
           return (
             <SectionContainer ref={(ref) => this.refHandler(ref)}>

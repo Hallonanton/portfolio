@@ -277,6 +277,18 @@ class Case extends Component {
 
     const { title, tags, url, image, ...rest } = this.props
 
+    const sources = [
+      image.mobile,
+      {
+        ...image.tabelt,
+        media: `(min-width: 540px)`,
+      },
+      {
+        ...image.desktop,
+        media: `(min-width: 768px)`,
+      }
+    ]
+
     return (
       <Card {...rest}>
         <a href={url}  target="_blank" rel="noopener noreferrer">
@@ -284,7 +296,7 @@ class Case extends Component {
 
             {image && 
               <div className="img-container">
-                <Img fluid={image} alt={title} />
+                <Img fluid={sources} alt={title} />
               </div>
             }
 

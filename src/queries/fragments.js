@@ -76,12 +76,22 @@ export const Images = graphql`
     allImageSharp {
       edges {
         node {
-          fluid(maxWidth: 480, quality: 100) {
-            originalName
-            ...GatsbyImageSharpFluid
+          mobile: fluid(maxWidth: 390, quality: 100) {
+            ...CaseFluid
+          }
+          tabelt: fluid(maxWidth: 680, quality: 100) {
+            ...CaseFluid
+          }
+          desktop: fluid(maxWidth: 450, quality: 100) {
+            ...CaseFluid
           }
         }
       }
     }
+  }
+  fragment CaseFluid on ImageSharpFluid {
+    ...GatsbyImageSharpFluid
+    originalName
+    presentationWidth
   }
 `
