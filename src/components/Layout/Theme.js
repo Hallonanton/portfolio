@@ -23,7 +23,7 @@ const reactBreakpoints = zipObject(labels, breakpoints.map(breakpoint => parseIn
 ==============================================================================*/
 
 let colors = {
-  black:    '#000000', 
+  black:    '#090707', 
   white:    '#ffffff',
   grey:     '#787878',
   green:    '#2ecc71'
