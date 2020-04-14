@@ -79,7 +79,7 @@ module.exports = {
           google: [
             {
               family: "Source Sans Pro",
-              variants: ["200", "400"],
+              variants: ["200", "400", "900"],
               fontDisplay: 'swap',
               strategy: 'selfHosted'
             },
@@ -95,9 +95,15 @@ module.exports = {
       resolve: "gatsby-plugin-preconnect",
       options: {
         domains: [
-          "https://fonts.googleapis.com",
-          "https://hallonanton-portfolio.netlify.app//fonts/HelveticaNeue/stylesheet.css",
+          "https://fonts.googleapis.com"
         ]
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        host: 'https://hallonanton-portfolio.netlify.app',
+        policy: [{ userAgent: '*', allow: '/' }]
       }
     }
   ],

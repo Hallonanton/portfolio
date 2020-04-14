@@ -171,7 +171,7 @@ const margin = {
 
 const fonts = {
   primary: '"Source Sans Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
-  header: '"Helvetica Neue",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif'
+  header: '"Source Sans Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif'
 }
 
 /*==============================================================================
@@ -235,8 +235,6 @@ const fontSizes = {
 ==============================================================================*/
 
 const globalStyles = css`
-  @import url('/fonts/HelveticaNeue/stylesheet.css');
-
   ::-moz-selection {
     background: ${colors.text}; 
     color: ${colors.white};  
