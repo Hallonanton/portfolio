@@ -169,7 +169,7 @@ class SectionAbout extends Component {
                 "En bra hemsida för mig är en sida som är logisk och tydligt uppbyggd men samtidigt vacker och levande att utforska.",
                 "Att försöka skapa sådana sidor är vad jag älskar med att utveckla."
               ]}
-              tagTitle="Erfarenheter"
+              tagTitle="Kompetens"
               tags={[
                 'React',
                 'Gatsby.js',

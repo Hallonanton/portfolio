@@ -279,7 +279,7 @@ class Case extends Component {
 
     return (
       <Card {...rest}>
-        <a href={url} target="_blank" rel="noopener noreferrer">
+        <a href={url}  target="_blank" rel="noopener noreferrer">
           <article className="inner">
 
             {image && 
