@@ -166,6 +166,8 @@ export default class Particles {
   start() {
     const videoIsPlaying = this.videoLoaded && this.video.currentTime > 0 && !this.video.paused && !this.video.ended
 
+    console.log('videoIsPlaying', this.anchor, videoIsPlaying)
+
     // Do not createPoints before the video has started
     if ( videoIsPlaying ) {
 
