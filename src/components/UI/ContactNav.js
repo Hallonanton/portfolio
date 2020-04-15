@@ -37,37 +37,27 @@ const rDuration = 1000
 
 const reveal = keyframes`
   0% {
-    transform: translate(-50%, -5px) scale3d(0,1,1);
+    transform: scale3d(0,1,1);
     transform-origin: 0% 50%;
   }
   40% {
-    transform: translate(-50%, -5px) scale3d(1,1,1);
+    transform: scale3d(1,1,1);
     transform-origin: 0% 50%;
   }
   60% {
-    transform: translate(-50%, -5px) scale3d(1,1,1);
+    transform: scale3d(1,1,1);
     transform-origin: 100% 50%;
   }
   100% {
-    transform: translate(-50%, -5px) scale3d(0,1,1);
+    transform: scale3d(0,1,1);
     transform-origin: 100% 50%;
   }
 `
 
 const Navigation = styled('div')`
-
-`
-
-const NavigationList = styled('ul')`
   position: fixed;
   bottom: 2.5px;
   right: 35px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: no-wrap;
-  flex-grow: 1;
-  flex-basis: 0;
-  align-items: center;
   z-index: 1;
   transform: translate(0, 0);
   transition: all 1000ms ${theme.easings.easeOutQuint};
@@ -83,38 +73,59 @@ const NavigationList = styled('ul')`
     bottom: 25px;
   }
 
-  &::before,
-  &::after {
+  .title {
     display: block;
-    content: "";
     position: absolute;
     left: 50%;
     bottom: 100%;
-    width: 250px;
-    height: 44px;
     text-align: center;
-  }
-
-  &::before {
-    display: block;
-    content: "Nyfiken på mer?";
-    color: ${theme.colors.text};
+    color: rgba(255,255,255,0);
     ${theme.fontSizes.hero}
     font-family: ${theme.fonts.heading};
     font-weight: 900;
     white-space: nowrap;
-    opacity: 0;
     transform-origin: top center;
     transition: all 750ms ${theme.easings.easeOutQuint};
     transform: translate(-50%, -5px) scale(0.5);
     z-index: 1;
+
+    &::after {
+      display: block;
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: ${theme.colors.textActive};
+      transform: translate(-50%, -5px) scale3d(0,1,1);
+      transform-origin: 0% 50%;
+      z-index: 2;
+    }
   }
 
-  &::after {
-    background-color: ${theme.colors.textActive};
-    transform: translate(-50%, -5px) scale3d(0,1,1);
-    transform-origin: 0% 50%;
-    z-index: 2;
+  .email {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    color: ${theme.colors.textInactive};
+    white-space: nowrap;
+    opacity: 0;
+    transition: all 250ms ${theme.easings.easeOutQuint};
+    transform: translate(-50%, 10px);
+    z-index: 1;
+
+    a {
+      color: ${theme.colors.textInactive};
+      text-decoration: none;
+      color 250ms ${theme.easings.primary}
+
+      &:hover {
+        text-decoration: underline;
+        color: ${theme.colors.text};
+      }
+    }
   }
 
   &.focus {
@@ -127,17 +138,23 @@ const NavigationList = styled('ul')`
       bottom: calc( 50% - 60px);
     }
 
-    &::before {
-      opacity: 1;
-      transition: all 0ms linear ${rDelay + (rDuration/2)}ms;
+    .title {
+      color: rgba(255,255,255,1);
+      transition: color 0ms linear ${rDelay + (rDuration/2)}ms,
+                  transform 0ms linear 0ms;
       transform: translate(-50%, -5px) scale(1);
+  
+      &::after {
+        animation: ${reveal} ${rDuration}ms ${theme.easings.primary} ${rDelay}ms;
+      }
     }
 
-    &::after {
-      animation: ${reveal} ${rDuration}ms ${theme.easings.primary} ${rDelay}ms;
+    .email {
+      opacity: 1;
+      transition: all 350ms ${theme.easings.easeOutSine} ${rDelay + rDuration}ms;
     }
 
-    a {
+    a:not(.link-email) {
       margin: 8px;
       color: ${theme.colors.text};
       transition: margin 1000ms ${theme.easings.easeOutSine};
@@ -168,6 +185,15 @@ const NavigationList = styled('ul')`
       }
     }
   }
+`
+
+const NavigationList = styled('ul')`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: no-wrap;
+  flex-grow: 1;
+  flex-basis: 0;
+  align-items: center;
 
   li {
     //Loop out delay for reveal animation
@@ -264,9 +290,9 @@ const socialmediaLinks = [
 
 const ContactNav = ({ ...rest }) => {
   return socialmediaLinks && (socialmediaLinks.length > 0) ? (
-    <Navigation>
+    <Navigation {...rest}>
       <h3 class="title">Nyfiken på mer?</h3>
-      <NavigationList {...rest}>
+      <NavigationList>
         {socialmediaLinks.map((link, i) => (
           <li key={i}>
             <NavigationItem 
@@ -280,7 +306,7 @@ const ContactNav = ({ ...rest }) => {
           </li>
         ))}
       </NavigationList>
-      <span class="description email">E-post: <a href="mailto:hello@antonpedersen.com">hello@antonpedersen.com</a></span>
+      <span class="description email">E-post: <a className="link-email" href="mailto:hello@antonpedersen.com">hello@antonpedersen.com</a></span>
     </Navigation>
   ) : null
 }
