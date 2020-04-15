@@ -3,7 +3,7 @@ module.exports = {
     title: 'Portfolio',
     titleSuffix: '|',
     sitename: 'Anton Pedersen',
-    siteUrl: 'https://hallonanton-portfolio.netlify.app/',
+    siteUrl: 'https://antonpedersen.com/',
     description: 'Mitt namn är Anton Pedersen. Jag är en social Front-end utvecklare med erfarenhet av båda stora och små projekt. Baserad i Göteborg.',
   },
   plugins: [
@@ -102,7 +102,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
-        host: 'https://hallonanton-portfolio.netlify.app',
+        host: 'https://antonpedersen.com',
         policy: [{ userAgent: '*', allow: '/' }]
       }
     }

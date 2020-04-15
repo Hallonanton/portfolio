@@ -134,13 +134,7 @@ class SectionCases extends Component {
       <StaticQuery 
         query={graphql`
           query ImageQuery {
-            allFile {
-              edges {
-                node {
-                  relativePath
-                }
-              }
-            }
+            ...Images
           }
         `}
         render={data => {
@@ -148,7 +142,7 @@ class SectionCases extends Component {
 
           const imagesRaw = data.allImageSharp?.edges
           let images = {}
-          //imagesRaw.forEach(image => {images[image.node.mobile.originalName] = image.node})
+          imagesRaw.forEach(image => {images[image.node.mobile.originalName] = image.node})
 
           return (
             <CasesContainer ref={(ref) => this.refHandler(ref)} fullWidth={true}>
@@ -178,5 +172,3 @@ class SectionCases extends Component {
 }
 
 export default SectionCases
-
-//...Images

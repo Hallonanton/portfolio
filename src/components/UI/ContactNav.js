@@ -54,6 +54,10 @@ const reveal = keyframes`
   }
 `
 
+const Navigation = styled('div')`
+
+`
+
 const NavigationList = styled('ul')`
   position: fixed;
   bottom: 2.5px;
@@ -213,7 +217,7 @@ const Icon = styled('span')`
       max-height: 18px;
     }
 
-    ${theme.above.md} {
+    ${theme.above.xxl} {
       max-width: 25px;
       max-height: 25px;
     }
@@ -235,7 +239,7 @@ const Icon = styled('span')`
 const socialmediaLinks = [
   {
     title: 'Mejl',
-    to: 'mailto:antonpedersen9@gmail.com',
+    to: 'mailto:hello@antonpedersen.com',
     icon: <Mail />
   },
   {
@@ -260,20 +264,24 @@ const socialmediaLinks = [
 
 const ContactNav = ({ ...rest }) => {
   return socialmediaLinks && (socialmediaLinks.length > 0) ? (
-    <NavigationList {...rest}>
-      {socialmediaLinks.map((link, i) => (
-        <li key={i}>
-          <NavigationItem 
-            href={link.to}
-            target={link.target ? '_blank' : ''}
-            rel={link.target ? "noopener noreferrer" : null}
-            title={link.title}
-          >
-            <Icon>{link.icon}</Icon>
-          </NavigationItem>
-        </li>
-      ))}
-    </NavigationList>
+    <Navigation>
+      <h3 class="title">Nyfiken på mer?</h3>
+      <NavigationList {...rest}>
+        {socialmediaLinks.map((link, i) => (
+          <li key={i}>
+            <NavigationItem 
+              href={link.to}
+              target={link.target ? '_blank' : ''}
+              rel={link.target ? "noopener noreferrer" : null}
+              title={link.title}
+            >
+              <Icon>{link.icon}</Icon>
+            </NavigationItem>
+          </li>
+        ))}
+      </NavigationList>
+      <span class="description email">E-post: <a href="mailto:hello@antonpedersen.com">hello@antonpedersen.com</a></span>
+    </Navigation>
   ) : null
 }
 

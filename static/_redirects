@@ -1,0 +1,6 @@
+# Redirect default Netlify subdomain to primary domain 
+https://antonpedersen-portfolio.netlify.com/* 			https://antonpedersen.com/:splat 301!
+http://antonpedersen-portfolio.netlify.com/* 				https://antonpedersen.com/:splat 301!
+https://antonpedersen-portfolio.netlify.app/* 			https://antonpedersen.com/:splat 301!
+http://antonpedersen-portfolio.netlify.app/* 				https://antonpedersen.com/:splat 301!
+http://antonpedersen.com/* 													https://antonpedersen.com/:splat 301!
