@@ -277,7 +277,7 @@ class Case extends Component {
 
     const { title, tags, url, image, ...rest } = this.props
 
-    const sources = [
+    const sources = image ? [
       image.mobile,
       {
         ...image.tabelt,
@@ -286,8 +286,12 @@ class Case extends Component {
       {
         ...image.desktop,
         media: `(min-width: 768px)`,
+      },
+      {
+        ...image.largedesktop,
+        media: `(min-width: 1200px)`,
       }
-    ]
+    ] : []
 
     return (
       <Card {...rest}>
@@ -296,7 +300,10 @@ class Case extends Component {
 
             {image && 
               <div className="img-container">
-                <Img fluid={sources} alt={title} />
+                <Img 
+                  fluid={sources}
+                  alt={title}
+                />
               </div>
             }
 

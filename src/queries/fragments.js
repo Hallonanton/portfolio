@@ -71,7 +71,7 @@ export const SiteMetaQuery = graphql`
   }
 `
 
-export const Images = graphql`
+/*export const Images = graphql`
   fragment Images on Query {
     allImageSharp {
       edges {
@@ -85,6 +85,9 @@ export const Images = graphql`
           desktop: fluid(maxWidth: 450, quality: 50) {
             ...CaseFluid
           }
+          largedesktop: fluid(maxWidth: 700, quality: 50) {
+            ...CaseFluid
+          }
         }
       }
     }
@@ -94,4 +97,4 @@ export const Images = graphql`
     originalName
     presentationWidth
   }
-`
+`*/

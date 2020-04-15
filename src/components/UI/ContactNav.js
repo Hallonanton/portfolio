@@ -74,6 +74,11 @@ const NavigationList = styled('ul')`
     right: 50px;
   }
 
+  ${theme.above.xxl} {
+    right: 75px;
+    bottom: 25px;
+  }
+
   &::before,
   &::after {
     display: block;
@@ -152,6 +157,11 @@ const NavigationList = styled('ul')`
         max-width: 70px;
         max-height: 70px;
       }
+
+      ${theme.above.xxl} {
+        max-width: 100px;
+        max-height: 100px;
+      }
     }
   }
 
@@ -190,8 +200,8 @@ const NavigationItem = styled('a')`
 const Icon = styled('span')`
   svg {
     display: block;
-    width: 70px;
-    height: 70px;
+    width: 100px;
+    height: 100px;
     max-width: 14px;
     max-height: 14px;
     object-fit: contain;
@@ -201,6 +211,11 @@ const Icon = styled('span')`
     ${theme.above.md} {
       max-width: 18px;
       max-height: 18px;
+    }
+
+    ${theme.above.md} {
+      max-width: 25px;
+      max-height: 25px;
     }
 
     path,

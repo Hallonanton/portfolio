@@ -65,6 +65,11 @@ const Main = styled('main')`
       ${theme.fontSizes.regular}
     }
 
+    ${theme.above.xxl} {
+      bottom: 70px;
+      left: 42.5px;
+    }
+
     span {
       display: inline-block;
       min-width: 4px;
@@ -108,6 +113,11 @@ const FrameMarker = styled('span')`
     height: 20px; 
   }
 
+  ${theme.above.xxl} {
+    width: 30px; 
+    height: 30px; 
+  }
+
   &::before,
   &:after {
     display: block;
@@ -137,6 +147,10 @@ const FrameMarker = styled('span')`
       top: 15px;
     }
 
+    ${theme.above.xxl} {
+      top: 30px;
+    }
+
     &::after {
       top: 0px;
       transform-origin: left top;
@@ -149,6 +163,10 @@ const FrameMarker = styled('span')`
 
     ${theme.above.md} {
       bottom: 15px;
+    }
+
+    ${theme.above.xxl} {
+      bottom: 30px;
     }
 
     &::after {
@@ -165,6 +183,10 @@ const FrameMarker = styled('span')`
       left: 15px;
     }
 
+    ${theme.above.xxl} {
+      left: 30px;
+    }
+
     &::before {
       left: 0px
     }
@@ -175,6 +197,10 @@ const FrameMarker = styled('span')`
 
     ${theme.above.md} {
       right: 15px;
+    }
+
+    ${theme.above.xxl} {
+      right: 30px;
     }
 
      &::before {

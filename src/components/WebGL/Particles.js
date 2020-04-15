@@ -53,7 +53,7 @@ export default class Particles {
     const uniforms = {
       uColor: { value: new THREE.Color(0x2ecc71) },
       uDepth: { value: 1.0 }, // Set from this.show()
-      uSize: { value: 1.0 },  // Set from this.show()
+      uSize: { value: 1.5 },  // Set from this.show()
       uTextureSize: { value: new THREE.Vector2(this.width, this.height) },
       uTexture: { value: this.texture },
       uTouch: { value: null },
@@ -164,7 +164,10 @@ export default class Particles {
   // ---------------------------------------------------------------------------------------------
 
   start() {
-    if ( this.videoLoaded ) {
+    const videoIsPlaying = this.videoLoaded && this.video.currentTime > 0 && !this.video.paused && !this.video.ended
+
+    // Do not createPoints before the video has started
+    if ( videoIsPlaying ) {
 
       if ( !this.pointsCreated ) {
         // Initiate animation
@@ -218,7 +221,7 @@ export default class Particles {
   show(time = 1.0) {
     if (!this.object3D) return;
     // reset
-    TweenLite.fromTo(this.object3D.material.uniforms.uSize, time, { value: 0 }, { value: 1.0 });
+    TweenLite.fromTo(this.object3D.material.uniforms.uSize, time, { value: 0 }, { value: 1.5 });
     TweenLite.fromTo(this.object3D.material.uniforms.uDepth, time * 1.5, { value: 20.0 }, { value: 1.0 });
   }
 

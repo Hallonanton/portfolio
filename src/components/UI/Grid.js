@@ -37,6 +37,10 @@ const BaseSectionContainer = styled(BaseContainer)`
   ${theme.above.md} {
     padding: 90px; 
   }
+
+  ${theme.above.xxl} {
+    padding: 150px; 
+  }
 `
 
 const BaseRow = styled('div')`

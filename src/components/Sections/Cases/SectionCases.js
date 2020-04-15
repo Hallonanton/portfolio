@@ -10,6 +10,10 @@ import { theme } from '../../Layout/Theme'
   # Styles
 ==============================================================================*/
 
+const CasesContainer = styled(SectionContainer)`
+  justify-content: center;
+`
+
 const CasesList = styled('ul')`
   position: relative;
   width: 100%;
@@ -130,7 +134,13 @@ class SectionCases extends Component {
       <StaticQuery 
         query={graphql`
           query ImageQuery {
-            ...Images
+            allFile {
+              edges {
+                node {
+                  relativePath
+                }
+              }
+            }
           }
         `}
         render={data => {
@@ -138,10 +148,10 @@ class SectionCases extends Component {
 
           const imagesRaw = data.allImageSharp?.edges
           let images = {}
-          imagesRaw.forEach(image => {images[image.node.mobile.originalName] = image.node})
+          //imagesRaw.forEach(image => {images[image.node.mobile.originalName] = image.node})
 
           return (
-            <SectionContainer ref={(ref) => this.refHandler(ref)}>
+            <CasesContainer ref={(ref) => this.refHandler(ref)} fullWidth={true}>
               <CasesList>
                 {cases.map((item, i) => {
                    
@@ -159,7 +169,7 @@ class SectionCases extends Component {
                   )
                 })}
               </CasesList>
-            </SectionContainer>
+            </CasesContainer>
           )
         }}
       />
@@ -168,3 +178,5 @@ class SectionCases extends Component {
 }
 
 export default SectionCases
+
+//...Images

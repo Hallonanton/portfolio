@@ -143,7 +143,7 @@ class SectionAbout extends Component {
 
   render () {
     return (
-      <SectionContainer ref={(ref) => this.refHandler(ref)}>
+      <SectionContainer ref={(ref) => this.refHandler(ref)} fullWidth={true}>
         <AboutRow>
 
           <MountCol col={12} md={6}>

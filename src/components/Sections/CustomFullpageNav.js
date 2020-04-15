@@ -44,6 +44,10 @@ const CustomNav = styled('div')`
     display: block;
   }
 
+  ${theme.above.xxl} {
+    right: 45px !important;
+  }
+
   ul {
 
     li {

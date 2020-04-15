@@ -145,7 +145,7 @@ class SectionIntro extends Component {
 
   render () {
     return (
-      <IntroContainer ref={(ref) => this.refHandler(ref)}>
+      <IntroContainer ref={(ref) => this.refHandler(ref)} fullWidth={true}>
         <IntroRow>
         
           <MountCol col={12} md={6}>

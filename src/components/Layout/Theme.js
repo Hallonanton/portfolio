@@ -12,8 +12,8 @@ import { createBreakpointHelpers } from '../../utility/breakpoints'
    # Breakpoints
  ==============================================================================*/
 
-const labels = ['xs', 'sm', 'md', 'lg', 'xl']
-const breakpoints = ['540px', '768px', '992px', '1200px', '1400px']
+const labels = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl']
+const breakpoints = ['540px', '768px', '992px', '1200px', '1400px', '1600px']
 const breakpointHelpers = createBreakpointHelpers(labels, breakpoints)
 const reactBreakpoints = zipObject(labels, breakpoints.map(breakpoint => parseInt(breakpoint)))
 
