@@ -31,7 +31,7 @@ void main() {
     color.a = t;
 
     //Only show bright enough points
-    if ( grey > 0.1 ) {
+    if ( grey > 0.13 ) {
         gl_FragColor = color;
     } else {
         gl_FragColor = vec4(0, 0, 0, 0);
