@@ -26,6 +26,8 @@ const SiteMetadata = () => {
   const favicons = favicon.edges[0] ? favicon.edges[0].node : null
   const finalTitle = `${title} ${titleSuffix} ${sitename}`
 
+  console.log( 'ogImage', ogImage )
+
   return (
     <Helmet>
       <html lang="sv" />

@@ -16,6 +16,8 @@
     "gatsby-plugin-compression-v2": "^0.1.0",
     "gatsby-plugin-emotion": "^4.1.9",
     "gatsby-plugin-glslify": "^1.0.0",
+    "gatsby-plugin-google-analytics": "^2.2.3",
+    "gatsby-plugin-google-tagmanager": "^2.2.2",
     "gatsby-plugin-netlify": "^2.0.6",
     "gatsby-plugin-nprogress": "^2.1.12",
     "gatsby-plugin-preconnect": "^1.0.5",

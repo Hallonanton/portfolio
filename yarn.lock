@@ -5997,6 +5997,21 @@ gatsby-plugin-glslify@^1.0.0:
     babel-plugin-glsl "1.0.0"
     glslify-loader "^2.0.0"
 
+gatsby-plugin-google-analytics@^2.2.3:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-google-analytics/-/gatsby-plugin-google-analytics-2.2.3.tgz#d2a9ae9a1409a147dcfee878d4cbd2867efbe5ed"
+  integrity sha512-Aji5BsN8vlpTUHjmAPfNpXvYnRCadmcd4zbZXkoHW6rfUAiD5tYcc6rQXrvvgt+2i+j5GdILWXLYAI1bqqmKbQ==
+  dependencies:
+    "@babel/runtime" "^7.8.7"
+    minimatch "3.0.4"
+
+gatsby-plugin-google-tagmanager@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-google-tagmanager/-/gatsby-plugin-google-tagmanager-2.2.2.tgz#72f0ae8a6ffb4fa25f95e1acb69b417d31ad7037"
+  integrity sha512-T0U/WK4bSV/xBUkAxSbA9s/r6nPkRiLiC971z3B3C8MNkFawz8GfnyAGOQr4XqH5XiUs8CFzdEVxDv8V/VZJWQ==
+  dependencies:
+    "@babel/runtime" "^7.8.7"
+
 gatsby-plugin-netlify@^2.0.6:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-netlify/-/gatsby-plugin-netlify-2.2.1.tgz#d819cba997a1613a3c38146c1877bb9a6a3fcdfa"

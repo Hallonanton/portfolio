@@ -100,6 +100,24 @@ module.exports = {
       }
     },
     {
+      resolve: "gatsby-plugin-google-tagmanager",
+      options: {
+        id: "GTM-MB75M2V",
+        includeInDevelopment: false,
+        defaultDataLayer: { platform: "gatsby" }
+      },
+    },
+    {
+      resolve: "gatsby-plugin-google-analytics",
+      options: {
+        trackingId: "UA-71487700-1",
+        head: true,
+        anonymize: true,
+        respectDNT: true,
+        cookieDomain: "antonpedersen.com",
+      },
+    },
+    {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
         host: 'https://antonpedersen.com',
