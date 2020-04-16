@@ -163,8 +163,6 @@ export default class Particles {
 
   start() {
 
-    this.mobileConsole()
-
     // Do not createPoints before the video has started
     if ( this.video.currentTime > 0 ) {
 
@@ -252,41 +250,5 @@ export default class Particles {
   onInteractiveMove(e) {
     const uv = e.intersectionData.uv;
     if (this.touch) this.touch.addTouch(uv);
-  }
-
-
-
-  mobileConsole () {
-    if ( this.table ) {
-
-      console.log('update table')
-
-      const row = document.createElement('tr');
-
-      let anchor = document.createElement('td')
-      anchor.innerHTML = this.anchor
-
-      let videoIsPlaying = document.createElement('td')
-      videoIsPlaying.innerHTML = this.video.currentTime > 0
-
-      let currentTime = document.createElement('td')
-      currentTime.innerHTML = this.video.currentTime
-
-      row.appendChild(anchor)
-      row.appendChild(videoIsPlaying)
-      row.appendChild(currentTime)
-      this.table.appendChild(row)
-
-    } else {
-
-      console.log('create table')
-
-      let tableWrapper = document.createElement('div');
-      tableWrapper.classList.add('table');
-      this.table = document.createElement('table');
-      tableWrapper.appendChild(this.table);
-      document.body.appendChild( tableWrapper );
-
-    }
   }
 }

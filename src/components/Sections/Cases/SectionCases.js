@@ -62,7 +62,7 @@ const cases = [
 	}*/
 ]
 
-/*class SectionCases extends Component {
+class SectionCases extends Component {
 
   componentDidMount() {
     window.addEventListener('sectionScroll', this.handleSectionScroll);
@@ -171,4 +171,4 @@ const cases = [
   }
 }
 
-export default SectionCases*/
+export default SectionCases

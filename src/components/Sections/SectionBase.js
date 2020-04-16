@@ -4,7 +4,7 @@ import ReactFullpage from '@fullpage/react-fullpage'
 import CustomFullpageNav from './CustomFullpageNav'
 import SectionIntro from './Intro/SectionIntro'
 import SectionAbout from './About/SectionAbout'
-//import SectionCases from './Cases/SectionCases'
+import SectionCases from './Cases/SectionCases'
 import SectionContact from './Contact/SectionContact'
 import ContactNav from '../UI/ContactNav'
 import { sectionVisibilty } from '../../utility/functions'
@@ -82,12 +82,11 @@ class SectionBase extends Component {
           section: SectionAbout,
           ref: null
         },
-        /*{
+        {
           anchor: 'cases',
           section: SectionCases,
-          section: null,
           ref: null
-        },*/
+        },
         {
           anchor: 'contact',
           section: SectionContact,
@@ -103,9 +102,6 @@ class SectionBase extends Component {
       detail:   "Triggers when fullpage.js changes section",
       bubbles:   true
     })
-
-
-    console.log(window.fullpage_api)
   }
 
   handleScroll = (e) => {

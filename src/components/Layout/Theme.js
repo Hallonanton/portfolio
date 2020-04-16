@@ -316,29 +316,6 @@ const globalStyles = css`
   .tl-wrapper {
     overflow: hidden;
   }
-
-
-  //TESTS
-  .table {
-    position: fixed;
-    bottom: 0px;
-    left: 0px;
-    width: 100%;
-    max-height: 200px;
-    background-color: #fff;
-    overflow: scroll;
-    z-index: 9999999;
-    color: #000;
-
-    table {
-      width: 100%;
-    }
-
-    td {
-      padding: 10px;
-      border: 1px solid #333;
-    }
-  }
 `;
 
 

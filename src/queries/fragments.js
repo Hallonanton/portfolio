@@ -71,7 +71,7 @@ export const SiteMetaQuery = graphql`
   }
 `
 
-/*export const Images = graphql`
+export const Images = graphql`
   fragment Images on Query {
     allImageSharp {
       edges {
@@ -97,4 +97,4 @@ export const SiteMetaQuery = graphql`
     originalName
     presentationWidth
   }
-`*/
+`
