@@ -162,7 +162,7 @@ export default class Particles {
   start() {
 
     this.mobileConsole()
-    
+
     // Do not createPoints before the video has started
     if ( this.video.currentTime > 0 ) {
 
@@ -280,6 +280,7 @@ export default class Particles {
 
       let tableWrapper = document.createElement('div');  
       tableWrapper.classList.add('table');  
+      tableWrapper.style.height = '200px'
       this.table = document.createElement('table');  
       tableWrapper.appendChild(this.table);  
       document.body.appendChild( tableWrapper );  
