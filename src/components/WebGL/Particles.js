@@ -161,7 +161,7 @@ export default class Particles {
 
   start() {
 
-    this.mobileConsole()
+    //this.debugParticles()
 
     // Do not createPoints before the video has started
     if ( this.video.currentTime > 0 ) {
@@ -253,7 +253,7 @@ export default class Particles {
   }
 
 
-  mobileConsole () {
+  debugParticles () {
     if ( this.anchor === 'intro' ) {   
       if ( this.table ) {  
 
@@ -280,7 +280,7 @@ export default class Particles {
         console.log('create table')  
 
         let tableWrapper = document.createElement('div');  
-        tableWrapper.classList.add('table');  
+        tableWrapper.classList.add('debug-particles');  
         tableWrapper.style.height = '200px'
         this.table = document.createElement('table');  
         tableWrapper.appendChild(this.table);  

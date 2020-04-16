@@ -66,17 +66,33 @@ const ContentCol = styled(Col)`
 class SectionAbout extends Component {
 
   componentDidMount() {
+    window.addEventListener('click', this.simulateVideoStart);
+    window.addEventListener('touchstart', this.simulateVideoStart);
     window.addEventListener('sectionScroll', this.handleSectionScroll);
   }
 
   componentWillUnmount() {
     this.WebGLHandler.destroyObject();
     clearTimeout(this.revealDelay);
+    window.removeEventListener('click', this.simulateVideoStart);
+    window.removeEventListener('touchstart', this.simulateVideoStart);
+    window.removeEventListener('sectionScroll', this.handleSectionScroll);
   }
 
   state = {
     visbile: false,
     revealDelay: 1000
+  }
+
+  // iOs is very strict on autoplay videos so 
+  // this is a workaround to start the video
+  simulateVideoStart = e => {
+    if ( this.video ) {
+      const videoIsPlaying = !!(this.video.currentTime > 0 && !this.video.paused && !this.video.ended && this.video.readyState > 2);
+      if ( !videoIsPlaying ) {
+        this.video.play();
+      }
+    }
   }
 
   mountHandler =  mount => {
@@ -148,10 +164,10 @@ class SectionAbout extends Component {
 
           <MountCol col={12} md={6}>
             <video
-              loop
-              playsInline
-              muted
               autoPlay
+              loop
+              muted
+              playsInline
               preload="auto"
               src={VideoSrc}
               style={{opacity: 0}}

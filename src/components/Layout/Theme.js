@@ -317,8 +317,8 @@ const globalStyles = css`
     overflow: hidden;
   }
 
-  //TESTS  
-  .table {  
+  // Debug particles  
+  .debug-particles {  
     position: fixed;  
     bottom: 0px;  
     left: 0px;  
