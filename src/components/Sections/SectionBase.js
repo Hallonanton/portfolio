@@ -82,12 +82,12 @@ class SectionBase extends Component {
           section: SectionAbout,
           ref: null
         },
-        {
+        /*{
           anchor: 'cases',
-          //section: SectionCases,
+          section: SectionCases,
           section: null,
           ref: null
-        },
+        },*/
         {
           anchor: 'contact',
           section: SectionContact,

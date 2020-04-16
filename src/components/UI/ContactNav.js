@@ -291,7 +291,7 @@ const socialmediaLinks = [
 const ContactNav = ({ ...rest }) => {
   return socialmediaLinks && (socialmediaLinks.length > 0) ? (
     <Navigation {...rest}>
-      <h3 class="title">Nyfiken på mer?</h3>
+      <h3 className="title">Nyfiken på mer?</h3>
       <NavigationList>
         {socialmediaLinks.map((link, i) => (
           <li key={i}>
@@ -306,7 +306,7 @@ const ContactNav = ({ ...rest }) => {
           </li>
         ))}
       </NavigationList>
-      <span class="description email">E-post: <a className="link-email" href="mailto:hello@antonpedersen.com">hello@antonpedersen.com</a></span>
+      <span className="description email">E-post: <a className="link-email" href="mailto:hello@antonpedersen.com">hello@antonpedersen.com</a></span>
     </Navigation>
   ) : null
 }

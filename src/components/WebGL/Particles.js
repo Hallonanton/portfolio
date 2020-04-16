@@ -49,7 +49,7 @@ export default class Particles {
   createPoints() {
 
     console.log('createPoints    ', this.anchor, this.video.currentTime)
-    
+
     // Uniforms for shaders
     /* variables that the shaders use to calculate position/color */
     const uniforms = {
@@ -168,10 +168,7 @@ export default class Particles {
   start() {
     const videoIsPlaying = this.videoLoaded && this.video.currentTime > 0
 
-    console.log('===============')
-    console.log('videoIsPlaying ', this.anchor, videoIsPlaying)
-    console.log('videoLoaded    ', this.anchor, this.video.videoLoaded)
-    console.log('currentTime    ', this.anchor, this.video.currentTime)
+    this.mobileConsole()
 
     // Do not createPoints before the video has started
     if ( videoIsPlaying ) {
@@ -260,5 +257,45 @@ export default class Particles {
   onInteractiveMove(e) {
     const uv = e.intersectionData.uv;
     if (this.touch) this.touch.addTouch(uv);
+  }
+
+
+
+  mobileConsole () {
+    if ( this.table ) {
+
+      console.log('update table')
+
+      const row = document.createElement('tr');
+
+      let anchor = document.createElement('td')
+      anchor.innerHTML = this.anchor
+
+      let videoIsPlaying = document.createElement('td')
+      videoIsPlaying.innerHTML = this.videoLoaded && this.video.currentTime > 0
+
+      let videoLoaded = document.createElement('td')
+      videoLoaded.innerHTML = this.video.videoLoaded
+
+      let currentTime = document.createElement('td')
+      currentTime.innerHTML = this.video.currentTime
+
+      row.appendChild(anchor)
+      row.appendChild(videoIsPlaying)
+      row.appendChild(videoLoaded)
+      row.appendChild(currentTime)
+      this.table.appendChild(row)
+
+    } else {
+
+      console.log('create table')
+
+      let tableWrapper = document.createElement('div');
+      tableWrapper.classList.add('table');
+      this.table = document.createElement('table');
+      tableWrapper.appendChild(this.table);
+      document.body.appendChild( tableWrapper );
+
+    }
   }
 }
