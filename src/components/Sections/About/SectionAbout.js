@@ -4,7 +4,7 @@ import { SectionContainer, Row, Col } from '../../UI/Grid'
 import TextReveal from '../../UI/TextReveal'
 import { theme } from '../../Layout/Theme'
 import WebGLHandler from '../../WebGL/WebglHandler'
-import VideoSrc from '../../../assets/video/face-1.mp4'
+import VideoSrc from '../../../assets/video/hand-1.mp4'
 
 
 /*==============================================================================

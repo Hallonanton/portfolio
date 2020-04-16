@@ -4,7 +4,7 @@ import { SectionContainer, Row, Col } from '../../UI/Grid'
 import TextReveal from '../../UI/TextReveal'
 import { theme } from '../../Layout/Theme'
 import WebGLHandler from '../../WebGL/WebglHandler'
-import VideoSrc from '../../../assets/video/hand-3.mp4'
+import VideoSrc from '../../../assets/video/face-2.mp4'
 
 
 /*==============================================================================
@@ -44,8 +44,9 @@ const MountCol = styled(Col)`
 
   video {
     position: absolute;
-    width: 150px;
-    height: 150px;
+    width: 15px;
+    height: 15px;
+    z-index: 9999;
   }
 `
 
@@ -155,7 +156,7 @@ class SectionIntro extends Component {
               muted
               autoPlay
               preload="auto"
-              tabindex="-1"
+              tabIndex="-1"
               src={VideoSrc}
               ref={(video) => this.videoHandler(video)}
             />
