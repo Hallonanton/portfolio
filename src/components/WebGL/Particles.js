@@ -253,38 +253,40 @@ export default class Particles {
   }
 
 
-  mobileConsole () {  
-    if ( this.table ) {  
+  mobileConsole () {
+    if ( this.anchor === 'intro' ) {   
+      if ( this.table ) {  
 
-      console.log('update table')  
+        console.log('update table')  
 
-      const row = document.createElement('tr');  
+        const row = document.createElement('tr');  
 
-      let anchor = document.createElement('td')  
-      anchor.innerHTML = this.anchor  
+        let anchor = document.createElement('td')  
+        anchor.innerHTML = this.anchor  
 
-      let videoIsPlaying = document.createElement('td')  
-      videoIsPlaying.innerHTML = this.video.currentTime > 0  
+        let videoIsPlaying = document.createElement('td')  
+        videoIsPlaying.innerHTML = this.video.currentTime > 0  
 
-      let currentTime = document.createElement('td')  
-      currentTime.innerHTML = this.video.currentTime  
+        let currentTime = document.createElement('td')  
+        currentTime.innerHTML = this.video.currentTime  
 
-      row.appendChild(anchor)  
-      row.appendChild(videoIsPlaying)  
-      row.appendChild(currentTime)  
-      this.table.appendChild(row)  
+        row.appendChild(anchor)  
+        row.appendChild(videoIsPlaying)  
+        row.appendChild(currentTime)  
+        this.table.appendChild(row)  
 
-    } else {  
+      } else {  
 
-      console.log('create table')  
+        console.log('create table')  
 
-      let tableWrapper = document.createElement('div');  
-      tableWrapper.classList.add('table');  
-      tableWrapper.style.height = '200px'
-      this.table = document.createElement('table');  
-      tableWrapper.appendChild(this.table);  
-      document.body.appendChild( tableWrapper );  
+        let tableWrapper = document.createElement('div');  
+        tableWrapper.classList.add('table');  
+        tableWrapper.style.height = '200px'
+        this.table = document.createElement('table');  
+        tableWrapper.appendChild(this.table);  
+        document.body.appendChild( tableWrapper );  
 
-    }  
+      }  
+    }
   }
 }

@@ -44,6 +44,7 @@ const MountCol = styled(Col)`
 
   video {
     position: absolute;
+    left: -9999px;
     width: 150px;
     height: 150px;
   }
@@ -155,8 +156,8 @@ class SectionIntro extends Component {
               muted
               autoPlay
               preload="auto"
+              tabindex="-1"
               src={VideoSrc}
-              style={{opacity: 0}}
               ref={(video) => this.videoHandler(video)}
             />
             <div className="mount" ref={(mount) => this.mountHandler(mount)} />
