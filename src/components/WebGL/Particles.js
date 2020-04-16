@@ -20,7 +20,6 @@ export default class Particles {
   load( video ) {
 
     // Create a video element to read data from
-    this.videoLoaded = false
     this.video = video
 
     // Extract data after load
@@ -40,9 +39,6 @@ export default class Particles {
       this.createHitArea();
       this.addListeners();
       this.resize();
-
-      // Loaded
-      this.videoLoaded = true
     })
   }
 
@@ -166,12 +162,11 @@ export default class Particles {
   // ---------------------------------------------------------------------------------------------
 
   start() {
-    const videoIsPlaying = this.videoLoaded && this.video.currentTime > 0
 
     this.mobileConsole()
 
     // Do not createPoints before the video has started
-    if ( videoIsPlaying ) {
+    if ( this.video.currentTime > 0 ) {
 
       if ( !this.pointsCreated ) {
         // Initiate animation
@@ -272,17 +267,13 @@ export default class Particles {
       anchor.innerHTML = this.anchor
 
       let videoIsPlaying = document.createElement('td')
-      videoIsPlaying.innerHTML = this.videoLoaded && this.video.currentTime > 0
-
-      let videoLoaded = document.createElement('td')
-      videoLoaded.innerHTML = this.video.videoLoaded
+      videoIsPlaying.innerHTML = this.video.currentTime > 0
 
       let currentTime = document.createElement('td')
       currentTime.innerHTML = this.video.currentTime
 
       row.appendChild(anchor)
       row.appendChild(videoIsPlaying)
-      row.appendChild(videoLoaded)
       row.appendChild(currentTime)
       this.table.appendChild(row)
 
