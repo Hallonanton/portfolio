@@ -46,6 +46,10 @@ const MountCol = styled(Col)`
     position: absolute;
     width: 150px;
     height: 150px;
+
+    //temp
+    z-index: 99999;
+    opacity: 1 !important;
   }
 `
 
