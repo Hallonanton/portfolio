@@ -44,8 +44,8 @@ const MountCol = styled(Col)`
 
   video {
     position: absolute;
-    width: 15px;
-    height: 15px;
+    width: 100px;
+    height: 100px;
     z-index: 9999;
   }
 `
@@ -156,7 +156,6 @@ class SectionIntro extends Component {
               muted
               autoPlay
               preload="auto"
-              tabIndex="-1"
               src={VideoSrc}
               ref={(video) => this.videoHandler(video)}
             />
