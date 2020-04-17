@@ -183,7 +183,7 @@ class SectionIntro extends Component {
               title="<span>Hej</span>"
               paragraphs={[
                 "Mitt namn är Anton Pedersen.",
-                "Jag är en social Front-end utvecklare",
+                "Jag är en social Front-end-utvecklare",
                 "med erfarenhet av båda stora och ",
                 "små projekt. Baserad i Göteborg.",
               ]}

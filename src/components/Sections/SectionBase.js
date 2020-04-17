@@ -129,9 +129,7 @@ class SectionBase extends Component {
         window.dispatchEvent( window.sectionScroll )
       }
 
-      this.setState({
-        activeSection: newActiveSection.anchor
-      })
+      this.setActiveSection( newActiveSection.anchor );
     }
   }
 
@@ -145,8 +143,15 @@ class SectionBase extends Component {
       window.dispatchEvent( window.sectionScroll )
     }
 
+    this.setActiveSection( destination.anchor );
+  }
+
+  setActiveSection = activeSection => {
+
+    //ga('send', 'event', 'CTA click', 'click', activeSection);
+
     this.setState({
-      activeSection: destination.anchor
+      activeSection: activeSection
     })
   }
 

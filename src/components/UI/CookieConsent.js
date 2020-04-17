@@ -27,53 +27,55 @@ const consentReveal = keyframes`
 `
 
 const ConsentWrapper = styled('div')`
-  position: fixed;
-  bottom: 5px;
-  left: 30px;
-  display: flex;
-  align-items: center;
-  padding: 5px 10px;
-  border-radius: 4px;
-  color: ${theme.colors.text};
-  background: #222222;
-  ${theme.fontSizes.description}
-  box-shadow: 0px 0px 5px 0px rgba(34,34,34,0.75);
-  transition: all 250ms ease;
-
-  animation: ${consentWait} ${cDelay}ms linear 0ms,
-             ${consentReveal} ${cDuration}ms ${theme.easings.primary} ${cDelay}ms;
-
-  ${theme.above.md} {
-    bottom: 8px;
-    left: 45px;
-  }
-
-  ${theme.above.xxl} {
-    bottom: 20px;
-    left: 80px;
-  }
-
-  &.hide {
-    opacity: 0;
-    transform: translateX(15px);
-    visibility: hidden;
-  }
-
-  button {
-    margin-left: 15px;
-    border-radius: 4px;
+  &.cookieConsent {
+    position: fixed;
+    bottom: 5px;
+    left: 30px;
+    display: flex;
+    align-items: center;
     padding: 5px 10px;
+    border-radius: 4px;
     color: ${theme.colors.text};
-    background-color: #111111;
-    cursor: pointer;
+    background: #222222;
     ${theme.fontSizes.description}
+    box-shadow: 0px 0px 5px 0px rgba(34,34,34,0.75);
     transition: all 250ms ease;
-    border: none;
-    box-shadow: none;
-    outline: none;
 
-    &:hover {
-      background-color: #010101;
+    animation: ${consentWait} ${cDelay}ms linear 0ms,
+               ${consentReveal} ${cDuration}ms ${theme.easings.primary} ${cDelay}ms;
+
+    ${theme.above.md} {
+      bottom: 8px;
+      left: 45px;
+    }
+
+    ${theme.above.xxl} {
+      bottom: 20px;
+      left: 80px;
+    }
+
+    &.hide {
+      opacity: 0;
+      transform: translateX(15px);
+      visibility: hidden;
+    }
+
+    button {
+      margin-left: 15px;
+      border-radius: 4px;
+      padding: 5px 10px;
+      color: ${theme.colors.text};
+      background-color: #111111;
+      cursor: pointer;
+      ${theme.fontSizes.description}
+      transition: all 250ms ease;
+      border: none;
+      box-shadow: none;
+      outline: none;
+
+      &:hover {
+        background-color: #010101;
+      }
     }
   }
 `
@@ -102,7 +104,7 @@ class CookieConsent extends Component {
     const approved = getCookie('cookieApproved')
 
     return !approved ? (
-      <ConsentWrapper className={!visible ? 'hide' : ''}>
+      <ConsentWrapper className={!visible ? 'cookieConsent hide' : 'cookieConsent'}>
         <p>Denna sidan använder sig av cookies.</p>
         <button onClick={this.handleClick}>Okej 👍</button>
       </ConsentWrapper>

@@ -6,7 +6,7 @@ import styled from '@emotion/styled'
 import { css, keyframes } from '@emotion/core'
 import SiteMetadata from './SiteMetadata'
 import Theme, { theme } from './Theme'
-import CookieConsent from '../UI/CookieConsent'
+//import CookieConsent from '../UI/CookieConsent'
 
 
 /*==============================================================================
@@ -244,6 +244,7 @@ const TemplateWrapper = ({children}) => {
   return (
     <Theme>
       <SiteMetadata />
+    {/*<CookieConsent />*/}
       <TiltWrapper>
         <Main>
           <h1 className="mainTitle">{title.split('').map((character, i) => <span key={i}>{character}</span>)}</h1>
@@ -254,7 +255,6 @@ const TemplateWrapper = ({children}) => {
           <FrameMarker className="bottom right" />
         </Main>
       </TiltWrapper>
-      <CookieConsent />
     </Theme>
   )
 }
