@@ -1,4 +1,5 @@
 import React from 'react'
+import { OutboundLink } from 'gatsby-plugin-google-analytics'
 import styled from '@emotion/styled'
 import { css, keyframes } from '@emotion/core'
 import { theme } from '../Layout/Theme'
@@ -206,7 +207,7 @@ const NavigationList = styled('ul')`
   }
 `
 
-const NavigationItem = styled('a')`
+const NavigationItem = styled(OutboundLink)`
   position: relative;
   display: flex;
   align-items: center;

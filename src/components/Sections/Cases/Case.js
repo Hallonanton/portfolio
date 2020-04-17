@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Img from 'gatsby-image'
+import { OutboundLink } from 'gatsby-plugin-google-analytics'
 import styled from '@emotion/styled'
 import { keyframes } from '@emotion/core'
 import { theme } from '../../Layout/Theme'
@@ -295,7 +296,7 @@ class Case extends Component {
 
     return (
       <Card {...rest}>
-        <a href={url}  target="_blank" rel="noopener noreferrer">
+        <OutboundLink href={url}  target="_blank" rel="noopener noreferrer">
           <article className="inner">
 
             {image && 
@@ -321,7 +322,7 @@ class Case extends Component {
             <div className="frame-marker bottom left" />
             <div className="frame-marker bottom right" />
           </article>
-        </a>
+        </OutboundLink>
       </Card>
     )
   }

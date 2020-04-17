@@ -108,13 +108,9 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-google-analytics",
+      resolve: 'gatsby-plugin-google-analytics',
       options: {
         trackingId: "UA-71487700-1",
-        head: true,
-        anonymize: true,
-        respectDNT: true,
-        cookieDomain: "antonpedersen.com",
       },
     },
     {

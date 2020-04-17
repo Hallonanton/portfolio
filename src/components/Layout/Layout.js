@@ -6,6 +6,7 @@ import styled from '@emotion/styled'
 import { css, keyframes } from '@emotion/core'
 import SiteMetadata from './SiteMetadata'
 import Theme, { theme } from './Theme'
+import CookieConsent from '../UI/CookieConsent'
 
 
 /*==============================================================================
@@ -253,6 +254,7 @@ const TemplateWrapper = ({children}) => {
           <FrameMarker className="bottom right" />
         </Main>
       </TiltWrapper>
+      <CookieConsent />
     </Theme>
   )
 }

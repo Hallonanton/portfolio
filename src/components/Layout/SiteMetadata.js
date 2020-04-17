@@ -26,8 +26,6 @@ const SiteMetadata = () => {
   const favicons = favicon.edges[0] ? favicon.edges[0].node : null
   const finalTitle = `${title} ${titleSuffix} ${sitename}`
 
-  console.log( 'ogImage', ogImage )
-
   return (
     <Helmet>
       <html lang="sv" />
@@ -45,7 +43,8 @@ const SiteMetadata = () => {
 
       <meta name="theme-color" content={theme.colors.bg} />
       <meta property="og:site_name" content={sitename} />
-      <meta property="og:title" content={title} />
+      <meta property="og:title" content={finalTitle} />
+      <meta property="og:description" content={description} />
       <meta property="og:type" content="website" />
       <meta property="og:locale" content="sv_SE" />
 
