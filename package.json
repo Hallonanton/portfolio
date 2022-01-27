@@ -47,7 +47,7 @@
     "react-media-universal": "^2.0.2",
     "react-tilt": "^0.1.4",
     "reset-css": "^4.0.1",
-    "three": "^0.115.0"
+    "three": "^0.137.0"
   },
   "keywords": [
     "gatsby",
